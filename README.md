@@ -25,10 +25,10 @@ PetMeds helps families track their pets medication schedules.
 Multiple families member can be reminded to give their pets their medication, who and when gave it to them.
 
 ## Features (planned)
-- User registration and login
-- Create or join a family group
-- Add pets and their medication schedules
-- Mark medicatiosn as given
-- See who gave the medication and when
-- Multi-day recurring schedules
-- Reminders for giving meds 
+- [x] User registration and login
+- [ ] Create or join a family group
+- [ ] Add pets and their medication schedules
+- [ ] Mark medicatiosn as given
+- [ ] See who gave the medication and when
+- [ ] Multi-day recurring schedules
+- [ ] Reminders for giving meds 

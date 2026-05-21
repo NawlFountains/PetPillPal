@@ -1,10 +1,30 @@
-import { View } from 'react-native'
-import Card from '../components/ui/card'
+import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+
 
 export default function LoginScreen() {
     return (
-        <View className ='flex-1 items-center justify-center bg-white px-6'>
-            <Card title='Login' subtitle='Log into your account please'></Card>
+        <View className ='flex-1 items-center justify-center bg-light-gray px-6'>
+            <View className='bg-white p-4 shadow-sm border rounded-[15] w-full gap-15'>
+                <View className='mx-12 my-6 items-center'>
+                    <View className='mb-14 mt-3 gap-5 w-full'>
+                        <Text className='text-5xl font-bold text-gray-900 mb-3 text-center'>Welcome back</Text>
+                        <Text className='text-3xl text-gray-500 text-center'>Sign in your account</Text>
+                    </View>
+                    <View className='mt-4 gap-10 w-full'>
+                        <TextInput className='text-2xl text-gray-500 border rounded-[15] px-5' placeholder='email@example.com' placeholderTextColor="#5c5c5c"></TextInput>
+                        <TextInput className='text-2xl text-gray-500 border rounded-[15] px-5' placeholder='password' placeholderTextColor="#5c5c5c"></TextInput>
+                        <TouchableOpacity
+                            className='py-3 bg-black w-full rounded-[15]'>
+                                <Text className='text-white text-2xl font-bold text-center'
+                                >Sign in</Text>
+                        </TouchableOpacity>
+                        <View className='flex-row justify-center mt-2'>
+                            <Text className='text-2xl '>Don't have an account? </Text>
+                            <Text className='text-2xl font-bold'>Register</Text>
+                        </View>
+                    </View>
+                </View>
+            </View>
         </View>
     )
 }

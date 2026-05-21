@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import '../global.css'
 import { supabase } from '../lib/supabase'
 
+
 export default function RootLayout() {
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)

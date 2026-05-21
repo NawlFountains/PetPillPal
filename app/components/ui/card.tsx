@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { Text, View } from 'react-native';
 
 export default function Card({
     title,
@@ -8,9 +8,9 @@ export default function Card({
     subtitle: string;
 }) {
     return (
-        <View>
-            <Text>{title}</Text>
-            <Text>{subtitle}</Text>
+        <View className='bg_white rounded-2xl p-2 shadow-sm border border-gray-100 w-full'>
+            <Text className='text-2xl font-bold text-gray-900 mb-1'>{title}</Text>
+            <Text className='text-sm text-gray-500'>{subtitle}</Text>
         </View>
     )
 }

@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
-import { Slot, useRouter, useSegments } from 'expo-router'
 import { Session } from '@supabase/supabase-js'
+import { Slot, useRouter, useSegments } from 'expo-router'
+import { useEffect, useState } from 'react'
+import '../global.css'
 import { supabase } from '../lib/supabase'
 
 export default function RootLayout() {

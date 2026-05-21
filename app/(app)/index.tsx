@@ -1,29 +1,24 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { useAuth } from '@/context/AuthContext'
+import { useLogout } from '@/hooks/useLogout'
+import { Text, TouchableOpacity, View } from 'react-native'
 
 export default function HomeScreen() {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>PetMeds</Text>
-            <Text style={styles.subtitle}>Welcome</Text>
-        </View>
-    )
+  const { profile } = useAuth()
+  const { loading, handleLogout } = useLogout()
+  
+  return (
+      <View className='flex-1 items-center justify-center bg-white px-6'>
+          <Text className='text-5xl'>PetMeds</Text>
+          <Text className='text-3xl '>Welcome {profile?.display_name}</Text>
+          <TouchableOpacity
+              className='py-3 bg-black w-full rounded-[15]'
+              onPress={handleLogout}
+          >
+            <Text className='text-white text-2xl font-bold text-center'>
+              {loading? 'Loggin out...' : 'Log out'}
+              </Text>
+          </TouchableOpacity>
+      </View>
+  )
 }
 
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: '600',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#6b7280',
-  }
-})

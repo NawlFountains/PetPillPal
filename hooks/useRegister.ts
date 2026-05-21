@@ -41,8 +41,15 @@ export function useRegister(){
         if (!validate()) return
 
         setLoading(true)
-        const { error } = await supabase.auth.signUp({ email, password })
-        //TODO on succesfully creation on auth database, also create profile
+        const { error } = await supabase.auth.signUp({
+            email, 
+            password, 
+            options: {
+                data: {
+                    display_name: name
+                } 
+            }
+        })
         
         setLoading(false)
 

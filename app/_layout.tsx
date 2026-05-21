@@ -1,26 +1,13 @@
-import { Session } from '@supabase/supabase-js'
 import { Slot, useRouter, useSegments } from 'expo-router'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { AuthProvider, useAuth } from '../context/AuthContext'
 import '../global.css'
-import { supabase } from '../lib/supabase'
 
 
-export default function RootLayout() {
-  const [session, setSession] = useState<Session | null>(null)
-  const [loading, setLoading] = useState(true)
+function RootLayoutNav() {
+  const { session, loading} = useAuth()
   const router = useRouter()
   const segments = useSegments()
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-      setLoading(false)
-    })
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-  }, [])
 
   useEffect(() => {
     if (loading) return
@@ -34,4 +21,12 @@ export default function RootLayout() {
   }, [session, loading])
 
   return <Slot />
+}
+
+export default function RootLayout() {
+  return (
+    <AuthProvider>
+      <RootLayoutNav/>
+    </AuthProvider>
+  )
 }

@@ -16,29 +16,33 @@ export default function LoginScreen() {
                         <Text className='text-3xl text-gray-500 text-center'>Sign in your account</Text>
                     </View>
                     <View className='mt-4 gap-10 w-full'>
-                        <TextInput 
-                            className='text-2xl text-gray-500 border rounded-[15] px-5'
-                            placeholder='email@example.com' 
-                            placeholderTextColor="#5c5c5c"
-                            value={email}
-                            onChangeText={setEmail}
-                            keyboardType='email-address'
-                            autoCapitalize='none'
-                            />
-                            {errors.email && (
-                                <Text className='text-red-500'>{errors.email}</Text>
-                            )}
-                        <TextInput 
-                            className='text-2xl text-gray-500 border rounded-[15] px-5'
-                            placeholder='password'
-                            placeholderTextColor="#5c5c5c"
-                            value={password}
-                            onChangeText={setPassword}
-                            secureTextEntry
-                            />
-                            {errors.password && (
-                                <Text className='text-red-500'>{errors.password}</Text>
-                            )}
+                        <View className=''>
+                            <TextInput 
+                                className='text-2xl text-gray-500 border rounded-[15] px-5'
+                                placeholder='email@example.com' 
+                                placeholderTextColor="#5c5c5c"
+                                value={email}
+                                onChangeText={setEmail}
+                                keyboardType='email-address'
+                                autoCapitalize='none'
+                                />
+                                {errors.email && (
+                                    <Text className='text-red-500 pt-2 px-5'>{errors.email}</Text>
+                                )}
+                        </View>
+                        <View>
+                            <TextInput 
+                                className='text-2xl text-gray-500 border rounded-[15] px-5'
+                                placeholder='password'
+                                placeholderTextColor="#5c5c5c"
+                                value={password}
+                                onChangeText={setPassword}
+                                secureTextEntry
+                                />
+                                {errors.password && (
+                                    <Text className='text-red-500 pt-2 px-5'>{errors.password}</Text>
+                                )}
+                        </View>
                         <TouchableOpacity
                             className='py-3 bg-black w-full rounded-[15]'
                             onPress={handleLogin}

@@ -33,7 +33,7 @@ export function useLogin() {
         setLoading(false)
 
         if ( error ) {
-            setErrors({ email: error.message})
+            setErrors({ email: 'Invalid email or password'})
         }
     }
     return { email, setEmail, password, setPassword, errors, loading, handleLogin }

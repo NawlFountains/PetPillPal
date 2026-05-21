@@ -1,9 +1,11 @@
+import { useRegister } from '@/hooks/useRegister'
 import { useRouter } from 'expo-router'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 
 
 export default function RegisterScreen() {
     const router = useRouter()
+    const { name, setName, email, setEmail, password, setPassword, confirmPassword, setConfirmPassword, errors, loading, handleRegister } = useRegister()
 
     return (
         <View className ='flex-1 items-center justify-center bg-light-gray px-6'>
@@ -14,14 +16,61 @@ export default function RegisterScreen() {
                         <Text className='text-3xl text-gray-500 text-center'>Start tracking your pets meds</Text>
                     </View>
                     <View className='mt-4 gap-10 w-full'>
-                        <TextInput className='text-2xl text-gray-500 border rounded-[15] px-5' placeholder='name' placeholderTextColor="#5c5c5c"></TextInput>
-                        <TextInput className='text-2xl text-gray-500 border rounded-[15] px-5' placeholder='email@example.com' placeholderTextColor="#5c5c5c"></TextInput>
-                        <TextInput className='text-2xl text-gray-500 border rounded-[15] px-5' placeholder='password' placeholderTextColor="#5c5c5c"></TextInput>
-                        <TextInput className='text-2xl text-gray-500 border rounded-[15] px-5' placeholder='confirm_password' placeholderTextColor="#5c5c5c"></TextInput>
+                        <View>
+                            <TextInput 
+                                className='text-2xl text-gray-500 border rounded-[15] px-5' 
+                                placeholder='name' 
+                                placeholderTextColor="#5c5c5c"
+                                value={name}
+                                onChangeText={setName}
+                                />
+                                {errors.name && (
+                                    <Text className='text-red-500'>{errors.name}</Text>
+                                )}
+                        </View>
+                        <View>
+                            <TextInput 
+                                className='text-2xl text-gray-500 border rounded-[15] px-5' 
+                                placeholder='email@example.com' 
+                                placeholderTextColor="#5c5c5c"
+                                value={email}
+                                onChangeText={setEmail}
+                                keyboardType='email-address'
+                                autoCapitalize='none'/>
+                                {errors.email && (
+                                    <Text className='text-red-500'>{errors.email}</Text>
+                                )}
+                        </View>
+                        <View>
+                            <TextInput 
+                                className='text-2xl text-gray-500 border rounded-[15] px-5' 
+                                placeholder='password' 
+                                placeholderTextColor="#5c5c5c"
+                                value={password}
+                                onChangeText={setPassword}
+                                secureTextEntry/>
+                                {errors.password && (
+                                    <Text className='text-red-500'>{errors.password}</Text>
+                                )}
+                        </View>
+                        <View>
+                            <TextInput 
+                                className='text-2xl text-gray-500 border rounded-[15] px-5' 
+                                placeholder='confirm_password' 
+                                placeholderTextColor="#5c5c5c"
+                                value={confirmPassword}
+                                onChangeText={setConfirmPassword}
+                                secureTextEntry/>
+                                {errors.confirmPassword && (
+                                    <Text className='text-red-500'>{errors.confirmPassword}</Text>
+                                )}
+                        </View>
                         <TouchableOpacity
-                            className='py-3 bg-black w-full rounded-[15]'>
+                            className='py-3 bg-black w-full rounded-[15]'
+                            onPress={handleRegister}
+                            disabled={loading}>
                                 <Text className='text-white text-2xl font-bold text-center'
-                                >Create account</Text>
+                                >{loading ? 'Creating account...' : 'Create account'}</Text>
                         </TouchableOpacity>
                         <View className='flex-row justify-center mt-2'>
                             <Text className='text-2xl '>Already have an account? </Text>

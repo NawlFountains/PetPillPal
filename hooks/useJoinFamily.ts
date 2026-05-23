@@ -2,19 +2,15 @@ import { useAuth } from "@/context/AuthContext"
 import { supabase } from "@/lib/supabase"
 import { useState } from "react"
 
-function generateCode(): string {
-    return Math.random().toString(36).substring(2, 8).toUpperCase()
-}
-
-export function useCreateFamily(onSuccess: () => void) {
+export function useJoinFamily(onSuccess: () => void) {
     const { profile, refreshFamilies } = useAuth()
-    const [familyName, setFamilyName] = useState('')
+    const [familyCode, setFamilyCode] = useState('')
     const [loading, setLoading] = useState(false)
     const[error, setError] = useState('')
 
-    async function handleCreateFamily() {
-        if (!familyName.trim()) {
-            setError('Family name is required')
+    async function handleJoinFamily() {
+        if (!familyCode.trim()) {
+            setError('Family code is required')
             return
         }
 
@@ -26,17 +22,15 @@ export function useCreateFamily(onSuccess: () => void) {
 
         const { data: family, error: familyError } = await supabase
             .from('families')
-            .insert({
-                name: familyName.trim(),
-                code: generateCode(),
-                created_by: profile.id
-            })
-            .select()
+            .select(`
+                id,
+                code`)
+            .eq('code', familyCode)
             .single()
 
-        
-        if (familyError) {
-            setError('This is a family error'+familyError.message)
+            
+        if (familyError || !family) {
+            setError('Family not found — check the code and try again')
             setLoading(false)
             return
         }
@@ -45,20 +39,24 @@ export function useCreateFamily(onSuccess: () => void) {
             .from('family_member')
             .insert({
                 user_id: profile.id,
-                family_id: family.id
+                family_id: family!.id
             })
         
         if (memberError) {
-            setError('This is a member error'+memberError.message)
+            if (memberError.code === '23505') {  // unique constraint violation
+                setError('You are already a member of this family')
+            } else {
+                setError('This is a member error: ' + memberError.message)
+            }
             setLoading(false)
             return
         }
     
         setLoading(false)
-        setFamilyName('')
+        setFamilyCode('')
         await refreshFamilies()
         onSuccess()
     }
 
-    return { familyName, setFamilyName, loading, error, handleCreateFamily }
+    return { familyCode, setFamilyCode, loading, error, handleJoinFamily }
 }

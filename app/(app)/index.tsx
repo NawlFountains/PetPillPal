@@ -3,10 +3,11 @@ import { useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import CreateFamilyModal from '../components/modals/CreateFamilyModal'
 import JoinFamilyModal from '../components/modals/JoinFamilyModal'
-import FamilyPetCard from '../components/ui/FamilyPetCard'
+import AnimalCard from '../components/ui/AnimalCard'
+import EmptyAnimalCard from '../components/ui/EmptyAnimalCard'
 
 export default function HomeScreen() {
-  const { profile } = useAuth()
+  const { profile, families } = useAuth()
   const [menuOpen, setMenuOpen] = useState(false)
   const [showCreateFamily, setShowCreateFamily] = useState(false)
   const [showJoinFamily, setShowJoinFamily] = useState(false)
@@ -27,9 +28,15 @@ export default function HomeScreen() {
           <Text className='text-5xl text-gray-700'>{profile?.display_name}</Text>
         </View>
         <View className='gap-6 mt-10'>
-            <FamilyPetCard family_name='{familiy_name_1}' pet_name='{pet_name_1}' med_name='{med_name}'/>
-            <FamilyPetCard family_name='{familiy_name_1}' pet_name='{pet_name_2}' med_name='{med_name}'/>
-            <FamilyPetCard family_name='{familiy_name_2}' pet_name='{pet_name_1}' med_name='{med_name}'/>
+            {families.map(family => (
+              family.animals && family.animals.length > 0 ? (
+                  family.animals.map(animal => (
+                    <AnimalCard key={animal.id} animal={animal} familyName={family.name} />
+                  ))
+              ) : (
+                    <EmptyAnimalCard key={family.id} familyName={family.name}/>
+              )
+            ))}
         </View>
         {menuOpen && (
           <View className='absolute bottom-24 right-6 bg-white rounded-2xl border border-gray-200 shadow-md overflow-hidden'>

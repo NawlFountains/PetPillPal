@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useJoinFamily } from '@/hooks/useJoinFamily'
 import { Modal, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
 }
 
 export default function JoinFamilyModal({ visible, onClose }: Props) {
-    const [familyCode, setFamilyCode] = useState('')
+    const {familyCode, setFamilyCode, loading, error, handleJoinFamily } = useJoinFamily(onClose)
 
   return (
     <Modal visible={visible} animationType='fade' transparent>
@@ -27,8 +27,13 @@ export default function JoinFamilyModal({ visible, onClose }: Props) {
             value={familyCode}
             onChangeText={setFamilyCode}
           />
-          <TouchableOpacity className='h-12 bg-black rounded-xl items-center justify-center'>
-            <Text className='text-white font-semibold'>Join</Text>
+          {error ? <Text className='text-red-500'>{error} </Text> : null}
+          <TouchableOpacity 
+            className='h-12 bg-black rounded-xl items-center justify-center'
+            onPress={handleJoinFamily}
+            disabled={loading}>
+            <Text className='text-white font-semibold'>
+                {loading ? 'Joining...' : 'Join'}</Text>
           </TouchableOpacity>
         </View>
       </View>

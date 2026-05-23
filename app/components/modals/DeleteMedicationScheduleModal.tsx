@@ -1,15 +1,18 @@
-import { useExitFamily } from '@/hooks/useExitFamily'
+import { useDeleteMedication } from '@/hooks/useDeleteMedication'
+import { Animal, Medication, Schedule } from '@/lib/definitions'
 import { Modal, Text, TouchableOpacity, View } from 'react-native'
+import AnimalScheduleCard from '../ui/AnimalScheduleCard'
 
 type Props = {
-    familyName: String
-    familyId: string
+    animal: Animal
+    medication: Medication
+    schedule: Schedule
     visible: boolean
     onClose: () => void
 }
 
-export default function CreateFamilyModal({ familyName, familyId, visible, onClose }: Props) {
-  const { loading, error, handleExitFamily} = useExitFamily(onClose)
+export default function DeleteMedicationScheduleModal({ animal, medication, schedule, visible, onClose }: Props) {
+  const { loading, error, handleDeleteMedication} = useDeleteMedication(onClose)
 
   return (
     <Modal visible={visible} animationType='fade' transparent>
@@ -20,8 +23,12 @@ export default function CreateFamilyModal({ familyName, familyId, visible, onClo
         />
 
         <View className='bg-white rounded-3xl px-6 pt-6 pb-6 gap-2'>
-          <Text className='text-2xl font-bold mb-1 text-center'>Are you sure you want to exit {familyName} ? </Text>
+          <Text className='text-2xl font-bold mb-1 text-center'>Are you sure you want to delete the schedule ? </Text>
           {error ? <Text className='text-red-500'> {error} </Text> : null}
+          <AnimalScheduleCard
+            animal={animal}
+            schedule={schedule}
+            medication={medication}/>
           <View className='flex-row justify-center gap-6 mt-4'>
             <TouchableOpacity 
                 className='h-12 rounded-xl border items-center justify-center w-1/2'
@@ -33,7 +40,7 @@ export default function CreateFamilyModal({ familyName, familyId, visible, onClo
             </TouchableOpacity>
             <TouchableOpacity 
                 className='h-12 bg-red-600 rounded-xl items-center justify-center w-1/2'
-                onPress={ () => handleExitFamily(familyId)}
+                onPress={ () => handleDeleteMedication(medication.id, schedule.id)}
                     disabled={loading}>
                 <Text className='text-white font-semibold'>
                 {loading ? 'Exiting...' : 'Confirm'}

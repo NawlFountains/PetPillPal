@@ -3,10 +3,10 @@ import { supabase } from "@/lib/supabase"
 import { isValidTime } from "@/lib/validation"
 import { useState } from "react"
 
-export function useCreateMedicine(onSuccess: () => void) {
+export function useCreateMedication(onSuccess: () => void) {
     const { profile, refreshFamilies } = useAuth()
 
-    const [ medicineName, setMedicineName] = useState('')
+    const [ medicationName, setMedicationName] = useState('')
     const [ dose, setDose] = useState('')
     const [ note, setNote] = useState('')
 
@@ -17,7 +17,7 @@ export function useCreateMedicine(onSuccess: () => void) {
     const [endsOn, setEndsOn] = useState('')
 
     const [loading, setLoading] = useState(false)
-    const [errors, setErrors] = useState<{ medicineName?: string, animalId?: string, time?: string , days?: string }> ({}) 
+    const [errors, setErrors] = useState<{ medicationName?: string, animalId?: string, time?: string , days?: string }> ({}) 
 
     function toggleDay(value: number) {
         setSelectedDays(prev =>
@@ -26,9 +26,9 @@ export function useCreateMedicine(onSuccess: () => void) {
     }
 
     function validate() {
-        const newErrors:  { medicineName?: string, animalId?: string, time?: string , days?: string } = {} 
+        const newErrors:  { medicationName?: string, animalId?: string, time?: string , days?: string } = {} 
         
-        if (!medicineName.trim()) newErrors.medicineName = 'Name is required'
+        if (!medicationName.trim()) newErrors.medicationName = 'Name is required'
         if (!time.trim()) {
             newErrors.time = 'Time is required'
         } else if (!isValidTime(time)) {
@@ -41,7 +41,7 @@ export function useCreateMedicine(onSuccess: () => void) {
         return Object.keys(newErrors).length == 0
     }
 
-    async function handleCreateMedicine(animalId: string) {
+    async function handleCreateMedication(animalId: string) {
 
         if (!validate()) return
         if (!profile) return
@@ -52,11 +52,11 @@ export function useCreateMedicine(onSuccess: () => void) {
         if (!animalId.trim()) setErrors({animalId : 'Animal is required'})
 
 
-        const { data: med,  error: medicineError } = await supabase
+        const { data: med,  error: medicationError } = await supabase
             .from('medications')
             .insert({
                 animal_id: animalId,
-                name: medicineName,
+                name: medicationName,
                 dose: dose,
                 note: note
             })
@@ -64,8 +64,8 @@ export function useCreateMedicine(onSuccess: () => void) {
             .single()
 
         
-        if (medicineError) {
-            setErrors({ medicineName : medicineError.message})
+        if (medicationError) {
+            setErrors({ medicationName : medicationError.message})
             setLoading(false)
             return
         }
@@ -82,14 +82,14 @@ export function useCreateMedicine(onSuccess: () => void) {
             })
         
         if (scheduleError) {
-            setErrors({ medicineName : scheduleError.message})
+            setErrors({ medicationName : scheduleError.message})
             setLoading(false)
             return
         }
 
     
         setLoading(false)
-        setMedicineName('')
+        setMedicationName('')
         setDose('')
         setNote('')
         setTime('')
@@ -102,7 +102,7 @@ export function useCreateMedicine(onSuccess: () => void) {
         
     }
     return {
-        medicineName, setMedicineName,
+        medicationName, setMedicationName,
         dose, setDose,
         note, setNote,
         time, setTime,
@@ -111,6 +111,6 @@ export function useCreateMedicine(onSuccess: () => void) {
         startsOn, setStartsOn,
         endsOn, setEndsOn,
         loading, errors,
-        handleCreateMedicine
+        handleCreateMedication
     }
 }

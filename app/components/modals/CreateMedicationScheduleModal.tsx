@@ -1,4 +1,4 @@
-import { useCreateMedicine } from '@/hooks/useCreateMedicine'
+import { useCreateMedication } from '@/hooks/useCreateMedication'
 import { useState } from 'react'
 import { Modal, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import AnimalDropdown from '../ui/AnimalDropdown'
@@ -9,13 +9,13 @@ type Props = {
   onClose: () => void
 }
 
-export default function CreateMedicineSchedule({ visible, onClose }: Props) {
+export default function CreateMedicationScheduleModal({ visible, onClose }: Props) {
     const [selectedFamilyId, setSelectedFamilyId] = useState('')
     const [selectedFamilyName, setSelectedFamilyName] = useState('')
     const [selectedAnimalId, setSelectedAnimalId] = useState('')
     const [selectedAnimalName, setSelectedAnimalName] = useState('')
 
-    const {medicineName, setMedicineName,
+    const {medicationName, setMedicationName,
         dose, setDose,
         note, setNote,
         time, setTime,
@@ -24,7 +24,7 @@ export default function CreateMedicineSchedule({ visible, onClose }: Props) {
         startsOn, setStartsOn,
         endsOn, setEndsOn,
         loading, errors,
-        handleCreateMedicine} = useCreateMedicine(onClose)
+        handleCreateMedication} = useCreateMedication(onClose)
 
     const frequencies = ['daily', 'weekly', 'custom']
     const days = [
@@ -48,12 +48,15 @@ export default function CreateMedicineSchedule({ visible, onClose }: Props) {
 
         <View className='bg-white rounded-3xl px-6 pt-6 pb-8 gap-2'>
           <Text className='text-2xl font-bold mb-1'>Add new med schedule </Text>
-          <FamilyDropdown
-            selectedId={selectedFamilyId}
-            onSelect={(id, name) => {
-                setSelectedFamilyId(id)
-                setSelectedFamilyName(name)
-            }}/>
+          <View style={{ zIndex: 2}}>
+            <FamilyDropdown
+              selectedId={selectedFamilyId}
+              onSelect={(id, name) => {
+                  setSelectedFamilyId(id)
+                  setSelectedFamilyName(name)
+              }}/>
+          </View>
+          <View style={{ zIndex: 1}}>
             <AnimalDropdown
               selectedId={selectedAnimalId}
               familyId={selectedFamilyId}
@@ -63,23 +66,23 @@ export default function CreateMedicineSchedule({ visible, onClose }: Props) {
                 setSelectedAnimalId(id)
                 setSelectedAnimalName(name)
             }}/>
+          </View>
             {errors.animalId && (
               <Text className='text-red-500'>{errors.animalId}</Text>
             )}
-          <View className='flex-row justify-between'>
-            <View>
+          <View className='flex-row justify-between w-full'>
+            <View className='w-2/3'>
               <TextInput
-                className='h-12 border rounded-xl px-4 text-2xl my-2 w-3/4'
-                placeholder='medicine_name'
+                className='h-12 border rounded-xl px-4 text-2xl my-2'
+                placeholder='medication_name'
                 placeholderTextColor='#5c5c5c'
-                value={medicineName}
-                onChangeText={setMedicineName}
+                value={medicationName}
+                onChangeText={setMedicationName}
               />
-              {errors.medicineName && (
-                <Text className='text-red-500'>{errors.medicineName}</Text>
+              {errors.medicationName && (
+                <Text className='text-red-500'>{errors.medicationName}</Text>
                 )}
             </View>
-
             <TextInput
               className='h-12 border rounded-xl px-4 text-2xl my-2 w-1/4'
               placeholder='dose'
@@ -90,7 +93,7 @@ export default function CreateMedicineSchedule({ visible, onClose }: Props) {
           </View>
           <TextInput
             className='h-12 border rounded-xl px-4 text-2xl my-2'
-            placeholder='medicine_note'
+            placeholder='note'
             placeholderTextColor='#5c5c5c'
             value={note}
             onChangeText={setNote}
@@ -160,7 +163,7 @@ export default function CreateMedicineSchedule({ visible, onClose }: Props) {
           </View>
           <TouchableOpacity 
             className='h-12 text-2xl bg-black rounded-xl items-center justify-center'
-            onPress={ () => handleCreateMedicine(selectedAnimalId)}
+            onPress={ () => handleCreateMedication(selectedAnimalId)}
             disabled={loading}>
             <Text className='text-white font-semibold'>
               {loading ? 'Adding...' : 'Add'}

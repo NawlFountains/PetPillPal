@@ -38,7 +38,7 @@ export default function AnimalDropdown({ selectedId, familyId, onSelect }: Props
       </TouchableOpacity>
 
       {open && (
-        <View className='absolute top-14 left-0 right-0 bg-white border border-gray-200 rounded-xl overflow-hidden shadow-md'>
+        <View className='absolute top-14 left-0 right-0 bg-white border rounded-xl overflow-hidden shadow-md'>
           {animals.length === 0 ? (
             <View className='px-4 py-3'>
               <Text className='text-gray-400'>No animals in this family</Text>
@@ -47,7 +47,7 @@ export default function AnimalDropdown({ selectedId, familyId, onSelect }: Props
             animals.map(animal => (
               <TouchableOpacity
                 key={animal.id}
-                className='px-4 py-3 border-b border-gray-100'
+                className='px-4 py-3 border-b'
                 onPress={() => {
                   onSelect(animal.id, animal.name)
                   setOpen(false)

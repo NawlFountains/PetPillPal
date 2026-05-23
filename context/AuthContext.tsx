@@ -47,11 +47,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function fetchUserData(userId: string) {
     const [profileRes, familiesRes] = await Promise.all([
-      supabase.from('profiles').select('*').eq('id', userId).single(),
+    supabase.from('profiles').select('*').eq('id', userId).single(),
       supabase
-        .from('family_member')
-        .select('families(*, animals(*))')
-        .eq('user_id', userId)
+    .from('family_member')
+    .select(`
+      families(
+        *,
+        animals(
+          *,
+          medications(
+            *,
+            medication_schedules(*)
+          )
+        )
+      )
+    `)
+    .eq('user_id', userId)
     ])
 
     setProfile(profileRes.data)
@@ -63,7 +74,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (!profile) return
     const { data } = await supabase
       .from('family_member')
-      .select('families(*, animals(*))')
+      .select(`
+        families(
+          *,
+          animals(
+            *,
+            medications(
+              *,
+              medication_schedules(*)
+            )
+          )
+        )
+      `)
       .eq('user_id', profile.id)
 
     setFamilies(data?.map((m: any) => m.families) ?? [])

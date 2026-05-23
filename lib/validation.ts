@@ -7,3 +7,8 @@ export function isValidEmail(email: string): boolean {
 export function isValidPassword(password: string): boolean {
   return password.length >= 6 
 }
+
+export function isValidTime(time: string): boolean {
+  const timeRegex = /^\d{2}:\d{2}$/
+  return timeRegex.test(time)
+}

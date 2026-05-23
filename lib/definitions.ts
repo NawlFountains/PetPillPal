@@ -4,12 +4,29 @@ export type Profile = {
     created_at: string
 }
 
+export type Schedule = {
+  id: string
+  time: string
+  frequency: string
+  days_of_week: number[]
+  starts_on: string | null
+  ends_on: string | null
+}
+
+export type Medication = {
+  id: string
+  name: string
+  dose: string
+  note: string
+  medication_schedules : Schedule[]
+}
+
 export type Animal = {
   id: string
   family_id: string
   name: string
   species: string
-  created_at: string
+  medications: Medication[]
 }
 
 export type Family = {

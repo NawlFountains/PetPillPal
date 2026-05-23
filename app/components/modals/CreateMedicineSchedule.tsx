@@ -1,4 +1,4 @@
-import { useCreateAnimal } from '@/hooks/useCreateAnimal'
+import { useCreateMedicine } from '@/hooks/useCreateMedicine'
 import { useState } from 'react'
 import { Modal, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import AnimalDropdown from '../ui/AnimalDropdown'
@@ -15,29 +15,27 @@ export default function CreateMedicineSchedule({ visible, onClose }: Props) {
     const [selectedAnimalId, setSelectedAnimalId] = useState('')
     const [selectedAnimalName, setSelectedAnimalName] = useState('')
 
-    const { animalName, setAnimalName, species, setSpecies, loading, errors, handleCreateAnimal } = useCreateAnimal(selectedFamilyId, onClose)
-    const [ frequency, setFrequency ] = useState('')
+    const {medicineName, setMedicineName,
+        dose, setDose,
+        note, setNote,
+        time, setTime,
+        frequency, setFrequency,
+        selectedDays, toggleDay,
+        startsOn, setStartsOn,
+        endsOn, setEndsOn,
+        loading, errors,
+        handleCreateMedicine} = useCreateMedicine(onClose)
+
     const frequencies = ['daily', 'weekly', 'custom']
     const days = [
-  { label: 'M', value: 1 },
-  { label: 'T', value: 2 },
-  { label: 'W', value: 3 },
-  { label: 'T', value: 4 },
-  { label: 'F', value: 5 },
-  { label: 'S', value: 6 },
-  { label: 'S', value: 7 },
-]
-
-    // State
-    const [selectedDays, setSelectedDays] = useState<number[]>([])
-
-    function toggleDay(value: number) {
-      setSelectedDays(prev =>
-        prev.includes(value)
-          ? prev.filter(d => d !== value)
-          : [...prev, value]
-      )
-    }
+      { label: 'M', value: 1 },
+      { label: 'T', value: 2 },
+      { label: 'W', value: 3 },
+      { label: 'T', value: 4 },
+      { label: 'F', value: 5 },
+      { label: 'S', value: 6 },
+      { label: 'S', value: 7 },
+    ]
 
   return (
     <Modal visible={visible} animationType='fade' transparent>
@@ -55,8 +53,7 @@ export default function CreateMedicineSchedule({ visible, onClose }: Props) {
             onSelect={(id, name) => {
                 setSelectedFamilyId(id)
                 setSelectedFamilyName(name)
-            }}
-            />
+            }}/>
             <AnimalDropdown
               selectedId={selectedAnimalId}
               familyId={selectedFamilyId}
@@ -65,31 +62,38 @@ export default function CreateMedicineSchedule({ visible, onClose }: Props) {
                 setSelectedAnimalName('')
                 setSelectedAnimalId(id)
                 setSelectedAnimalName(name)
-            }}
-            />
-            {/* TODO change each field for their hooks either useCreateMedication or useCreateMedicationSchedule */}
+            }}/>
+            {errors.animalId && (
+              <Text className='text-red-500'>{errors.animalId}</Text>
+            )}
           <View className='flex-row justify-between'>
-            <TextInput
-              className='h-12 border rounded-xl px-4 text-2xl my-2 w-3/4'
-              placeholder='medicine_name'
-              placeholderTextColor='#5c5c5c'
-              value={animalName}
-              onChangeText={setAnimalName}
-            />
+            <View>
+              <TextInput
+                className='h-12 border rounded-xl px-4 text-2xl my-2 w-3/4'
+                placeholder='medicine_name'
+                placeholderTextColor='#5c5c5c'
+                value={medicineName}
+                onChangeText={setMedicineName}
+              />
+              {errors.medicineName && (
+                <Text className='text-red-500'>{errors.medicineName}</Text>
+                )}
+            </View>
+
             <TextInput
               className='h-12 border rounded-xl px-4 text-2xl my-2 w-1/4'
               placeholder='dose'
               placeholderTextColor='#5c5c5c'
-              value={species}
-              onChangeText={setSpecies}
+              value={dose}
+              onChangeText={setDose}
             />
           </View>
           <TextInput
             className='h-12 border rounded-xl px-4 text-2xl my-2'
             placeholder='medicine_note'
             placeholderTextColor='#5c5c5c'
-            value={species}
-            onChangeText={setSpecies}
+            value={note}
+            onChangeText={setNote}
           />
           <View className='gap-2'>
             <View className='flex-row gap-2 justify-between'>
@@ -130,31 +134,33 @@ export default function CreateMedicineSchedule({ visible, onClose }: Props) {
             className='h-12 text-2xl border rounded-xl px-4'
             placeholder='HH:MM (e.g. 08:00)'
             placeholderTextColor='#5c5c5c'
-            // value={time}
-            // onChangeText={setTime}
-            keyboardType='numeric'
+            value={time}
+            onChangeText={setTime}
             maxLength={5}
           />
+          {errors.time && (
+            <Text className='text-red-500'>{errors.time}</Text>
+            )}
           <Text className='text-2xl font-bold mb-1'>Optional </Text>
           <View className='flex-row justify-between'>
             <TextInput
               className='h-12 text-2xl border rounded-xl px-4 w-1/2'
               placeholder='Start-date YYYY-MM-DD'
               placeholderTextColor='#5c5c5c'
-              // value={startsOn}
-              // onChangeText={setStartsOn}
+              value={startsOn}
+              onChangeText={setStartsOn}
             />
             <TextInput
               className='h-12 text-2xl border rounded-xl px-4 w-1/2'
               placeholder='End-date YYYY-MM-DD'
               placeholderTextColor='#5c5c5c'
-              // value={startsOn}
-              // onChangeText={setStartsOn}
+              value={endsOn}
+              onChangeText={setEndsOn}
             />
           </View>
           <TouchableOpacity 
             className='h-12 text-2xl bg-black rounded-xl items-center justify-center'
-            onPress={ () => handleCreateAnimal(selectedFamilyId)}
+            onPress={ () => handleCreateMedicine(selectedAnimalId)}
             disabled={loading}>
             <Text className='text-white font-semibold'>
               {loading ? 'Adding...' : 'Add'}

@@ -2,7 +2,7 @@ import { useAuth } from '@/context/AuthContext'
 import { Ionicons } from '@expo/vector-icons'
 import * as Clipboard from 'expo-clipboard'
 import { useState } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import CreateAnimalModal from '../components/modals/CreateAnimalModal'
 import CreateMedicineSchedule from '../components/modals/CreateMedicineSchedule'
 import ExitFamilyModal from '../components/modals/ExitFamilyModal'
@@ -34,6 +34,7 @@ const handleCopy = async (code: string) => {
           <CreateMedicineSchedule
           visible={showCreateMedicineSchedule}
           onClose={() => setShowCreateMedicineSchedule(false)}/>
+          <ScrollView>
         <View>
           <Text className='text-5xl font-bold'>{families.length > 1 ? 'Families' : 'Family'}</Text>
         </View>
@@ -52,12 +53,27 @@ const handleCopy = async (code: string) => {
                   <Ionicons name='exit-outline' size={36} color='#f56565' />
                 </TouchableOpacity>
               </View>
-              {/* Add clipboard for copying family code using expo-clipboard requires rebuild */}
+
                   {family.animals?.map(animal => (
-                    <AnimalScheduleCard key={animal.id} animal={animal}/>
+                    animal.medications?.map(medication => (
+                      medication.medication_schedules?.map( schedule => (
+                        <TouchableOpacity
+                          key={`${animal.id}-${medication.id}-${schedule.id}`}
+                          // onLongPress={() => setEditOrDeleteScheduleModal({ id: schedule.id})}
+                          >
+                        <AnimalScheduleCard 
+                          key={`${animal.id}-${medication.id}-${schedule.id}`} 
+                          animal={animal} 
+                          medication = {medication} 
+                          schedule={schedule}/>
+                        </TouchableOpacity>
+
+                      ))
+                    ))
                   ))}
               </View>
             ))}
+        </ScrollView>
            {menuOpen && (
           <View className='absolute bottom-24 right-6 bg-white rounded-2xl border border-gray-200 shadow-md overflow-hidden'>
             <TouchableOpacity 
@@ -76,12 +92,14 @@ const handleCopy = async (code: string) => {
             </TouchableOpacity>
           </View>
         )}
+
         <TouchableOpacity
           className='absolute bottom-6 right-6 w-14 h-14 bg-black rounded-full items-center justify-center shadow-md'
           onPress={() => setMenuOpen(!menuOpen)}
           >
           <Text className='text-white text-3xl font-light'>+</Text>
         </TouchableOpacity>
+        
       </View>
   )
 }

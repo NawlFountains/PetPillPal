@@ -1,6 +1,6 @@
 import { useAuth } from '@/context/AuthContext'
 import { useState } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import CreateFamilyModal from '../components/modals/CreateFamilyModal'
 import JoinFamilyModal from '../components/modals/JoinFamilyModal'
 import AnimalCard from '../components/ui/AnimalCard'
@@ -12,6 +12,7 @@ export default function HomeScreen() {
   const [showCreateFamily, setShowCreateFamily] = useState(false)
   const [showJoinFamily, setShowJoinFamily] = useState(false)
   
+  console.log(families[0]?.animals[0]?.medications)
   return (
       <View className='flex-1 pt-20 bg-white px-6'>
 
@@ -22,22 +23,32 @@ export default function HomeScreen() {
         <JoinFamilyModal
           visible={showJoinFamily}
           onClose={() => setShowJoinFamily(false)}/>
+        <ScrollView>
+          <View>
+            <Text className='text-5xl font-bold'>Welcome back</Text>
+            <Text className='text-5xl text-gray-700'>{profile?.display_name}</Text>
+          </View>
+          <View className='gap-6 mt-10'>
+              {families.map(family => (
+                family.animals && family.animals.length > 0 ? (
+                    family.animals.map(animal => (
+                      animal.medications.map ( medication => (
+                        medication.medication_schedules.map ( schedule => (
+                          <AnimalCard key={`${animal.id}-${medication.id}-${schedule.id}`}
+                            family={family}
+                            animal={animal}
+                            medication={medication}
+                            schedule={schedule}/>
+                        ))
+                      ))
+                    ))
+                ) : (
+                      <EmptyAnimalCard key={family.id} familyName={family.name}/>
+                )
+              ))}
+          </View>
+        </ScrollView>
 
-        <View>
-          <Text className='text-5xl font-bold'>Welcome back</Text>
-          <Text className='text-5xl text-gray-700'>{profile?.display_name}</Text>
-        </View>
-        <View className='gap-6 mt-10'>
-            {families.map(family => (
-              family.animals && family.animals.length > 0 ? (
-                  family.animals.map(animal => (
-                    <AnimalCard key={animal.id} animal={animal} familyName={family.name} />
-                  ))
-              ) : (
-                    <EmptyAnimalCard key={family.id} familyName={family.name}/>
-              )
-            ))}
-        </View>
         {menuOpen && (
           <View className='absolute bottom-24 right-6 bg-white rounded-2xl border border-gray-200 shadow-md overflow-hidden'>
             <TouchableOpacity 

@@ -13,8 +13,7 @@ export default function CreateFamilyModal({ familyName, familyId, visible, onClo
 
   return (
     <Modal visible={visible} animationType='fade' transparent>
-      <View className='flex-1 justify-center px-6'>
-
+      <View className='flex-1 justify-between px-6'>
         <TouchableOpacity
           className='absolute inset-0 bg-black/40'
           onPress={onClose}

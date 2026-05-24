@@ -26,7 +26,7 @@ export default function PendingLogDoseCard({ family, animal, medication, schedul
 
     return (
     <View className='bg-white rounded-2xl border border-black w-full'>
-        <View className='mx-4 mt-4 mb-1 flex-row justify-between items-center'>
+        <View className='mx-4 my-4 flex-row justify-between items-center'>
         <Text className='text-2xl font-bold'>{animal.name}</Text>
         {onDelete && (
             <TouchableOpacity onPress={onDelete}>

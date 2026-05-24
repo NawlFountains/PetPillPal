@@ -19,11 +19,11 @@ export default function AnimalScheduleCard({
 }) {
     return (
         <View className='bg-white rounded-2xl border border-black w-full'>
-            <View className='flex-row mx-4 mt-4 mb-1 justify-between'>
-                <View>
-                    <Text className='text-2xl font-bold mb-3'>{animal.name}</Text>
+            <View className='flex-row mx-4 my-2 justify-between'>
+                <View className='justify-center'>
+                    <Text className='text-2xl font-bold'>{animal.name}</Text>
                 </View>
-                <View className='flex-row gap-5'>
+                <View className='flex-row gap-5 justify-center'>
                     {onEdit && (
                         <TouchableOpacity
                             onPress={onEdit}

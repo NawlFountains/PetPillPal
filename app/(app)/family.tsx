@@ -5,10 +5,12 @@ import * as Clipboard from 'expo-clipboard'
 import { useState } from 'react'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import CreateAnimalModal from '../components/modals/CreateAnimalModal'
+import CreateFamilyModal from '../components/modals/CreateFamilyModal'
 import CreateMedicationScheduleModal from '../components/modals/CreateMedicationScheduleModal'
 import DeleteMedicationScheduleModal from '../components/modals/DeleteMedicationScheduleModal'
 import EditMedicationScheduleModal from '../components/modals/EditMedicationScheduleModal'
 import ExitFamilyModal from '../components/modals/ExitFamilyModal'
+import JoinFamilyModal from '../components/modals/JoinFamilyModal'
 import AnimalScheduleCard from '../components/ui/AnimalScheduleCard'
 
 export default function HomeScreen() {
@@ -20,6 +22,8 @@ export default function HomeScreen() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [showCreateAnimal, setShowCreateAnimal] = useState(false)
   const [showCreateMedicationSchedule, setShowCreateMedicationSchedule] = useState(false)
+  const [showCreateFamily, setShowCreateFamily] = useState(false)
+  const [showJoinFamily, setShowJoinFamily] = useState(false)
 
 const handleCopy = async (code: string, familyId: string) => {
   await Clipboard.setStringAsync(code)
@@ -39,6 +43,13 @@ const handleCopy = async (code: string, familyId: string) => {
         <CreateMedicationScheduleModal
           visible={showCreateMedicationSchedule}
           onClose={() => setShowCreateMedicationSchedule(false)}/>
+        <CreateFamilyModal
+          visible={showCreateFamily}
+          onClose={() => setShowCreateFamily(false)}/>
+        <JoinFamilyModal
+          visible={showJoinFamily}
+          onClose={() => setShowJoinFamily(false)}/>
+          
         {deleteScheduleModal && (
           <DeleteMedicationScheduleModal
             visible={true}
@@ -61,6 +72,15 @@ const handleCopy = async (code: string, familyId: string) => {
           <View>
             <Text className='text-5xl font-bold'>{families.length > 1 ? 'Families' : 'Family'}</Text>
           </View>
+            {/* No families */}
+            {families.length === 0 && (
+              <View className='mt-20 items-center'>
+                <Text className='text-gray-400 text-2xl'>
+                  You're not in any family, join or create one.
+
+                </Text>
+              </View>
+            )}
             {families.map(family => (
               <View key={family.id} className='gap-6 mt-10'>
                 <View className='flex-row justify-between item-center'>
@@ -109,7 +129,8 @@ const handleCopy = async (code: string, familyId: string) => {
                 </View>
               ))}
         </ScrollView>
-           {menuOpen && (
+        
+        {menuOpen && (
           <View className='absolute bottom-24 right-6 bg-white rounded-2xl border border-gray-200 shadow-md overflow-hidden'>
             <TouchableOpacity 
               className='px-6 py-4 border-b border-gray-100'
@@ -125,9 +146,22 @@ const handleCopy = async (code: string, familyId: string) => {
                 setMenuOpen(false)}}>
               <Text className='text-base font-semibold'>Add medication schedule</Text>
             </TouchableOpacity>
+            <TouchableOpacity 
+              className='px-6 py-4 border-b border-gray-100'
+              onPress={() => {
+                setShowCreateFamily(true)
+                setMenuOpen(false)}}>
+              <Text className='text-base font-semibold'>Create a family</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+            className='px-6 py-4'
+              onPress={() => {
+                setShowJoinFamily(true)
+                setMenuOpen(false)}}>
+              <Text className='text-base font-semibold'>Join a family</Text>
+            </TouchableOpacity>
           </View>
         )}
-
         <TouchableOpacity
           className='absolute bottom-6 right-6 w-14 h-14 bg-black rounded-full items-center justify-center shadow-md'
           onPress={() => setMenuOpen(!menuOpen)}

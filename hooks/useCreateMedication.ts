@@ -42,14 +42,13 @@ export function useCreateMedication(onSuccess: () => void) {
     }
 
     async function handleCreateMedication(animalId: string) {
-
         if (!validate()) return
         if (!profile) return
 
+        if (!animalId.trim()) setErrors({animalId : 'Animal is required'})
         
         setLoading(true)
 
-        if (!animalId.trim()) setErrors({animalId : 'Animal is required'})
 
 
         const { data: med,  error: medicationError } = await supabase
@@ -65,7 +64,7 @@ export function useCreateMedication(onSuccess: () => void) {
 
         
         if (medicationError) {
-            setErrors({ medicationName : medicationError.message})
+            setErrors({ animalId : 'Animal is required'})
             setLoading(false)
             return
         }

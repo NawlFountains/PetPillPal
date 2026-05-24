@@ -18,7 +18,7 @@ export default function LoginScreen() {
                     <View className='mt-4 gap-10 w-full'>
                         <View className=''>
                             <TextInput 
-                                className='text-2xl text-gray-500 border rounded-[15] px-5'
+                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5'
                                 placeholder='email@example.com' 
                                 placeholderTextColor="#5c5c5c"
                                 value={email}
@@ -32,7 +32,7 @@ export default function LoginScreen() {
                         </View>
                         <View>
                             <TextInput 
-                                className='text-2xl text-gray-500 border rounded-[15] px-5'
+                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5'
                                 placeholder='password'
                                 placeholderTextColor="#5c5c5c"
                                 value={password}

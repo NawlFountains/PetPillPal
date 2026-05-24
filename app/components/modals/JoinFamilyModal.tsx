@@ -11,15 +11,17 @@ export default function JoinFamilyModal({ visible, onClose }: Props) {
 
   return (
     <Modal visible={visible} animationType='fade' transparent>
-      <View className='flex-1 justify-center px-6'>
+        <View className='flex-1 justify-center px-6'>
 
         <TouchableOpacity
           className='absolute inset-0 bg-black/40'
           onPress={onClose}
         />
 
-        <View className='bg-white rounded-3xl px-6 pt-6 pb-8 gap-2'>
-          <Text className='text-2xl font-bold mb-1'>Join an existing family </Text>
+        <View className='bg-white rounded-t-3xl border-b px-6 pt-6 pb-4'>
+          <Text className='text-2xl font-bold'>Join an existing family </Text>
+        </View>
+        <View className='bg-white rounded-b-3xl px-6 pt-2 pb-8 gap-2'>
           <TextInput
             className='h-12 border rounded-xl px-4 text-xl my-2'
             placeholder='family_code'

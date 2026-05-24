@@ -23,7 +23,7 @@ export default function EditMedicationScheduleModal({ animal, medication, schedu
         endsOn, setEndsOn,
         loading, errors,
         handleEditMedication} = useEditMedication(onClose)
-    const frequencies = ['daily', 'weekly', 'custom']
+    const frequencies = ['daily', 'weekly']
     const days = [
       { label: 'M', value: 1 },
       { label: 'T', value: 2 },
@@ -55,15 +55,15 @@ export default function EditMedicationScheduleModal({ animal, medication, schedu
             onPress={onClose}
           />
   
-          <View className='bg-white rounded-3xl px-6 pt-6 pb-8 gap-2'>
-            <Text className='text-2xl font-bold mb-1'>Edit med schedule for {animal.name} </Text>
-              {errors.animalId && (
-                <Text className='text-red-500'>{errors.animalId}</Text>
-              )}
-            <View className='flex-row justify-between w-full'>
-              <View className='w-2/3'>
+
+        <View className='bg-white rounded-t-3xl border-b px-6 pt-6 pb-4'>
+            <Text className='text-2xl font-bold'>Edit med schedule for {animal.name} </Text>
+        </View>
+          <View className='bg-white rounded-b-3xl px-6 pt-6 pb-8 gap-4'>
+            <View className='flex-row justify-between w-full gap-2'>
+              <View className='flex-1'>
                 <TextInput
-                  className='h-12 border rounded-xl px-4 text-2xl my-2'
+                  className='h-12 text-2xl border rounded-xl px-4'
                   defaultValue={medication.name}
                   value={medicationName}
                   onChangeText={setMedicationName}
@@ -72,28 +72,27 @@ export default function EditMedicationScheduleModal({ animal, medication, schedu
                   <Text className='text-red-500'>{errors.medicationName}</Text>
                   )}
               </View>
-              <TextInput
-                className='h-12 border rounded-xl px-4 text-2xl my-2 w-1/4'
-                placeholder='dose'
-                placeholderTextColor='#5c5c5c'
-                value={dose}
-                onChangeText={setDose}
-              />
+              <View className='flex-1'>
+                <TextInput
+                  className='h-12 text-2xl border rounded-xl px-4'
+                  placeholder='HH:MM (e.g. 08:00)'
+                  placeholderTextColor='#5c5c5c'
+                  value={time}
+                  onChangeText={setTime}
+                  maxLength={5}
+                />
+                {errors.time && (
+                  <Text className='text-red-500'>{errors.time}</Text>
+                  )}
+              </View>
             </View>
-            <TextInput
-              className='h-12 border rounded-xl px-4 text-2xl my-2'
-              placeholder='note'
-              placeholderTextColor='#5c5c5c'
-              value={note}
-              onChangeText={setNote}
-            />
             <View className='gap-2'>
               <View className='flex-row gap-2 justify-between'>
                 {frequencies.map(f => (
                   <TouchableOpacity
                     key={f}
                     onPress={() => setFrequency(f)}
-                    className={`px-4 py-2 rounded-[10] w-1/4 border ${frequency === f ? 'bg-black' : ''}`}
+                    className={`flex-1 px-4 py-2 rounded-[10] w-1/4 border ${frequency === f ? 'bg-black' : ''}`}
                   >
                     <Text className={`text-2xl ${frequency === f ? 'text-white font-semibold' : 'text-gray-600'}`}>
                       {f}
@@ -122,28 +121,34 @@ export default function EditMedicationScheduleModal({ animal, medication, schedu
                 </View>
               )}
             </View>
-            <TextInput
-              className='h-12 text-2xl border rounded-xl px-4'
-              placeholder='HH:MM (e.g. 08:00)'
-              placeholderTextColor='#5c5c5c'
-              value={time}
-              onChangeText={setTime}
-              maxLength={5}
-            />
-            {errors.time && (
-              <Text className='text-red-500'>{errors.time}</Text>
-              )}
             <Text className='text-2xl font-bold mb-1'>Optional </Text>
-            <View className='flex-row justify-between'>
+            <View className='flex-row gap-2'>
+             <TextInput
+              className='h-12 border rounded-xl px-4 text-2xl flex-1'
+              placeholder='note'
+              placeholderTextColor='#5c5c5c'
+              value={note}
+              onChangeText={setNote}
+            />
+            <TextInput
+              className='h-12 border rounded-xl px-4 text-2xl flex-1'
+              placeholder='dose'
+              placeholderTextColor='#5c5c5c'
+              value={dose}
+              onChangeText={setDose}
+            />
+            </View>
+              
+            <View className='flex-row justify-between gap-2'>
               <TextInput
-                className='h-12 text-2xl border rounded-xl px-4 w-1/2'
+                className='h-12 text-2xl border rounded-xl px-4 flex-1'
                 placeholder='Start-date YYYY-MM-DD'
                 placeholderTextColor='#5c5c5c'
                 value={startsOn}
                 onChangeText={setStartsOn}
               />
               <TextInput
-                className='h-12 text-2xl border rounded-xl px-4 w-1/2'
+                className='h-12 text-2xl border rounded-xl px-4 flex-1'
                 placeholder='End-date YYYY-MM-DD'
                 placeholderTextColor='#5c5c5c'
                 value={endsOn}

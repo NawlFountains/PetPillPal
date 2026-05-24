@@ -51,7 +51,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
     useEffect(() => {
-  console.log('profile in realtime effect:', profile)  // ← add this
     if (!profile) return
 
     // Subscribe to family_member changes (someone joins/leaves)
@@ -61,8 +60,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         event: '*',
         schema: 'public',
         table: 'medication_schedules'
-      }, (payload) => {
-        console.log('schedule change ',payload)
+      }, () => {
         refreshFamilies()
       })
       .on('postgres_changes', {
@@ -86,9 +84,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }, () => {
         refreshDoseLogs()
       })
-      .subscribe((status) => {
-         console.log('subscription status:', status)  // ← add this
-      })
+      .subscribe()
 
     return () => {
       supabase.removeChannel(familiesChannel)

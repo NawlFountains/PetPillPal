@@ -22,8 +22,10 @@ export default function CreateAnimalModal({ visible, onClose }: Props) {
           onPress={onClose}
         />
 
-        <View className='bg-white rounded-3xl px-6 pt-6 pb-8 gap-2'>
-          <Text className='text-2xl font-bold mb-1'>Add new animal</Text>
+        <View className='bg-white rounded-t-3xl border-b px-6 pt-6 pb-4'>
+          <Text className='text-2xl font-bold'>Add new animal</Text>
+        </View>
+        <View className='bg-white rounded-b-3xl px-6 pt-6 pb-8 gap-2'>
           <FamilyDropdown
             selectedId={selectedFamilyId}
             onSelect={(id, name) => {

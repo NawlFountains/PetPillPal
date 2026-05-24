@@ -18,7 +18,7 @@ export default function RegisterScreen() {
                     <View className='mt-4 gap-10 w-full'>
                         <View>
                             <TextInput 
-                                className='text-2xl text-gray-500 border rounded-[15] px-5' 
+                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5' 
                                 placeholder='name' 
                                 placeholderTextColor="#5c5c5c"
                                 value={name}
@@ -30,7 +30,7 @@ export default function RegisterScreen() {
                         </View>
                         <View>
                             <TextInput 
-                                className='text-2xl text-gray-500 border rounded-[15] px-5' 
+                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5' 
                                 placeholder='email@example.com' 
                                 placeholderTextColor="#5c5c5c"
                                 value={email}
@@ -43,7 +43,7 @@ export default function RegisterScreen() {
                         </View>
                         <View>
                             <TextInput 
-                                className='text-2xl text-gray-500 border rounded-[15] px-5' 
+                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5' 
                                 placeholder='password' 
                                 placeholderTextColor="#5c5c5c"
                                 value={password}
@@ -55,7 +55,7 @@ export default function RegisterScreen() {
                         </View>
                         <View>
                             <TextInput 
-                                className='text-2xl text-gray-500 border rounded-[15] px-5' 
+                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5' 
                                 placeholder='confirm_password' 
                                 placeholderTextColor="#5c5c5c"
                                 value={confirmPassword}

@@ -18,8 +18,10 @@ export default function CreateFamilyModal({ visible, onClose }: Props) {
           onPress={onClose}
         />
 
-        <View className='bg-white rounded-3xl px-6 pt-6 pb-8 gap-2'>
-          <Text className='text-2xl font-bold mb-1'>Create a new family </Text>
+        <View className='bg-white rounded-t-3xl border-b px-6 pt-6 pb-4'>
+          <Text className='text-2xl font-bold'>Create a new family </Text>
+        </View>
+        <View className='bg-white rounded-b-3xl px-6 pt-2 pb-8 gap-2'>
           <TextInput
             className='h-12 border rounded-xl px-4 text-2xl my-2'
             placeholder='family_name'

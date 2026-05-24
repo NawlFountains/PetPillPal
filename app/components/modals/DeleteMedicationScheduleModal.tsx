@@ -22,8 +22,10 @@ export default function DeleteMedicationScheduleModal({ animal, medication, sche
           onPress={onClose}
         />
 
-        <View className='bg-white rounded-3xl px-6 pt-6 pb-6 gap-2'>
-          <Text className='text-2xl font-bold mb-1 text-center'>Are you sure you want to delete the schedule ? </Text>
+        <View className='bg-white rounded-t-3xl border-b px-6 pt-6 pb-4'>
+          <Text className='text-2xl font-bold text-center'>Are you sure you want to delete the schedule ? </Text>
+        </View>
+        <View className='bg-white rounded-b-3xl px-6 pt-6 pb-6 gap-2'>
           {error ? <Text className='text-red-500'> {error} </Text> : null}
           <AnimalScheduleCard
             animal={animal}

@@ -1,0 +1,166 @@
+import { useEditMedication } from '@/hooks/useEditMedication'
+import { Animal, Medication, Schedule } from '@/lib/definitions'
+import { useEffect } from 'react'
+import { Modal, Text, TextInput, TouchableOpacity, View } from 'react-native'
+
+type Props = {
+  animal: Animal
+  medication: Medication
+  schedule: Schedule
+  visible: boolean
+  onClose: () => void
+}
+
+export default function EditMedicationScheduleModal({ animal, medication, schedule, visible, onClose }: Props) {
+
+    const {medicationName, setMedicationName,
+        dose, setDose,
+        note, setNote,
+        time, setTime,
+        frequency, setFrequency,
+        selectedDays, setSelectedDays, toggleDay,
+        startsOn, setStartsOn,
+        endsOn, setEndsOn,
+        loading, errors,
+        handleEditMedication} = useEditMedication(onClose)
+    const frequencies = ['daily', 'weekly', 'custom']
+    const days = [
+      { label: 'M', value: 1 },
+      { label: 'T', value: 2 },
+      { label: 'W', value: 3 },
+      { label: 'T', value: 4 },
+      { label: 'F', value: 5 },
+      { label: 'S', value: 6 },
+      { label: 'S', value: 7 },
+    ]
+    useEffect(() => {
+      if (visible) {
+        setMedicationName(medication.name)
+        setDose(medication.dose ?? '')
+        setNote(medication.note ?? '')
+        setTime(schedule.time.substring(0, 5))  // "08:00:00" → "08:00"
+        setFrequency(schedule.frequency)
+        setSelectedDays(schedule.days_of_week ?? [])
+        setStartsOn(schedule.starts_on ?? '')
+        setEndsOn(schedule.ends_on ?? '')
+      }
+    }, [visible])
+
+  return (
+      <Modal visible={visible} animationType='fade' transparent>
+        <View className='flex-1 justify-center px-6'>
+  
+          <TouchableOpacity
+            className='absolute inset-0 bg-black/40'
+            onPress={onClose}
+          />
+  
+          <View className='bg-white rounded-3xl px-6 pt-6 pb-8 gap-2'>
+            <Text className='text-2xl font-bold mb-1'>Edit med schedule for {animal.name} </Text>
+              {errors.animalId && (
+                <Text className='text-red-500'>{errors.animalId}</Text>
+              )}
+            <View className='flex-row justify-between w-full'>
+              <View className='w-2/3'>
+                <TextInput
+                  className='h-12 border rounded-xl px-4 text-2xl my-2'
+                  defaultValue={medication.name}
+                  value={medicationName}
+                  onChangeText={setMedicationName}
+                />
+                {errors.medicationName && (
+                  <Text className='text-red-500'>{errors.medicationName}</Text>
+                  )}
+              </View>
+              <TextInput
+                className='h-12 border rounded-xl px-4 text-2xl my-2 w-1/4'
+                placeholder='dose'
+                placeholderTextColor='#5c5c5c'
+                value={dose}
+                onChangeText={setDose}
+              />
+            </View>
+            <TextInput
+              className='h-12 border rounded-xl px-4 text-2xl my-2'
+              placeholder='note'
+              placeholderTextColor='#5c5c5c'
+              value={note}
+              onChangeText={setNote}
+            />
+            <View className='gap-2'>
+              <View className='flex-row gap-2 justify-between'>
+                {frequencies.map(f => (
+                  <TouchableOpacity
+                    key={f}
+                    onPress={() => setFrequency(f)}
+                    className={`px-4 py-2 rounded-[10] w-1/4 border ${frequency === f ? 'bg-black' : ''}`}
+                  >
+                    <Text className={`text-2xl ${frequency === f ? 'text-white font-semibold' : 'text-gray-600'}`}>
+                      {f}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+  
+              {frequency === 'weekly'  && (
+                <View className='flex-row gap-2 justify-between'>
+                  {days.map(day => (
+                    <TouchableOpacity
+                      key={day.value}
+                      onPress={() => toggleDay(day.value)}
+                      className={`w-14 h-9 rounded-[10] items-center justify-center border ${
+                        selectedDays.includes(day.value)
+                          ? 'bg-black'
+                          : ''
+                      }`}
+                    >
+                      <Text className={selectedDays.includes(day.value) ? 'text-white font-semibold' : 'text-gray-600'}>
+                        {day.label}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              )}
+            </View>
+            <TextInput
+              className='h-12 text-2xl border rounded-xl px-4'
+              placeholder='HH:MM (e.g. 08:00)'
+              placeholderTextColor='#5c5c5c'
+              value={time}
+              onChangeText={setTime}
+              maxLength={5}
+            />
+            {errors.time && (
+              <Text className='text-red-500'>{errors.time}</Text>
+              )}
+            <Text className='text-2xl font-bold mb-1'>Optional </Text>
+            <View className='flex-row justify-between'>
+              <TextInput
+                className='h-12 text-2xl border rounded-xl px-4 w-1/2'
+                placeholder='Start-date YYYY-MM-DD'
+                placeholderTextColor='#5c5c5c'
+                value={startsOn}
+                onChangeText={setStartsOn}
+              />
+              <TextInput
+                className='h-12 text-2xl border rounded-xl px-4 w-1/2'
+                placeholder='End-date YYYY-MM-DD'
+                placeholderTextColor='#5c5c5c'
+                value={endsOn}
+                onChangeText={setEndsOn}
+              />
+            </View>
+            <TouchableOpacity 
+              className='h-12 text-2xl bg-black rounded-xl items-center justify-center'
+              onPress={ () => handleEditMedication(medication.id, schedule.id)}
+              disabled={loading}>
+              <Text className='text-white font-semibold'>
+                {loading ? 'Editing...' : 'Edit'}
+                </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+    )
+  
+}

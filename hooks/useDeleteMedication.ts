@@ -9,7 +9,6 @@ export function useDeleteMedication(onSuccess: () => void) {
 
     async function handleDeleteMedication(medication_id: string, schedule_id: string) {
         // If user not logged in 
-        console.log('About to delete medication ',medication_id)
         if (!profile) return
         
         setLoading(true)
@@ -25,7 +24,6 @@ export function useDeleteMedication(onSuccess: () => void) {
             setLoading(false)
             return
         }
-        console.log('After deleting entries errors are ',scheduleError)
 
         const { error: medicationError } = await supabase
             .from('medications')
@@ -38,7 +36,6 @@ export function useDeleteMedication(onSuccess: () => void) {
             return
         }
 
-        console.log('After deleting entries errors are ',medicationError)
         setLoading(false)
         await refreshFamilies()
         onSuccess()

@@ -62,6 +62,5 @@ export function useCreateAnimal(familyId: string, onSuccess: () => void) {
         
     }
 
-    console.log(errors)
     return { animalName, setAnimalName, species, setSpecies, familyName, setFamilyName, familyId, loading, errors, handleCreateAnimal }
 }

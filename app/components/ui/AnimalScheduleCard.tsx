@@ -28,6 +28,11 @@ export default function AnimalScheduleCard({
                                 .join(', ')} at ${schedule.time}`
                             }      
                     </Text>
+                    {medication.note && (
+                        <Text className='text-xl text-gray-500'> 
+                        Notes: {medication.note}
+                        </Text>
+                    )}
                     {(schedule.starts_on || schedule.ends_on) && (
                         <View className='flex-row justify-between'>
                             <Text className='text-xl text-gray-500'> 

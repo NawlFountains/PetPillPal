@@ -7,6 +7,7 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import CreateAnimalModal from '../components/modals/CreateAnimalModal'
 import CreateMedicationScheduleModal from '../components/modals/CreateMedicationScheduleModal'
 import DeleteMedicationScheduleModal from '../components/modals/DeleteMedicationScheduleModal'
+import EditMedicationScheduleModal from '../components/modals/EditMedicationScheduleModal'
 import ExitFamilyModal from '../components/modals/ExitFamilyModal'
 import AnimalScheduleCard from '../components/ui/AnimalScheduleCard'
 
@@ -14,6 +15,7 @@ export default function HomeScreen() {
   const { families } = useAuth()
   const [ exitModal, setExitModal ] = useState<{ name: string, id: string} | null> (null)
   const [ deleteScheduleModal, setDeleteScheduleModal ] = useState<{ animal: Animal, medication: Medication, schedule: Schedule} | null> (null)
+  const [ editScheduleModal, setEditScheduleModal ] = useState<{ animal: Animal, medication: Medication, schedule: Schedule} | null> (null)
   const [copied, setCopied] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [showCreateAnimal, setShowCreateAnimal] = useState(false)
@@ -46,6 +48,15 @@ const handleCopy = async (code: string) => {
             onClose={() => setDeleteScheduleModal(null)}
           />
         )}
+        {editScheduleModal && (
+          <EditMedicationScheduleModal
+            visible={true}
+            animal={editScheduleModal.animal}
+            medication={editScheduleModal.medication}
+            schedule={editScheduleModal.schedule}
+            onClose={() => setEditScheduleModal(null)}
+          />
+        )}
         <ScrollView>
           <View>
             <Text className='text-5xl font-bold'>{families.length > 1 ? 'Families' : 'Family'}</Text>
@@ -69,17 +80,27 @@ const handleCopy = async (code: string) => {
                     {family.animals?.map(animal => (
                       animal.medications?.map(medication => (
                         medication.medication_schedules?.map( schedule => (
-                          <TouchableOpacity
+                          <View 
                             key={`${animal.id}-${medication.id}-${schedule.id}`}
-                            onLongPress={() => setDeleteScheduleModal({animal, medication, schedule})}
+                            className='flex-row items-center gap-3'
                             >
-                          <AnimalScheduleCard 
-                            key={`${animal.id}-${medication.id}-${schedule.id}`} 
-                            animal={animal} 
-                            medication = {medication} 
-                            schedule={schedule}/>
-                          </TouchableOpacity>
+                            <TouchableOpacity
+                              className='flex-1'
+                              onLongPress={() => setEditScheduleModal({ animal, medication, schedule })}
+                            >
+                              <AnimalScheduleCard
+                                animal={animal}
+                                medication={medication}
+                                schedule={schedule}
+                              />
+                            </TouchableOpacity>
 
+                            <TouchableOpacity
+                              onPress={() => setDeleteScheduleModal({ animal, medication, schedule })}
+                            >
+                              <Ionicons name='trash-bin-outline' size={30} color='#f56565' />
+                            </TouchableOpacity>
+                          </View>
                         ))
                       ))
                     ))}

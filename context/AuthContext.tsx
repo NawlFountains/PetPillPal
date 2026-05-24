@@ -50,6 +50,51 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     })
   }, [])
 
+    useEffect(() => {
+  console.log('profile in realtime effect:', profile)  // ← add this
+    if (!profile) return
+
+    // Subscribe to family_member changes (someone joins/leaves)
+    const familiesChannel = supabase
+      .channel('families-changes')
+      .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'medication_schedules'
+      }, (payload) => {
+        console.log('schedule change ',payload)
+        refreshFamilies()
+      })
+      .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'medications'
+      }, () => {
+        refreshFamilies()
+      })
+      .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'animals'
+      }, () => {
+        refreshFamilies()
+      })
+      .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'dose_logs'
+      }, () => {
+        refreshDoseLogs()
+      })
+      .subscribe((status) => {
+         console.log('subscription status:', status)  // ← add this
+      })
+
+    return () => {
+      supabase.removeChannel(familiesChannel)
+    }
+  }, [profile])
+
   async function fetchUserData(userId: string) {
     const today = new Date().toISOString().split('T')[0]
 
@@ -104,16 +149,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setFamilies(data?.map((m: any) => m.families) ?? [])
   }
   async function refreshDoseLogs() {
-    const today = new Date().toISOString().split('T')[0]
-    const { data, error } = await supabase
+    const sevenDaysAgo = new Date()
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
+    
+    const { data } = await supabase
       .from('dose_logs')
       .select('*, profiles!dose_logs_given_by_fkey(display_name)')
-      .gte('given_at', `${today}T00:00:00`)
-      .lte('given_at', `${today}T23:59:59`)
+      .gte('given_at', sevenDaysAgo.toISOString())
 
-    console.log('dose logs:', JSON.stringify(data, null, 2))
-    console.log('error:', error)
-    
     setDoseLogs(data ?? [])
   }
 

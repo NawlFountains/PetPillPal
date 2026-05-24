@@ -16,15 +16,15 @@ export default function HomeScreen() {
   const [ exitModal, setExitModal ] = useState<{ name: string, id: string} | null> (null)
   const [ deleteScheduleModal, setDeleteScheduleModal ] = useState<{ animal: Animal, medication: Medication, schedule: Schedule} | null> (null)
   const [ editScheduleModal, setEditScheduleModal ] = useState<{ animal: Animal, medication: Medication, schedule: Schedule} | null> (null)
-  const [copied, setCopied] = useState(false)
+  const [copiedId, setCopiedId] = useState<string | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [showCreateAnimal, setShowCreateAnimal] = useState(false)
   const [showCreateMedicationSchedule, setShowCreateMedicationSchedule] = useState(false)
 
-const handleCopy = async (code: string) => {
+const handleCopy = async (code: string, familyId: string) => {
   await Clipboard.setStringAsync(code)
-  setCopied(true)
-  setTimeout(() => setCopied(false), 2000)
+  setCopiedId(familyId)
+  setTimeout(() => setCopiedId(null), 2000)
 }
   return (
       <View className='flex-1 pt-20 bg-white px-6'>
@@ -63,20 +63,25 @@ const handleCopy = async (code: string) => {
           </View>
             {families.map(family => (
               <View key={family.id} className='gap-6 mt-10'>
-                <View className='flex-row justify-between'>
+                <View className='flex-row justify-between item-center'>
+                  <View className='flex-row item-center gap-2 flex-1'>
                   <TouchableOpacity
-                    onPress={() => handleCopy(family.code)}>
-                    <Text className='text-3xl font-bold text-gray-600'>
-                      {(family.animals?.length ?? 0) > 0 ? family.name + " " : family.name + " doesn't have any animals "} 
-                      <Ionicons name={copied ? 'checkmark-outline' : 'copy-outline'} size={30} color='#5c5c5c' />
-                    </Text>
+                    onPress={() => handleCopy(family.code, family.id)}>
+
+                      <Text className='text-3xl text-gray-600'>
+                        <Text className='font-bold'>
+                          {family.name}
+                        </Text>
+                          {(family.animals?.length ?? 0) > 0 ? " " : " doesn't have any animals "} 
+                        <Ionicons name={copiedId == family.id ? 'checkmark-outline' : 'copy-outline'} size={30} color='#5c5c5c' />
+                      </Text>
                   </TouchableOpacity>
+                    </View>
                   <TouchableOpacity
                     onPress={() => setExitModal({ name: family.name, id: family.id})}>
                     <Ionicons name='exit-outline' size={36} color='#f56565' />
                   </TouchableOpacity>
                 </View>
-
                     {family.animals?.map(animal => (
                       animal.medications?.map(medication => (
                         medication.medication_schedules?.map( schedule => (
@@ -92,13 +97,10 @@ const handleCopy = async (code: string) => {
                                 animal={animal}
                                 medication={medication}
                                 schedule={schedule}
-                              />
-                            </TouchableOpacity>
+                                onEdit={() => setEditScheduleModal({ animal, medication, schedule })}
+                                onDelete={() => setDeleteScheduleModal({ animal, medication, schedule })}
 
-                            <TouchableOpacity
-                              onPress={() => setDeleteScheduleModal({ animal, medication, schedule })}
-                            >
-                              <Ionicons name='trash-bin-outline' size={30} color='#f56565' />
+                              />
                             </TouchableOpacity>
                           </View>
                         ))

@@ -1,20 +1,44 @@
 import { Animal, Medication, Schedule } from '@/lib/definitions';
-import { Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 
 export default function AnimalScheduleCard({
     animal,
     medication,
-    schedule
+    schedule,
+    onEdit,
+    onDelete
 }: {
     animal: Animal;
     medication: Medication;
     schedule: Schedule;
+    onEdit?: () => void
+    onDelete?: () => void
 }) {
     return (
         <View className='bg-white rounded-2xl border border-black w-full'>
-            <View className='mx-4 mt-4 mb-1'>
-                <Text className='text-2xl font-bold mb-3'>{animal.name}</Text>
+            <View className='flex-row mx-4 mt-4 mb-1 justify-between'>
+                <View>
+                    <Text className='text-2xl font-bold mb-3'>{animal.name}</Text>
+                </View>
+                <View className='flex-row gap-5'>
+                    {onEdit && (
+                        <TouchableOpacity
+                            onPress={onEdit}
+                            >
+                            <Ionicons name='pencil' size={30} color='#1c1c1c' />
+                        </TouchableOpacity>
+                    )}
+                    {onDelete && (
+                        <TouchableOpacity
+                            onPress={onDelete}
+                            >
+                            <Ionicons name='trash-outline' size={30} color='#f56565' />
+                        </TouchableOpacity>
+                    )}
+                </View>
             </View>
             <View className='h-px bg-black'/>
             <View className='m-4'>

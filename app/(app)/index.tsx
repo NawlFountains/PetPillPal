@@ -1,18 +1,54 @@
 import { useAuth } from '@/context/AuthContext'
-import { useState } from 'react'
+import { isOverdue, isScheduledToday } from '@/lib/utils'
+import { useFocusEffect } from 'expo-router'
+import { useCallback, useState } from 'react'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import CreateFamilyModal from '../components/modals/CreateFamilyModal'
 import JoinFamilyModal from '../components/modals/JoinFamilyModal'
-import AnimalCard from '../components/ui/AnimalCard'
-import EmptyAnimalCard from '../components/ui/EmptyAnimalCard'
+import PendingLogDoseCard from '../components/ui/PendingLogDoseCard'
 
 export default function HomeScreen() {
-  const { profile, families } = useAuth()
+  const { profile, families, doseLogs, refreshDoseLogs } = useAuth()
   const [menuOpen, setMenuOpen] = useState(false)
   const [showCreateFamily, setShowCreateFamily] = useState(false)
   const [showJoinFamily, setShowJoinFamily] = useState(false)
+
+  const todaySchedules = families.flatMap(family =>
+  (family.animals ?? []).flatMap(animal =>
+    (animal.medications ?? []).flatMap(medication =>
+      (medication.medication_schedules ?? [])
+        .filter(schedule => isScheduledToday(schedule))
+        .map(schedule => ({ family, animal, medication, schedule }))
+    )
+  )
+)
+
+  const overdueSchedules = families.flatMap(family =>
+    (family.animals ?? []).flatMap(animal =>
+      (animal.medications ?? []).flatMap(medication =>
+        (medication.medication_schedules ?? [])
+          .filter(schedule => 
+            !isScheduledToday(schedule) && isOverdue(schedule, doseLogs)
+          )
+          .map(schedule => ({ family, animal, medication, schedule }))
+      )
+    )
+  )
+
+  const pending = todaySchedules.filter(
+    item => !doseLogs.some(log => log.schedule_id === item.schedule.id)
+  )
+  const given = todaySchedules.filter(
+    item => doseLogs.some(log => log.schedule_id === item.schedule.id)
+  )
+
   
-  console.log(families[0]?.animals[0]?.medications)
+  useFocusEffect(
+    useCallback(() => {
+      refreshDoseLogs()
+    }, [])
+  )
+
   return (
       <View className='flex-1 pt-20 bg-white px-6'>
 
@@ -28,25 +64,60 @@ export default function HomeScreen() {
             <Text className='text-5xl font-bold'>Welcome back</Text>
             <Text className='text-5xl text-gray-700'>{profile?.display_name}</Text>
           </View>
-          <View className='gap-6 mt-10'>
-              {families.map(family => (
-                family.animals && family.animals.length > 0 ? (
-                    family.animals.map(animal => (
-                      animal.medications.map ( medication => (
-                        medication.medication_schedules.map ( schedule => (
-                          <AnimalCard key={`${animal.id}-${medication.id}-${schedule.id}`}
-                            family={family}
-                            animal={animal}
-                            medication={medication}
-                            schedule={schedule}/>
-                        ))
-                      ))
-                    ))
-                ) : (
-                      <EmptyAnimalCard key={family.id} familyName={family.name}/>
-                )
-              ))}
-          </View>
+          {/* Pending */}
+            {pending.length > 0 && (
+              <View className='gap-4 mt-10'>
+                <Text className='text-2xl font-bold text-gray-800'>Pending</Text>
+                {pending.map(({ family, animal, medication, schedule }) => (
+                  <PendingLogDoseCard
+                    key={`${animal.id}-${medication.id}-${schedule.id}`}
+                    family={family}
+                    animal={animal}
+                    medication={medication}
+                    schedule={schedule}
+                  />
+                ))}
+              </View>
+            )}
+
+            {/* Given */}
+            {given.length > 0 && (
+              <View className='gap-4 mt-10'>
+                <Text className='text-2xl font-bold text-gray-800'>Given today</Text>
+                {given.map(({ family, animal, medication, schedule }) => (
+                  <PendingLogDoseCard
+                    key={`${animal.id}-${medication.id}-${schedule.id}`}
+                    family={family}
+                    animal={animal}
+                    medication={medication}
+                    schedule={schedule}
+                  />
+                ))}
+              </View>
+            )}
+            
+            {/* Overdue */}
+            {overdueSchedules.length > 0 && (
+              <View className='gap-4 mt-10'>
+                <Text className='text-2xl font-bold text-red-500'>Overdue</Text>
+                {overdueSchedules.map(({ family, animal, medication, schedule }) => (
+                  <PendingLogDoseCard
+                    key={`overdue-${animal.id}-${medication.id}-${schedule.id}`}
+                    family={family}
+                    animal={animal}
+                    medication={medication}
+                    schedule={schedule}
+                  />
+                ))}
+              </View>
+            )}
+
+            {/* Empty state */}
+            {todaySchedules.length === 0 && (
+              <View className='mt-20 items-center'>
+                <Text className='text-gray-400 text-lg'>No medications scheduled for today</Text>
+              </View>
+            )}
         </ScrollView>
 
         {menuOpen && (

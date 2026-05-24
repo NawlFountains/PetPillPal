@@ -4,6 +4,20 @@ export type Profile = {
     created_at: string
 }
 
+export type DoseLog = {
+  id: string
+  medication_id: string
+  schedule_id: string
+  family_id: string
+  given_by: string
+  given_at: string
+  scheduled_time: string
+  note: string
+  profiles: {
+    display_name: string
+  }
+}
+
 export type Schedule = {
   id: string
   time: string

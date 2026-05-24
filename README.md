@@ -28,7 +28,7 @@ Multiple families member can be reminded to give their pets their medication, wh
 - [x] User registration and login
 - [x] Create or join a family group
 - [x] Add pets and their medication schedules
-- [ ] Mark medications as given
-- [ ] See who gave the medication and when
-- [ ] Multi-day recurring schedules
+- [x] Mark medications as given
+- [x] See who gave the medication and when
+- [x] Multi-day recurring schedules
 - [ ] Reminders for giving meds 

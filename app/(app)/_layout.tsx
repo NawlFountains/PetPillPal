@@ -1,8 +1,10 @@
+import { useAuth } from '@/context/AuthContext'
 import { Ionicons } from '@expo/vector-icons'
 import { Tabs } from 'expo-router'
 
 
 export default function AppLayout() {
+    const {profile} = useAuth()
     return (
          <Tabs
             screenOptions={{
@@ -36,7 +38,7 @@ export default function AppLayout() {
         <Tabs.Screen
             name='settings'
             options={{
-            title: 'Settings',
+            title: profile?.display_name,
             tabBarIcon: ({ color, size }) => (
                 <Ionicons name='person-outline' size={size} color={color} />
             ),

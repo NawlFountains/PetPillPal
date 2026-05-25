@@ -31,13 +31,20 @@ export function useLogDose(onSuccess: () => void) {
         note: note ?? null
       })
     
-    console.log('login dose ',logError?.message)
-
     if (logError) {
       setError(logError.message)
       setLoading(false)
       return
     }
+    await supabase.functions.invoke('notify-dose-given', {
+      body: {
+        family_id: familyId,
+        given_by: profile.id,
+        animal_name: medication.name,
+        medication_name: medication.name,
+      }
+    })
+
 
     setLoading(false)
     await refreshDoseLogs()

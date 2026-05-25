@@ -12,7 +12,7 @@
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
     "@react-navigation/native": "^7.1.33",
-    "@supabase/supabase-js": "^2.106.1",
+    "@supabase/supabase-js": "^2.25.0",
     "expo": "~55.0.25",
     "expo-clipboard": "~55.0.13",
     "expo-constants": "~55.0.16",

@@ -197,7 +197,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       `)
       .eq('user_id', profile.id)
 
-    setFamilies(data?.map((m: any) => m.families) ?? [])
+    const fetchedFamilies = data?.map((m: any) => m.families) ?? []
+    setFamilies(fetchedFamilies)
+    console.log('On refresh families')
+    await scheduleAllNotifications(fetchedFamilies, doseLogs);
   }
   async function refreshDoseLogs() {
     const sevenDaysAgo = new Date()

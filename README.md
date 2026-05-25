@@ -31,4 +31,4 @@ Multiple families member can be reminded to give their pets their medication, wh
 - [x] Mark medications as given
 - [x] See who gave the medication and when
 - [x] Multi-day recurring schedules
-- [ ] Reminders for giving meds 
+- [x] Reminders for giving meds 

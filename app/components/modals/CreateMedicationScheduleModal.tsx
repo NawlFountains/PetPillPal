@@ -155,13 +155,19 @@ export default function CreateMedicationScheduleModal({ visible, onClose }: Prop
             />
           </View>
           <View className='flex-row gap-2'>
+            <View className='flex-1'>
             <TextInput
-              className='h-12 border rounded-xl px-4 text-2xl flex-1'
+              className='h-12 border rounded-xl px-4 text-2xl'
               placeholder='Start-date YYYY-MM-DD'
               placeholderTextColor='#5c5c5c'
               value={startsOn}
               onChangeText={setStartsOn}
             />
+            {errors.startsOn && (
+              <Text className='text-red-500'>{errors.startsOn}</Text>
+            )}
+            </View>
+            <View className='flex-1'>
             <TextInput
               className='h-12 border rounded-xl px-4 text-2xl flex-1'
               placeholder='End-date YYYY-MM-DD'
@@ -169,6 +175,10 @@ export default function CreateMedicationScheduleModal({ visible, onClose }: Prop
               value={endsOn}
               onChangeText={setEndsOn}
             />
+            {errors.endsOn && (
+              <Text className='text-red-500'>{errors.endsOn}</Text>
+            )}
+          </View>
           </View>
           <TouchableOpacity 
             className='h-12 text-2xl bg-black rounded-xl items-center justify-center'

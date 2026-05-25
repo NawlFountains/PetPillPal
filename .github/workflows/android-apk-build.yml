@@ -1,0 +1,33 @@
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - main # Triggers the build whenever you merge or push code to main
+  workflow_dispatch: # Gives you a manual button on GitHub to click and trigger a build anytime
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm' # Automatically caches node_modules to speed up subsequent pipeline runs
+
+      - name: Set up Expo EAS Engine
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Trigger EAS Android Preview Build (APK)
+        run: eas build --platform android --profile preview --non-interactive

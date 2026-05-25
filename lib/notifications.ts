@@ -15,7 +15,7 @@ Notifications.setNotificationHandler({
 // To avoid race condition we use a mutex
 let isScheduling = false;
 
-export async function scheduleAllNotifications(families: Family[], doseLogs: DoseLog[]) {
+export async function scheduleAllNotifications(families: Family[], doseLogs: DoseLog[], reminderMinutes: number = 30) {
     // If an instance is already running, block this call
     if (isScheduling) {
         console.log('[DEBUG] Scheduling already in progress. Skipping duplicate run.');
@@ -56,7 +56,7 @@ export async function scheduleAllNotifications(families: Family[], doseLogs: Dos
     
                             const [hours, minutes] = schedule.time.split(':').map(Number)
     
-                            let triggerMinute = minutes - 5
+                            let triggerMinute = minutes - reminderMinutes
                             let triggerHour = hours
     
     
@@ -82,7 +82,7 @@ export async function scheduleAllNotifications(families: Family[], doseLogs: Dos
                             await Notifications.scheduleNotificationAsync({
                                 content: {
                                     title: 'Upcoming medication',
-                                    body: `${animal.name} scheduled to take ${medication.name} in 5 minutes.`,
+                                    body: `${animal.name} scheduled to take ${medication.name} in ${reminderMinutes} minutes.`,
                                 },
                                 trigger: {
                                     type: Notifications.SchedulableTriggerInputTypes.DATE,

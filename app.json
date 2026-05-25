@@ -17,7 +17,7 @@
       "bundleIdentifier": "com.nawl.PetMeds"
     },
     "android": {
-      "googleServicesFile": "./google-services.json",
+      "googleServicesFile": "./process.env.GOOGLE_SERVICES_JSON",
       "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",

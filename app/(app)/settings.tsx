@@ -18,21 +18,13 @@ export default function HomeScreen() {
         const hidden = '*'.repeat(local.length - visibleCount)
         obscuredEmail = `${visible}${hidden}@${domain}`
     }
-    
-    const [reminderMinutes, setReminderMinutes] = useState(30)
-    const { families, doseLogs } = useAuth()
-
     const reminderOptions = [
         { label: '15 min', value: 15 },
         { label: '30 min', value: 30 },
         { label: '1 hour', value: 60 },
     ]
-
-    useEffect(() => {
-        AsyncStorage.getItem('reminderMinutes').then(val => {
-            if (val) setReminderMinutes(Number(val))
-        })
-    }, [])
+    
+    const { reminderMinutes, setReminderMinutes, families, doseLogs } = useAuth()
 
     async function handleReminderChange(minutes: number) {
         setReminderMinutes(minutes)

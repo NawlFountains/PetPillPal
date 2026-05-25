@@ -77,7 +77,7 @@ export async function scheduleAllNotifications(families: Family[], doseLogs: Dos
                             // For testing: Set the trigger to 5 seconds from right now
                             // const testTriggerDate = new Date(Date.now() + 5000);
                             // console.log('Scheduled ',schedule.time,'',schedule, ' on ',triggerDate)
-
+                            console.log('[DEBUG] Schedule notification for ',triggerDate, ' upcoming time of ',reminderMinutes)
                             
                             await Notifications.scheduleNotificationAsync({
                                 content: {

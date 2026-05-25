@@ -1,6 +1,7 @@
 import { DoseLog, Family, Profile } from '@/lib/definitions'
 import { scheduleAllNotifications } from '@/lib/notifications'
 import { supabase } from '@/lib/supabase'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Session } from '@supabase/supabase-js'
 import * as Device from 'expo-device'
 import * as Notifications from 'expo-notifications'
@@ -12,6 +13,8 @@ type AuthContextType = {
     families: Family[]
     doseLogs: DoseLog[]
     loading: boolean
+    reminderMinutes: number
+    setReminderMinutes: (minutes: number) => void
     refreshFamilies: () => Promise<void>
     refreshDoseLogs: () => Promise<void>
 }
@@ -22,6 +25,8 @@ const AuthContext = createContext<AuthContextType>({
     families: [],
     doseLogs: [],
     loading: true,
+    reminderMinutes: 30,
+    setReminderMinutes: async() => {},
     refreshFamilies: async () => {},
     refreshDoseLogs: async () => {}
 })
@@ -60,6 +65,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [profile, setProfile] = useState<Profile | null>(null)
     const [families, setFamilies] = useState<Family[]>([])
     const [doseLogs, setDoseLogs] = useState<DoseLog[]>([])
+    const [reminderMinutes, setReminderMinutes] = useState(30)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -179,12 +185,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         console.log('token save error ',error)
     }
 
+    const savedMinutes = await AsyncStorage.getItem('reminderMinutes')
+    const minutes = savedMinutes ? Number(savedMinutes) : 30
+
+    setReminderMinutes(minutes)
     setProfile(profileRes.data)
     setFamilies(fetchedFamilies)
     setDoseLogs(fetchedLogs)
     setLoading(false)
 
-    await scheduleAllNotifications(fetchedFamilies, fetchedLogs)
+    await scheduleAllNotifications(fetchedFamilies, fetchedLogs, minutes)
   }
 
   async function refreshFamilies() {
@@ -223,7 +233,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
     return (
-    <AuthContext.Provider value={{ session, profile, families, doseLogs , loading, refreshFamilies, refreshDoseLogs }}>
+    <AuthContext.Provider value={{ session, profile, families, doseLogs , loading, reminderMinutes, setReminderMinutes, refreshFamilies, refreshDoseLogs }}>
       {children}
     </AuthContext.Provider>
   )

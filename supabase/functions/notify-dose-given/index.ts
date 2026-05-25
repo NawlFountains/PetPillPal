@@ -9,42 +9,43 @@ serve(async (req) => {
     Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
   )
 
-  // Get all family members except the giver
   const { data: members } = await supabase
     .from('family_member')
     .select('user_id')
     .eq('family_id', family_id)
     .neq('user_id', given_by)
 
+  console.log(`[DEBUG] Found ${members?.length || 0} family members.`)
+
   if (!members?.length) return new Response('no members', { status: 200 })
 
-  // Get their push tokens
   const userIds = members.map(m => m.user_id)
   const { data: tokens } = await supabase
     .from('push_tokens')
     .select('token')
     .in('user_id', userIds)
-console.log(`[DEBUG] Found ${members?.length || 0} family members. User IDs: ${userIds}`);
-console.log(`[DEBUG] Found ${tokens?.length || 0} active push tokens.`);
 
-  if (!tokens?.length) {
-    console.log('[DEBUG] Exiting early: No tokens found to send notifications to.');
-    return new Response('no tokens', { status: 200 })
-  }
-  console.log(`[DEBUG] Sending ${messages.length} push notifications via Expo...`);
+  console.log(`[DEBUG] Found ${tokens?.length || 0} active push tokens.`)
 
-  // Send push notifications via Expo
+  if (!tokens?.length) return new Response('no tokens', { status: 200 })
+
+  // Define messages BEFORE using them
   const messages = tokens.map(({ token }) => ({
     to: token,
     title: '✅ Medication given',
     body: `${animal_name} was given ${medication_name}`,
   }))
 
-  await fetch('https://exp.host/--/api/v2/push/send', {
+  console.log(`[DEBUG] Sending ${messages.length} push notifications via Expo...`)
+
+  const response = await fetch('https://exp.host/--/api/v2/push/send', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(messages),
   })
+
+  const result = await response.json()
+  console.log('[DEBUG] Expo push response:', JSON.stringify(result))
 
   return new Response('ok', { status: 200 })
 })

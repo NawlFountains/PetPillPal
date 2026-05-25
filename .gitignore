@@ -3,6 +3,10 @@
 # dependencies
 node_modules/
 
+# Personal config files
+.claude/
+.vscode/
+
 # Expo
 .expo/
 dist/
@@ -45,3 +49,4 @@ GoogleService-Info.plist
 /ios
 /android
 
+service-account.json

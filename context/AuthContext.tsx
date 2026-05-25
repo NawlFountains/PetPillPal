@@ -5,7 +5,6 @@ import { Session } from '@supabase/supabase-js'
 import * as Device from 'expo-device'
 import * as Notifications from 'expo-notifications'
 import { createContext, useContext, useEffect, useState } from 'react'
-import { Platform } from 'react-native'
 
 type AuthContextType = {
     session: Session | null
@@ -26,31 +25,35 @@ const AuthContext = createContext<AuthContextType>({
     refreshFamilies: async () => {},
     refreshDoseLogs: async () => {}
 })
-
 async function registerForPushNotifications() {
-  console.log('Platform is ', Platform.OS)
-  if (Platform.OS === 'web') {
-    console.log('Running on web: Skipping Expo Push Token generation')
+  try {
+    if (!Device.isDevice) return null
+
+    const { status: existingStatus } = await Notifications.getPermissionsAsync()
+    let finalStatus = existingStatus
+
+    if (existingStatus !== 'granted') {
+      const { status } = await Notifications.requestPermissionsAsync()
+      finalStatus = status
+    }
+
+    if (finalStatus !== 'granted') {
+      console.log('Notification permission denied')
+      return null
+    }
+
+    const token = (await Notifications.getExpoPushTokenAsync({
+      projectId: '36f15f60-848d-4f55-99c4-98306f6967e4'  // ← add your EAS project ID
+    })).data
+    
+    console.log('Push token:', token)
+    return token
+  } catch (error) {
+    console.log('Push token error:', error)
     return null
   }
-  if (!Device.isDevice) return null
-
-  // Check if already granted permission
-  const { status: existingStatus } = await Notifications.getPermissionsAsync()
-  let finalStatus = existingStatus
-
-  // If not then ask for it
-  if (existingStatus !== 'granted') {
-    const { status } = await Notifications.requestPermissionsAsync()
-    finalStatus = status
-  }
-
-  // Teh user didnt allow it so we cant register push notifications
-  if (finalStatus !== 'granted') return null
-
-  const token = (await Notifications.getExpoPushTokenAsync()).data
-  return token
 }
+
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [session, setSession] = useState<Session | null>(null)
@@ -159,17 +162,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           .gte('given_at', `${today}T00:00:00`)
           .lte('given_at', `${today}T23:59:59`)
     ])
-
     const fetchedFamilies = familiesRes.data?.map((m: any) => m.families) ?? []
     const fetchedLogs = logsRes.data ?? []
 
     const token = await registerForPushNotifications()
-    if (token && profileRes.data) {
-      await supabase
-        .from('push_tokens')
-        .upsert({ user_id: profileRes.data.id, token }, { onConflict: 'user_id' })
-    }
+    console.log('token:', token)
+    console.log('profile data:', profileRes.data)
 
+    if (token && profileRes.data) {
+      const { error } = await supabase
+        .from('push_tokens')
+        .upsert({ 
+          user_id: profileRes.data.id, 
+          token 
+        }, { onConflict: 'user_id' })
+        console.log('token save error ',error)
+    }
 
     setProfile(profileRes.data)
     setFamilies(fetchedFamilies)

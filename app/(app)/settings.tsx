@@ -36,7 +36,7 @@ export default function HomeScreen() {
 
     return (
         <ScrollView className='bg-white dark:bg-black'>
-            <View className='flex-1 pt-20 px-6 gap-5'>
+            <View className='flex-1 pt-20 px-6 gap-8'>
                 <Text className='text-5xl font-bold dark:text-white'>Settings</Text>
                 <View className='flex-row items-center justify-between rounded-2xl px- py-4 dark:bg-black'>
                 <Text className='text-4xl font-bold dark:text-white'>Dark mode</Text>
@@ -93,7 +93,7 @@ export default function HomeScreen() {
                     </View>
                 </View>
 
-                <Text className='text-3xl font-bold'>Account</Text>
+                <Text className='text-4xl font-bold dark:text-white'>Account</Text>
                 <TouchableOpacity
                     className='py-3 bg-red-500 w-full rounded-[15]'
                     onPress={handleLogout}

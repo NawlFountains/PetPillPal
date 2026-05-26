@@ -120,7 +120,7 @@ export default function CreateMedicationScheduleModal({ visible, onClose }: Prop
             )}
             <ErrorMessage error={errors.days}/>
           </View>
-          <Text className='text-2xl font-bold mb-1'>Optional</Text>
+          <Text className='text-2xl font-bold mb-1 dark:text-white'>Optional</Text>
           <View className='flex-row gap-2'>
             <TextInput
               className='h-12 border dark:border-white dark:text-white rounded-xl px-4 text-2xl flex-1'

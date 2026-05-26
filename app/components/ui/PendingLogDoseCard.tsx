@@ -25,20 +25,20 @@ export default function PendingLogDoseCard({ family, animal, medication, schedul
     const isMyLog = log?.given_by === profile?.id
 
     return (
-    <View className='bg-white rounded-2xl border border-black w-full'>
+    <View className='bg-white dark:bg-black rounded-2xl border border-black dark:border-white w-full'>
         <View className='mx-4 my-4 flex-row justify-between items-center'>
-        <Text className='text-2xl font-bold'>{animal.name}</Text>
+        <Text className='text-2xl font-bold dark:text-white'>{animal.name}</Text>
         {onDelete && (
             <TouchableOpacity onPress={onDelete}>
             <Ionicons name='trash-bin-outline' size={24} color='#f56565' />
             </TouchableOpacity>
         )}
         </View>
-        <View className='h-px bg-black' />
+        <View className='h-px bg-black dark:bg-white' />
         <View className='m-4 gap-3'>
-        <Text className='text-xl text-gray-500'>
+        <Text className='text-xl text-gray-500 dark:text-gray-200'>
             Schedule to take
-            <Text className='text-black font-bold'> {medication.name} </Text>
+            <Text className='text-black font-bold dark:text-white'> {medication.name} </Text>
             {schedule.frequency === 'daily'
             ? `everyday at ${schedule.time.substring(0, 5)}`
             : `every ${schedule.days_of_week
@@ -64,11 +64,11 @@ export default function PendingLogDoseCard({ family, animal, medication, schedul
             </View>
             ) : (
             <TouchableOpacity
-                className='h-12 bg-black rounded-xl items-center justify-center'
+                className='h-12 bg-black dark:bg-white rounded-xl items-center justify-center'
                 onPress={() => handleLogDose(family.id, animal.name, medication, schedule)}
                 disabled={loading}
             >
-                <Text className='text-white font-semibold'>
+                <Text className='text-white dark:text-black font-semibold'>
                 {loading ? 'Logging...' : 'Mark as given'}
                 </Text>
             </TouchableOpacity>

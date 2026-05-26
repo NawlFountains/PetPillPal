@@ -18,7 +18,7 @@ export default function HomeScreen() {
   const { copiedId, handleCopy } = useCopy()
 
   return (
-      <View className='flex-1 pt-20 bg-white px-6'>
+      <View className='flex-1 pt-20 bg-white dark:bg-black px-6'>
         <ExitFamilyModal
           visible={exitModal !== null}
           familyName={exitModal?.name ?? ''}
@@ -45,7 +45,7 @@ export default function HomeScreen() {
         )}
         <ScrollView>
           <View>
-            <Text className='text-5xl font-bold'>{families.length > 1 ? 'Families' : 'Family'}</Text>
+            <Text className='text-5xl font-bold dark:text-white'>{families.length > 1 ? 'Families' : 'Family'}</Text>
           </View>
             {/* No families */}
             {families.length === 0 && (
@@ -63,7 +63,7 @@ export default function HomeScreen() {
                   <TouchableOpacity
                     onPress={() => handleCopy(family.code, family.id)}>
 
-                      <Text className='text-3xl text-gray-600'>
+                      <Text className='text-3xl text-gray-600 dark:text-gray-200'>
                         <Text className='font-bold'>
                           {family.name}
                         </Text>

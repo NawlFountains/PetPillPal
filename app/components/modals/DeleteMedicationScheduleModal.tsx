@@ -23,10 +23,10 @@ export default function DeleteMedicationScheduleModal({ animal, medication, sche
           onPress={onClose}
         />
 
-        <View className='bg-white rounded-t-3xl border-b px-6 pt-6 pb-4'>
-          <Text className='text-2xl font-bold text-center'>Are you sure you want to delete the schedule ? </Text>
+        <View className='bg-white dark:bg-black rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
+          <Text className='text-2xl font-bold text-center dark:text-white'>Are you sure you want to delete the schedule ? </Text>
         </View>
-        <View className='bg-white rounded-b-3xl px-6 pt-6 pb-6 gap-2'>
+        <View className='bg-white dark:bg-black rounded-b-3xl border dark:border-white px-6 pt-6 pb-6 gap-2'>
           <ErrorMessage error={error}/>
           <AnimalScheduleCard
             animal={animal}
@@ -34,10 +34,10 @@ export default function DeleteMedicationScheduleModal({ animal, medication, sche
             medication={medication}/>
           <View className='flex-row justify-center gap-6 mt-4'>
             <TouchableOpacity 
-                className='h-12 rounded-xl border items-center justify-center w-1/2'
+                className='h-12 rounded-xl border dark:border-white items-center justify-center w-1/2'
                 onPress={onClose}
                 disabled={loading}>
-                <Text className='font-semibold'>
+                <Text className='font-semibold dark:text-white'>
                     Cancel
                 </Text>
             </TouchableOpacity>

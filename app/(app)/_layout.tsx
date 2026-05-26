@@ -15,7 +15,7 @@ export default function AppLayout() {
                 tabBarActiveTintColor: isDark ? '#ffffff': '#1c1c1c',
                 tabBarInactiveTintColor: '#9ca3af',
                 tabBarStyle: {
-                backgroundColor: isDark ? '#1c1c1c' : '#ffffff',
+                backgroundColor: isDark ? '#000000' : '#ffffff',
                 borderTopColor: '#e5e7eb',
                 },
                 headerShown: false,

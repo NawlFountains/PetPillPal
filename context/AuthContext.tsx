@@ -6,6 +6,7 @@ import { Session } from '@supabase/supabase-js'
 import * as Device from 'expo-device'
 import * as Notifications from 'expo-notifications'
 import { createContext, useContext, useEffect, useState } from 'react'
+import { useColorScheme } from 'nativewind'
 
 type AuthContextType = {
     session: Session | null
@@ -67,6 +68,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [doseLogs, setDoseLogs] = useState<DoseLog[]>([])
     const [reminderMinutes, setReminderMinutes] = useState(30)
     const [loading, setLoading] = useState(true)
+    const { colorScheme, setColorScheme } = useColorScheme()
 
     useEffect(() => {
     // Get initial session
@@ -188,6 +190,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const savedMinutes = await AsyncStorage.getItem('reminderMinutes')
     const minutes = savedMinutes ? Number(savedMinutes) : 30
 
+     const savedScheme = await AsyncStorage.getItem('colorScheme')
+    if (savedScheme) {
+      setColorScheme(savedScheme as 'light' | 'dark')
+    }
+    
     setReminderMinutes(minutes)
     setProfile(profileRes.data)
     setFamilies(fetchedFamilies)

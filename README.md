@@ -13,9 +13,9 @@ In active development — core features complete
 
 - **Family spaces** — create or join a private family group with an invite code
 - **Real-time sync** — see when a family member logs a dose instantly
-- **Smart scheduling** — daily, weekly, or custom schedules with start/end dates
+- **Smart scheduling** — daily or weekly schedules with start/end dates
 - **Overdue tracking** — missed doses from the last 7 days are surfaced
-- **Push notifications** — 30-minute reminders before scheduled doses
+- **Push notifications** — 15, 30 or 60-minute reminders before scheduled doses
 - **Dose logging** — confirm a dose was given with an undo option
 
 ## Tech Stack
@@ -112,10 +112,13 @@ npx expo start
 - [x] See who gave the medication and when
 - [x] Multi-day recurring schedules
 - [x] Reminders for giving meds 
+- [ ] Push notification when an user logs a dose
 
 ## CI/CD
 
 GitHub Actions triggers an EAS build on every push to `main`, producing an Android APK for internal testing.
+
+For `feature/*` branches every push triggers a simple typescript check, also executed when creating a PR for `main`
 
 ## Author
 

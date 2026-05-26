@@ -2,7 +2,6 @@ import { useAuth } from '@/context/AuthContext'
 import { useLogout } from '@/hooks/useLogout'
 import { scheduleAllNotifications } from '@/lib/notifications'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useEffect, useState } from 'react'
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
 export default function HomeScreen() {

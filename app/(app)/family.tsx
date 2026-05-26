@@ -4,14 +4,11 @@ import { Ionicons } from '@expo/vector-icons'
 import * as Clipboard from 'expo-clipboard'
 import { useState } from 'react'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
-import CreateAnimalModal from '../components/modals/CreateAnimalModal'
-import CreateFamilyModal from '../components/modals/CreateFamilyModal'
-import CreateMedicationScheduleModal from '../components/modals/CreateMedicationScheduleModal'
 import DeleteMedicationScheduleModal from '../components/modals/DeleteMedicationScheduleModal'
 import EditMedicationScheduleModal from '../components/modals/EditMedicationScheduleModal'
 import ExitFamilyModal from '../components/modals/ExitFamilyModal'
-import JoinFamilyModal from '../components/modals/JoinFamilyModal'
 import AnimalScheduleCard from '../components/ui/AnimalScheduleCard'
+import FABModals from '../components/modals/FABModal'
 
 export default function HomeScreen() {
   const { families } = useAuth()
@@ -19,11 +16,6 @@ export default function HomeScreen() {
   const [ deleteScheduleModal, setDeleteScheduleModal ] = useState<{ animal: Animal, medication: Medication, schedule: Schedule} | null> (null)
   const [ editScheduleModal, setEditScheduleModal ] = useState<{ animal: Animal, medication: Medication, schedule: Schedule} | null> (null)
   const [copiedId, setCopiedId] = useState<string | null>(null)
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [showCreateAnimal, setShowCreateAnimal] = useState(false)
-  const [showCreateMedicationSchedule, setShowCreateMedicationSchedule] = useState(false)
-  const [showCreateFamily, setShowCreateFamily] = useState(false)
-  const [showJoinFamily, setShowJoinFamily] = useState(false)
 
 const handleCopy = async (code: string, familyId: string) => {
   await Clipboard.setStringAsync(code)
@@ -37,18 +29,7 @@ const handleCopy = async (code: string, familyId: string) => {
           familyName={exitModal?.name ?? ''}
           familyId={exitModal?.id ?? ''}
           onClose={() => setExitModal(null)}/>      
-        <CreateAnimalModal
-          visible={showCreateAnimal}
-          onClose={() => setShowCreateAnimal(false)}/>   
-        <CreateMedicationScheduleModal
-          visible={showCreateMedicationSchedule}
-          onClose={() => setShowCreateMedicationSchedule(false)}/>
-        <CreateFamilyModal
-          visible={showCreateFamily}
-          onClose={() => setShowCreateFamily(false)}/>
-        <JoinFamilyModal
-          visible={showJoinFamily}
-          onClose={() => setShowJoinFamily(false)}/>
+        
           
         {deleteScheduleModal && (
           <DeleteMedicationScheduleModal
@@ -119,7 +100,6 @@ const handleCopy = async (code: string, familyId: string) => {
                                 schedule={schedule}
                                 onEdit={() => setEditScheduleModal({ animal, medication, schedule })}
                                 onDelete={() => setDeleteScheduleModal({ animal, medication, schedule })}
-
                               />
                             </TouchableOpacity>
                           </View>
@@ -129,45 +109,8 @@ const handleCopy = async (code: string, familyId: string) => {
                 </View>
               ))}
         </ScrollView>
-        
-        {menuOpen && (
-          <View className='absolute bottom-24 right-6 bg-white rounded-2xl border border-gray-200 shadow-md overflow-hidden'>
-            <TouchableOpacity 
-              className='px-6 py-4 border-b border-gray-100'
-              onPress={() => {
-                setShowCreateAnimal(true)
-                setMenuOpen(false)}}>
-              <Text className='text-base font-semibold'>Add animal</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-            className='px-6 py-4'
-              onPress={() => {
-                setShowCreateMedicationSchedule(true)
-                setMenuOpen(false)}}>
-              <Text className='text-base font-semibold'>Add medication schedule</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              className='px-6 py-4 border-b border-gray-100'
-              onPress={() => {
-                setShowCreateFamily(true)
-                setMenuOpen(false)}}>
-              <Text className='text-base font-semibold'>Create a family</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-            className='px-6 py-4'
-              onPress={() => {
-                setShowJoinFamily(true)
-                setMenuOpen(false)}}>
-              <Text className='text-base font-semibold'>Join a family</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-        <TouchableOpacity
-          className='absolute bottom-6 right-6 w-14 h-14 bg-black rounded-full items-center justify-center shadow-md'
-          onPress={() => setMenuOpen(!menuOpen)}
-          >
-          <Text className='text-white text-3xl font-light'>+</Text>
-        </TouchableOpacity>
+
+        <FABModals/>
         
       </View>
   )

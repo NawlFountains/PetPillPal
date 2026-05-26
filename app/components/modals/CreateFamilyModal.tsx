@@ -19,12 +19,12 @@ export default function CreateFamilyModal({ visible, onClose }: Props) {
           onPress={onClose}
         />
 
-        <View className='bg-white rounded-t-3xl border-b px-6 pt-6 pb-4'>
-          <Text className='text-2xl font-bold'>Create a new family </Text>
+        <View className='bg-white dark:bg-black rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
+          <Text className='text-2xl font-bold dark:text-white'>Create a new family </Text>
         </View>
-        <View className='bg-white rounded-b-3xl px-6 pt-2 pb-8 gap-2'>
+        <View className='bg-white dark:bg-black rounded-b-3xl border dark:border-white px-6 pt-2 pb-8 gap-2'>
           <TextInput
-            className='h-12 border rounded-xl px-4 text-2xl my-2'
+            className='h-12 border dark:border-white rounded-xl px-4 text-2xl my-2 dark:text-white'
             placeholder='family_name'
             placeholderTextColor='#5c5c5c'
             value={familyName}
@@ -32,10 +32,10 @@ export default function CreateFamilyModal({ visible, onClose }: Props) {
           />
           <ErrorMessage error={error}/>
           <TouchableOpacity 
-            className='h-12 bg-black rounded-xl items-center justify-center'
+            className='h-12 bg-black dark:bg-white rounded-xl items-center justify-center'
             onPress={handleCreateFamily}
             disabled={loading}>
-            <Text className='text-white font-semibold'>
+            <Text className='text-white dark:text-black font-semibold'>
               {loading ? 'Creating...' : 'Create'}
               </Text>
           </TouchableOpacity>

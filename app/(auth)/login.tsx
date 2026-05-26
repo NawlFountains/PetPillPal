@@ -9,7 +9,7 @@ export default function LoginScreen() {
     const { email, setEmail, password, setPassword, errors, loading, handleLogin} = useLogin()
 
     return (
-        <View className ='flex-1 items-center justify-center bg-light-gray px-6'>
+            <View className ='flex-1 items-center justify-center bg-light-gray px-6'>
             <View className='bg-white dark:bg-black p-4 shadow-sm border rounded-[15] w-full gap-15'>
                 <View className='mx-12 my-6 items-center'>
                     <View className='mb-14 mt-3 gap-5 w-full'>
@@ -19,7 +19,7 @@ export default function LoginScreen() {
                     <View className='mt-4 gap-10 w-full'>
                         <View>
                             <TextInput 
-                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-gray-200'
+                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-gray-200 dark:text-white'
                                 placeholder='email@example.com' 
                                 placeholderTextColor="#5c5c5c"
                                 value={email}
@@ -31,7 +31,7 @@ export default function LoginScreen() {
                         </View>
                         <View>
                             <TextInput 
-                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-gray-200'
+                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-gray-200 dark:text-white'
                                 placeholder='password'
                                 placeholderTextColor="#5c5c5c"
                                 value={password}

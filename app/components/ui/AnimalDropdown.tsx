@@ -28,17 +28,17 @@ export default function AnimalDropdown({ selectedId, familyId, onSelect }: Props
   return (
     <View className='relative z-10'>
       <TouchableOpacity
-        className='h-12 border rounded-xl px-4 flex-row items-center justify-between'
+        className='h-12 border dark:border-white rounded-xl px-4 flex-row items-center justify-between'
         onPress={() => setOpen(!open)}
       >
-        <Text className={`text-2xl ${selected ? 'text-gray-900' : 'text-gray-400'}`}>
+        <Text className={`text-2xl ${selected ? 'text-gray-900 dark:text-white' : 'text-gray-400'}`}>
           {selected ? selected.name : 'Select an animal'}
         </Text>
         <Ionicons name={open ? 'chevron-up' : 'chevron-down'} size={16} color='#9ca3af' />
       </TouchableOpacity>
 
       {open && (
-        <View className='absolute top-14 left-0 right-0 bg-white border rounded-xl overflow-hidden shadow-md'>
+        <View className='absolute top-14 left-0 right-0 bg-white dark:bg-black border dark:border-white rounded-xl overflow-hidden shadow-md'>
           {animals.length === 0 ? (
             <View className='px-4 py-3'>
               <Text className='text-gray-400'>No animals in this family</Text>
@@ -47,13 +47,13 @@ export default function AnimalDropdown({ selectedId, familyId, onSelect }: Props
             animals.map(animal => (
               <TouchableOpacity
                 key={animal.id}
-                className='px-4 py-3 border-b'
+                className='px-4 py-3 border-b dark:border-white'
                 onPress={() => {
                   onSelect(animal.id, animal.name)
                   setOpen(false)
                 }}
               >
-                <Text className={`text-base ${animal.id === selectedId ? 'font-bold text-black' : 'text-gray-700'}`}>
+                <Text className={`text-base ${animal.id === selectedId ? 'font-bold text-black dark:text-white' : 'text-gray-700 dark:text-gray-200'}`}>
                   {animal.name}
                 </Text>
               </TouchableOpacity>

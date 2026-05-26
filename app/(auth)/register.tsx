@@ -1,6 +1,7 @@
 import { useRegister } from '@/hooks/useRegister'
 import { useRouter } from 'expo-router'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import ErrorMessage from '../components/ui/ErrorMessage'
 
 
 export default function RegisterScreen() {
@@ -9,73 +10,65 @@ export default function RegisterScreen() {
 
     return (
         <View className ='flex-1 items-center justify-center bg-light-gray px-6'>
-            <View className='bg-white p-4 shadow-sm border rounded-[15] w-full gap-15'>
+            <View className='bg-white dark:bg-black p-4 shadow-sm border rounded-[15] w-full gap-15'>
                 <View className='mx-12 my-6 items-center'>
                     <View className='mb-14 mt-3 gap-5 w-full'>
-                        <Text className='text-5xl font-bold text-gray-900 mb-3 text-center'>Create account</Text>
-                        <Text className='text-3xl text-gray-500 text-center'>Start tracking your pets meds</Text>
+                        <Text className='text-5xl font-bold text-gray-900 dark:text-gray-200 mb-3 text-center'>Create account</Text>
+                        <Text className='text-3xl text-gray-500 dark:text-gray-400 text-center'>Start tracking your pets meds</Text>
                     </View>
                     <View className='mt-4 gap-10 w-full'>
                         <View>
                             <TextInput 
-                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5' 
+                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-white dark:text-white' 
                                 placeholder='name' 
                                 placeholderTextColor="#5c5c5c"
                                 value={name}
                                 onChangeText={setName}
                                 />
-                                {errors.name && (
-                                    <Text className='text-red-500'>{errors.name}</Text>
-                                )}
+                                <ErrorMessage error={errors.name}/>
                         </View>
                         <View>
                             <TextInput 
-                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5' 
+                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-white dark:text-white' 
                                 placeholder='email@example.com' 
                                 placeholderTextColor="#5c5c5c"
                                 value={email}
                                 onChangeText={setEmail}
                                 keyboardType='email-address'
                                 autoCapitalize='none'/>
-                                {errors.email && (
-                                    <Text className='text-red-500'>{errors.email}</Text>
-                                )}
+                                <ErrorMessage error={errors.email}/>
                         </View>
                         <View>
                             <TextInput 
-                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5' 
+                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-white dark:text-white' 
                                 placeholder='password' 
                                 placeholderTextColor="#5c5c5c"
                                 value={password}
                                 onChangeText={setPassword}
                                 secureTextEntry/>
-                                {errors.password && (
-                                    <Text className='text-red-500'>{errors.password}</Text>
-                                )}
+                                <ErrorMessage error={errors.password}/>
                         </View>
                         <View>
                             <TextInput 
-                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5' 
+                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-white dark:text-white' 
                                 placeholder='confirm_password' 
                                 placeholderTextColor="#5c5c5c"
                                 value={confirmPassword}
                                 onChangeText={setConfirmPassword}
                                 secureTextEntry/>
-                                {errors.confirmPassword && (
-                                    <Text className='text-red-500'>{errors.confirmPassword}</Text>
-                                )}
+                                <ErrorMessage error={errors.confirmPassword}/>
                         </View>
                         <TouchableOpacity
-                            className='py-3 bg-black w-full rounded-[15]'
+                            className='py-3 bg-black dark:bg-white w-full rounded-[15]'
                             onPress={handleRegister}
                             disabled={loading}>
-                                <Text className='text-white text-2xl font-bold text-center'
+                                <Text className='text-white dark:text-black text-2xl font-bold text-center'
                                 >{loading ? 'Creating account...' : 'Create account'}</Text>
                         </TouchableOpacity>
                         <View className='flex-row justify-center mt-2'>
-                            <Text className='text-2xl '>Already have an account? </Text>
+                            <Text className='text-2xl dark:text-white'>Already have an account? </Text>
                             <TouchableOpacity onPress={() => router.push('/(auth)/login')}>
-                                <Text className='text-2xl font-bold'>Sign in</Text>
+                                <Text className='text-2xl font-bold dark:text-white'>Sign in</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

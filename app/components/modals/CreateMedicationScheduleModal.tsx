@@ -37,10 +37,10 @@ export default function CreateMedicationScheduleModal({ visible, onClose }: Prop
           onPress={onClose}
         />
 
-        <View className='bg-white rounded-t-3xl border-b px-6 pt-6 pb-4'>
-          <Text className='text-2xl font-bold'>Add new med schedule </Text>
+        <View className='bg-white dark:bg-black rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
+          <Text className='text-2xl font-bold dark:text-white'>Add new med schedule </Text>
         </View>
-        <View className='bg-white rounded-b-3xl px-6 pt-6 pb-8 gap-4'>
+        <View className='bg-white dark:bg-black rounded-b-3xl border dark:border-white px-6 pt-6 pb-8 gap-4'>
           <View style={{ zIndex: 2}}>
             <FamilyDropdown
               selectedId={selectedFamilyId}
@@ -64,7 +64,7 @@ export default function CreateMedicationScheduleModal({ visible, onClose }: Prop
           <View className='flex-row justify-between w-full gap-3'>
             <View className='flex-1'>
               <TextInput
-                className='h-12 text-2xl border rounded-xl px-4'
+                className='h-12 text-2xl border dark:border-white dark:text-white rounded-xl px-4'
                 placeholder='medication_name'
                 placeholderTextColor='#5c5c5c'
                 value={medicationName}
@@ -74,7 +74,7 @@ export default function CreateMedicationScheduleModal({ visible, onClose }: Prop
             </View>
             <View className='flex-1'>
               <TextInput
-                className='h-12 text-2xl border rounded-xl px-4'
+                className='h-12 text-2xl border dark:border-white dark:text-white rounded-xl px-4'
                 placeholder='HH:MM (e.g. 08:00)'
                 placeholderTextColor='#5c5c5c'
                 value={time}
@@ -90,9 +90,9 @@ export default function CreateMedicationScheduleModal({ visible, onClose }: Prop
                 <TouchableOpacity
                   key={f}
                   onPress={() => setFrequency(f)}
-                  className={`flex-1 px-4 py-2 rounded-[10] w-1/4 border ${frequency === f ? 'bg-black' : ''}`}
+                  className={`flex-1 px-4 py-2 rounded-[10] w-1/4 border dark:border-white ${frequency === f ? 'bg-black dark:bg-white' : ''}`}
                 >
-                  <Text className={`text-2xl ${frequency === f ? 'text-white font-semibold' : 'text-gray-600'}`}>
+                  <Text className={`text-2xl ${frequency === f ? 'text-white font-semibold dark:text-black' : 'text-gray-600'}`}>
                     {f}
                   </Text>
                 </TouchableOpacity>
@@ -105,13 +105,13 @@ export default function CreateMedicationScheduleModal({ visible, onClose }: Prop
                   <TouchableOpacity
                     key={day.value}
                     onPress={() => toggleDay(day.value)}
-                    className={`w-14 h-9 rounded-[10] items-center justify-center border ${
+                    className={`w-14 h-9 rounded-[10] items-center justify-center border dark:border-white ${
                       selectedDays.includes(day.value)
-                        ? 'bg-black'
+                        ? 'bg-black dark:bg-white'
                         : ''
                     }`}
                   >
-                    <Text className={selectedDays.includes(day.value) ? 'text-white font-semibold' : 'text-gray-600'}>
+                    <Text className={selectedDays.includes(day.value) ? 'text-white font-semibold dark:text-black' : 'text-gray-600'}>
                       {day.label}
                     </Text>
                   </TouchableOpacity>
@@ -123,14 +123,14 @@ export default function CreateMedicationScheduleModal({ visible, onClose }: Prop
           <Text className='text-2xl font-bold mb-1'>Optional</Text>
           <View className='flex-row gap-2'>
             <TextInput
-              className='h-12 border rounded-xl px-4 text-2xl flex-1'
+              className='h-12 border dark:border-white dark:text-white rounded-xl px-4 text-2xl flex-1'
               placeholder='note'
               placeholderTextColor='#5c5c5c'
               value={note}
               onChangeText={setNote}
             />
             <TextInput
-              className='h-12 border rounded-xl px-4 text-2xl flex-1'
+              className='h-12 border dark:border-white dark:text-white rounded-xl px-4 text-2xl flex-1'
               placeholder='dose'
               placeholderTextColor='#5c5c5c'
               value={dose}
@@ -140,7 +140,7 @@ export default function CreateMedicationScheduleModal({ visible, onClose }: Prop
           <View className='flex-row gap-2'>
             <View className='flex-1'>
             <TextInput
-              className='h-12 text-2xl border rounded-xl px-4'
+              className='h-12 text-2xl dark:border-white dark:text-white border rounded-xl px-4'
               placeholder='Start-date YYYY-MM-DD'
               placeholderTextColor='#5c5c5c'
               value={startsOn}
@@ -150,7 +150,7 @@ export default function CreateMedicationScheduleModal({ visible, onClose }: Prop
             </View>
             <View className='flex-1'>
             <TextInput
-              className='h-12 text-2xl border rounded-xl px-4'
+              className='h-12 text-2xl dark:border-white dark:text-white border rounded-xl px-4'
               placeholder='End-date YYYY-MM-DD'
               placeholderTextColor='#5c5c5c'
               value={endsOn}
@@ -160,10 +160,10 @@ export default function CreateMedicationScheduleModal({ visible, onClose }: Prop
             </View>
           </View>
           <TouchableOpacity 
-            className='h-12 text-2xl bg-black rounded-xl items-center justify-center'
+            className='h-12 text-2xl bg-black dark:bg-white rounded-xl items-center justify-center'
             onPress={ () => handleCreateMedication(selectedAnimalId)}
             disabled={loading}>
-            <Text className='text-white font-semibold'>
+            <Text className='text-white dark:text-black font-semibold'>
               {loading ? 'Adding...' : 'Add'}
               </Text>
           </TouchableOpacity>

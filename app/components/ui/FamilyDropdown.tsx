@@ -17,10 +17,10 @@ export default function FamilyDropdown({
   return (
     <View className='relative z-10'>
       <TouchableOpacity
-        className='h-12 border rounded-xl px-4 flex-row items-center justify-between'
+        className='h-12 border dark:border-white rounded-xl px-4 flex-row items-center justify-between'
         onPress={() => setOpen(!open)}
       >
-        <Text className={`text-2xl ${selected ? 'text-gray-900' : 'text-gray-400'}`}>
+        <Text className={`text-2xl ${selected ? 'text-gray-900 dark:text-white' : 'text-gray-400'}`}>
           {selected ? selected.name : 'Select a family'}
         </Text>
         <Ionicons name={open ? 'chevron-up' : 'chevron-down'} size={16} color='#9ca3af' />
@@ -28,17 +28,17 @@ export default function FamilyDropdown({
 
       {/* Options */}
       {open && (
-        <View className='absolute top-14 left-0 right-0 bg-white border rounded-xl overflow-hidden shadow-md'>
+        <View className='absolute top-14 left-0 right-0 bg-white dark:bg-black border dark:border-white rounded-xl overflow-hidden shadow-md'>
           {families.map(family => (
             <TouchableOpacity
               key={family.id}
-              className='px-4 py-3 border-b'
+              className='px-4 py-3 border-b dark:border-white'
               onPress={() => {
                 onSelect(family.id, family.name)
                 setOpen(false)
               }}
             >
-              <Text className={`text-base ${family.id === selectedId ? 'font-bold text-black' : 'text-gray-700'}`}>
+              <Text className={`text-base ${family.id === selectedId ? 'font-bold text-black dark:text-white' : 'text-gray-700 dark:text-gray-200'}`}>
                 {family.name}
               </Text>
             </TouchableOpacity>

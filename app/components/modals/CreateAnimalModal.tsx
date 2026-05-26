@@ -23,10 +23,10 @@ export default function CreateAnimalModal({ visible, onClose }: Props) {
           onPress={onClose}
         />
 
-        <View className='bg-white rounded-t-3xl border-b px-6 pt-6 pb-4'>
-          <Text className='text-2xl font-bold'>Add new animal</Text>
+        <View className='bg-white dark:bg-black rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
+          <Text className='dark:text-white text-2xl font-bold'>Add new animal</Text>
         </View>
-        <View className='bg-white rounded-b-3xl px-6 pt-6 pb-8 gap-2'>
+        <View className='bg-white dark:bg-black rounded-b-3xl border border-l border-b dark:border-white px-6 pt-6 pb-8 gap-2'>
           <FamilyDropdown
             selectedId={selectedFamilyId}
             onSelect={(id, name) => {
@@ -36,7 +36,7 @@ export default function CreateAnimalModal({ visible, onClose }: Props) {
             />
           <ErrorMessage error={errors.animalName}/>
           <TextInput
-            className='h-12 border rounded-xl px-4 text-2xl my-2'
+            className='h-12 border dark:border-white rounded-xl px-4 text-2xl my-2 dark:text-white'
             placeholder='animal_name'
             placeholderTextColor='#5c5c5c'
             value={animalName}
@@ -44,7 +44,7 @@ export default function CreateAnimalModal({ visible, onClose }: Props) {
           />
           <ErrorMessage error={errors.animalName}/>
           <TextInput
-            className='h-12 border rounded-xl px-4 text-2xl my-2'
+            className='h-12 border dark:border-white rounded-xl px-4 text-2xl my-2 dark:text-white'
             placeholder='species'
             placeholderTextColor='#5c5c5c'
             value={species}
@@ -52,10 +52,10 @@ export default function CreateAnimalModal({ visible, onClose }: Props) {
           />
           <ErrorMessage error={errors.species}/>
           <TouchableOpacity 
-            className='h-12 bg-black rounded-xl items-center justify-center'
+            className='h-12 bg-black dark:bg-white rounded-xl items-center justify-center'
             onPress={ () => handleCreateAnimal(selectedFamilyId)}
             disabled={loading}>
-            <Text className='text-white font-semibold'>
+            <Text className='text-white font-semibold dark:text-black'>
               {loading ? 'Adding...' : 'Add'}
               </Text>
           </TouchableOpacity>

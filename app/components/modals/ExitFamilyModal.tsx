@@ -1,5 +1,6 @@
 import { useExitFamily } from '@/hooks/useExitFamily'
 import { Modal, Text, TouchableOpacity, View } from 'react-native'
+import ErrorMessage from '../ui/ErrorMessage'
 
 type Props = {
     familyName: String
@@ -23,7 +24,7 @@ export default function CreateFamilyModal({ familyName, familyId, visible, onClo
           <Text className='text-2xl font-bold text-center'>Are you sure you want to exit {familyName} ? </Text>
         </View>
         <View className='bg-white rounded-b-3xl px-6 pt-6 pb-6 gap-2'>
-          {error ? <Text className='text-red-500'> {error} </Text> : null}
+          <ErrorMessage error={error}/>
           <View className='flex-row justify-center gap-6 mt-4'>
             <TouchableOpacity 
                 className='h-12 rounded-xl border items-center justify-center w-1/2'

@@ -1,7 +1,6 @@
 import { useAuth } from '@/context/AuthContext'
 import { Animal, Medication, Schedule } from '@/lib/definitions'
 import { Ionicons } from '@expo/vector-icons'
-import * as Clipboard from 'expo-clipboard'
 import { useState } from 'react'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import DeleteMedicationScheduleModal from '../components/modals/DeleteMedicationScheduleModal'
@@ -9,19 +8,15 @@ import EditMedicationScheduleModal from '../components/modals/EditMedicationSche
 import ExitFamilyModal from '../components/modals/ExitFamilyModal'
 import AnimalScheduleCard from '../components/ui/AnimalScheduleCard'
 import FABModals from '../components/modals/FABModal'
+import { useCopy } from '@/hooks/useCopy'
 
 export default function HomeScreen() {
   const { families } = useAuth()
   const [ exitModal, setExitModal ] = useState<{ name: string, id: string} | null> (null)
   const [ deleteScheduleModal, setDeleteScheduleModal ] = useState<{ animal: Animal, medication: Medication, schedule: Schedule} | null> (null)
   const [ editScheduleModal, setEditScheduleModal ] = useState<{ animal: Animal, medication: Medication, schedule: Schedule} | null> (null)
-  const [copiedId, setCopiedId] = useState<string | null>(null)
+  const { copiedId, handleCopy } = useCopy()
 
-const handleCopy = async (code: string, familyId: string) => {
-  await Clipboard.setStringAsync(code)
-  setCopiedId(familyId)
-  setTimeout(() => setCopiedId(null), 2000)
-}
   return (
       <View className='flex-1 pt-20 bg-white px-6'>
         <ExitFamilyModal
@@ -29,7 +24,6 @@ const handleCopy = async (code: string, familyId: string) => {
           familyName={exitModal?.name ?? ''}
           familyId={exitModal?.id ?? ''}
           onClose={() => setExitModal(null)}/>      
-        
           
         {deleteScheduleModal && (
           <DeleteMedicationScheduleModal

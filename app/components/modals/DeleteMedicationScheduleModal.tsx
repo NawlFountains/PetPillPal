@@ -2,6 +2,7 @@ import { useDeleteMedication } from '@/hooks/useDeleteMedication'
 import { Animal, Medication, Schedule } from '@/lib/definitions'
 import { Modal, Text, TouchableOpacity, View } from 'react-native'
 import AnimalScheduleCard from '../ui/AnimalScheduleCard'
+import ErrorMessage from '../ui/ErrorMessage'
 
 type Props = {
     animal: Animal
@@ -26,7 +27,7 @@ export default function DeleteMedicationScheduleModal({ animal, medication, sche
           <Text className='text-2xl font-bold text-center'>Are you sure you want to delete the schedule ? </Text>
         </View>
         <View className='bg-white rounded-b-3xl px-6 pt-6 pb-6 gap-2'>
-          {error ? <Text className='text-red-500'> {error} </Text> : null}
+          <ErrorMessage error={error}/>
           <AnimalScheduleCard
             animal={animal}
             schedule={schedule}

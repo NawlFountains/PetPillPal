@@ -1,5 +1,6 @@
 import { useCreateFamily } from '@/hooks/useCreateFamily'
 import { Modal, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import ErrorMessage from '../ui/ErrorMessage'
 
 type Props = {
   visible: boolean
@@ -29,7 +30,7 @@ export default function CreateFamilyModal({ visible, onClose }: Props) {
             value={familyName}
             onChangeText={setFamilyName}
           />
-          {error ? <Text className='text-red-500'> {error} </Text> : null}
+          <ErrorMessage error={error}/>
           <TouchableOpacity 
             className='h-12 bg-black rounded-xl items-center justify-center'
             onPress={handleCreateFamily}

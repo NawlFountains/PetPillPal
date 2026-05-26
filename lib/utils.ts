@@ -79,4 +79,12 @@ export function isScheduledOnDate(schedule: Schedule, date: Date): boolean {
 return true
 }
 
+export function obscureEmail(email: string) : string {
+    const [local, domain] = email.split('@')
+    const visibleCount = Math.min(2, local.length - 1)
+    const visible = local.substring(0, visibleCount)
+    const hidden = '*'.repeat(local.length - visibleCount)
+    return `${visible}${hidden}@${domain}`
+}
+
 

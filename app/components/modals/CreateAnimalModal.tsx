@@ -2,6 +2,7 @@ import { useCreateAnimal } from '@/hooks/useCreateAnimal'
 import { useState } from 'react'
 import { Modal, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import FamilyDropdown from '../ui/FamilyDropdown'
+import ErrorMessage from '../ui/ErrorMessage'
 
 type Props = {
   visible: boolean
@@ -33,9 +34,7 @@ export default function CreateAnimalModal({ visible, onClose }: Props) {
                 setSelectedFamilyName(name)
             }}
             />
-          {errors.animalName && (
-            <Text className='text-red-500'>{errors.animalName}</Text>
-          )}
+          <ErrorMessage error={errors.animalName}/>
           <TextInput
             className='h-12 border rounded-xl px-4 text-2xl my-2'
             placeholder='animal_name'
@@ -43,9 +42,7 @@ export default function CreateAnimalModal({ visible, onClose }: Props) {
             value={animalName}
             onChangeText={setAnimalName}
           />
-          {errors.animalName && (
-            <Text className='text-red-500'>{errors.animalName}</Text>
-          )}
+          <ErrorMessage error={errors.animalName}/>
           <TextInput
             className='h-12 border rounded-xl px-4 text-2xl my-2'
             placeholder='species'
@@ -53,9 +50,7 @@ export default function CreateAnimalModal({ visible, onClose }: Props) {
             value={species}
             onChangeText={setSpecies}
           />
-          {errors.species && (
-            <Text className='text-red-500'>{errors.species}</Text>
-          )}
+          <ErrorMessage error={errors.species}/>
           <TouchableOpacity 
             className='h-12 bg-black rounded-xl items-center justify-center'
             onPress={ () => handleCreateAnimal(selectedFamilyId)}

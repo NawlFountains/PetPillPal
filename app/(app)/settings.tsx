@@ -3,6 +3,8 @@ import { useLogout } from '@/hooks/useLogout'
 import { scheduleAllNotifications } from '@/lib/notifications'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { REMINDER_OPTIONS } from '@/lib/constants'
+import { obscureEmail } from '@/lib/utils'
 
 export default function HomeScreen() {
     const { profile , session} = useAuth()
@@ -11,17 +13,8 @@ export default function HomeScreen() {
     let obscuredEmail = ''
 
     if (session?.user.email) {
-        const [local, domain] = session.user.email.split('@')
-        const visibleCount = Math.min(2, local.length - 1)
-        const visible = local.substring(0, visibleCount)
-        const hidden = '*'.repeat(local.length - visibleCount)
-        obscuredEmail = `${visible}${hidden}@${domain}`
+        obscuredEmail = obscureEmail(session?.user.email)
     }
-    const reminderOptions = [
-        { label: '15 min', value: 15 },
-        { label: '30 min', value: 30 },
-        { label: '1 hour', value: 60 },
-    ]
     
     const { reminderMinutes, setReminderMinutes, families, doseLogs } = useAuth()
 
@@ -63,7 +56,7 @@ export default function HomeScreen() {
                     <View className='px-4 py-4'>
                         <Text className='text-xl font-semibold mb-3'>Reminder before dose</Text>
                         <View className='flex-row gap-2'>
-                            {reminderOptions.map(option => (
+                            {REMINDER_OPTIONS.map(option => (
                                 <TouchableOpacity
                                 key={option.value}
                                 onPress={() => handleReminderChange(option.value)}

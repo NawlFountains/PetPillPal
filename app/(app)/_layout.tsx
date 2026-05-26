@@ -1,17 +1,21 @@
 import { useAuth } from '@/context/AuthContext'
 import { Ionicons } from '@expo/vector-icons'
 import { Tabs } from 'expo-router'
+import { useColorScheme } from 'nativewind'
 
 
 export default function AppLayout() {
     const {profile} = useAuth()
+    const { colorScheme } = useColorScheme()
+    const isDark = colorScheme === 'dark'
+
     return (
          <Tabs
             screenOptions={{
-                tabBarActiveTintColor: '#1c1c1c',
+                tabBarActiveTintColor: isDark ? '#ffffff': '#1c1c1c',
                 tabBarInactiveTintColor: '#9ca3af',
                 tabBarStyle: {
-                backgroundColor: '#ffffff',
+                backgroundColor: isDark ? '#1c1c1c' : '#ffffff',
                 borderTopColor: '#e5e7eb',
                 },
                 headerShown: false,

@@ -35,8 +35,8 @@ export default function HomeScreen() {
     }
 
     return (
-        <ScrollView>
-            <View className='flex-1 pt-20 bg-white dark:bg-black px-6 gap-5'>
+        <ScrollView className='bg-white dark:bg-black'>
+            <View className='flex-1 pt-20 px-6 gap-5'>
                 <Text className='text-5xl font-bold dark:text-white'>Settings</Text>
                 <View className='flex-row items-center justify-between rounded-2xl px- py-4 dark:bg-black'>
                 <Text className='text-4xl font-bold dark:text-white'>Dark mode</Text>

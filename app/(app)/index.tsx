@@ -46,18 +46,18 @@ export default function HomeScreen() {
   )
 
   return (
-      <View className='flex-1 pt-20 bg-white px-6'>
+      <View className='flex-1 pt-20 bg-white dark:bg-black px-6'>
 
           
         <ScrollView>
           <View>
-            <Text className='text-5xl font-bold'>Welcome back</Text>
-            <Text className='text-5xl text-gray-700'>{profile?.display_name}</Text>
+            <Text className='text-5xl font-bold dark:text-white'>Welcome back</Text>
+            <Text className='text-5xl text-gray-700 dark:text-gray-100'>{profile?.display_name}</Text>
           </View>
           {/* Pending */}
             {pending.length > 0 && (
               <View className='gap-4 mt-10'>
-                <Text className='text-2xl font-bold text-gray-800'>Pending</Text>
+                <Text className='text-2xl font-bold text-gray-800 dark:text-gray-200'>Pending</Text>
                 {pending.map(({ family, animal, medication, schedule }) => (
                   <PendingLogDoseCard
                     key={`${animal.id}-${medication.id}-${schedule.id}`}
@@ -73,7 +73,7 @@ export default function HomeScreen() {
             {/* Given */}
             {given.length > 0 && (
               <View className='gap-4 mt-10'>
-                <Text className='text-2xl font-bold text-gray-800'>Given today</Text>
+                <Text className='text-2xl font-bold text-gray-800 dark:text-gray-100'>Given today</Text>
                 {given.map(({ family, animal, medication, schedule }) => (
                   <PendingLogDoseCard
                     key={`${animal.id}-${medication.id}-${schedule.id}`}
@@ -105,7 +105,7 @@ export default function HomeScreen() {
             {/* Empty state */}
             {families.length > 0 && todaySchedules.length === 0 && (
               <View className='mt-20 items-center'>
-                <Text className='text-gray-400 text-lg'>No medications scheduled for today</Text>
+                <Text className='text-gray-400 text-lg dark:text-gray-100'>No medications scheduled for today</Text>
               </View>
             )}
 

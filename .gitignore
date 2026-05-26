@@ -49,4 +49,4 @@ GoogleService-Info.plist
 /ios
 /android
 
-service-account.json
+petmeds-fcm-key.json

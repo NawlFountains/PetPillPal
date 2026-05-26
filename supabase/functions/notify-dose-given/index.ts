@@ -2,7 +2,7 @@ import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
 serve(async (req) => {
-  const { family_id, given_by, animal_name, medication_name } = await req.json()
+  const { family_id, given_by, animal_name, medication_name, giver_name } = await req.json()
 
   const supabase = createClient(
     Deno.env.get('SUPABASE_URL')!,
@@ -33,7 +33,7 @@ serve(async (req) => {
   const messages = tokens.map(({ token }) => ({
     to: token,
     title: '✅ Medication given',
-    body: `${animal_name} was given ${medication_name}`,
+    body: `${animal_name} was given ${medication_name} by ${giver_name}`,
   }))
 
   console.log(`[DEBUG] Sending ${messages.length} push notifications via Expo...`)

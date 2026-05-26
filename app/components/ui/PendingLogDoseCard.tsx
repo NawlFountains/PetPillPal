@@ -65,7 +65,7 @@ export default function PendingLogDoseCard({ family, animal, medication, schedul
             ) : (
             <TouchableOpacity
                 className='h-12 bg-black rounded-xl items-center justify-center'
-                onPress={() => handleLogDose(family.id, medication, schedule)}
+                onPress={() => handleLogDose(family.id, animal.name, medication, schedule)}
                 disabled={loading}
             >
                 <Text className='text-white font-semibold'>

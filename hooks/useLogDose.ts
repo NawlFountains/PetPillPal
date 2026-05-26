@@ -10,6 +10,7 @@ export function useLogDose(onSuccess: () => void) {
 
   async function handleLogDose(
     familyId: string,
+    animal_name: string,
     medication: Medication,
     schedule: Schedule,
     note?: string
@@ -40,8 +41,9 @@ export function useLogDose(onSuccess: () => void) {
       body: {
         family_id: familyId,
         given_by: profile.id,
-        animal_name: medication.name,
+        animal_name: animal_name,
         medication_name: medication.name,
+        giver_name: profile.display_name
       }
     })
 

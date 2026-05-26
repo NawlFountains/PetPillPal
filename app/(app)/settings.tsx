@@ -38,8 +38,7 @@ export default function HomeScreen() {
                             placeholder={profile?.display_name}
                             placeholderTextColor='#5c5c5c'
                             editable={false}>
-                        </TextInput>[DEBUG] Expo push response: {"data":[{"status":"error","message":"Unable to retrieve the FCM server key for the recipient's app. Make sure you have provided a server key as directed by the Expo FCM documentation.","details":{"error":"InvalidCredentials","fault":"developer"}}]}
-
+                        </TextInput>
                     </View>
                     <View className='flex-row'>
                         <Text className='w-32 text-2xl bg-black rounded-bl-[15] p-5 text-white flex-2 border-r'>Email</Text>

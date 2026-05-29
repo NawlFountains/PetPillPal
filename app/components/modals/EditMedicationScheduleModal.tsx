@@ -41,13 +41,14 @@ export default function EditMedicationScheduleModal({ animal, medication, schedu
 
   return (
       <Modal visible={visible} animationType='fade' transparent>
-        <View className='flex-1 justify-center px-6'>
+        <View className='flex-1 justify-center items-center px-6'>
   
           <TouchableOpacity
             className='absolute inset-0 bg-black/40'
             onPress={onClose}
           />
 
+	<View className='w-full max-w-2xl'>
           <View className='bg-white dark:bg-black rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
             <Text className='text-2xl font-bold dark:text-white'>Edit med schedule for {animal.name} </Text>
           </View>
@@ -112,7 +113,7 @@ export default function EditMedicationScheduleModal({ animal, medication, schedu
               <ErrorMessage error={errors.days}/>
             </View>
             <Text className='text-2xl font-bold mb-1 dark:text-white'>Optional </Text>
-            <View className='flex-row gap-2'>
+            <View className='flex-row flex-wrap gap-4 lg:gap-2'>
               <TextInput
                 className='h-12 border dark:border-white rounded-xl px-4 text-2xl flex-1 dark:text-white'
                 placeholder='note'
@@ -160,6 +161,7 @@ export default function EditMedicationScheduleModal({ animal, medication, schedu
                 </Text>
             </TouchableOpacity>
           </View>
+	  </View>
         </View>
       </Modal>
     )

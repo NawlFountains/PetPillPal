@@ -14,36 +14,38 @@ export default function CreateFamilyModal({ familyName, familyId, visible, onClo
 
   return (
     <Modal visible={visible} animationType='fade' transparent>
-      <View className='flex-1 justify-center px-6'>
+      <View className='flex-1 justify-center items-center px-6'>
         <TouchableOpacity
           className='absolute inset-0 bg-black/40'
           onPress={onClose}
         />
 
-        <View className='bg-white dark:bg-black rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
-          <Text className='text-2xl font-bold text-center dark:text-white'>Are you sure you want to exit {familyName} ? </Text>
-        </View>
-        <View className='bg-white dark:bg-black rounded-b-3xl border dark:border-white px-6 pt-6 pb-6 gap-2'>
-          <ErrorMessage error={error}/>
-          <View className='flex-row justify-center gap-6 mt-4'>
-            <TouchableOpacity 
-                className='h-12 rounded-xl border items-center justify-center flex-1 dark:border-white'
-                onPress={onClose}
-                disabled={loading}>
-                <Text className='font-semibold dark:text-white'>
-                    Cancel
-                </Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-                className='h-12 bg-red-600 rounded-xl items-center justify-center flex-1'
-                onPress={ () => handleExitFamily(familyId)}
-                    disabled={loading}>
-                <Text className='text-white font-semibold'>
-                {loading ? 'Exiting...' : 'Confirm'}
-                </Text>
-                </TouchableOpacity>
-          </View>
-        </View>
+	<View className='w-full max-w-2xl'>
+		<View className='bg-white dark:bg-black rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
+		  <Text className='text-2xl font-bold text-center dark:text-white'>Are you sure you want to exit {familyName} ? </Text>
+		</View>
+		<View className='bg-white dark:bg-black rounded-b-3xl border dark:border-white px-6 pt-6 pb-6 gap-2'>
+		  <ErrorMessage error={error}/>
+		  <View className='flex-row justify-center gap-6 mt-4'>
+		    <TouchableOpacity 
+			className='h-12 rounded-xl border items-center justify-center flex-1 dark:border-white'
+			onPress={onClose}
+			disabled={loading}>
+			<Text className='font-semibold dark:text-white'>
+			    Cancel
+			</Text>
+		    </TouchableOpacity>
+		    <TouchableOpacity 
+			className='h-12 bg-red-600 rounded-xl items-center justify-center flex-1'
+			onPress={ () => handleExitFamily(familyId)}
+			    disabled={loading}>
+			<Text className='text-white font-semibold'>
+			{loading ? 'Exiting...' : 'Confirm'}
+			</Text>
+			</TouchableOpacity>
+		  </View>
+		</View>
+	</View>
       </View>
     </Modal>
   )

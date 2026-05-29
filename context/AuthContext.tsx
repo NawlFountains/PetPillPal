@@ -31,9 +31,11 @@ const AuthContext = createContext<AuthContextType>({
     refreshFamilies: async () => {},
     refreshDoseLogs: async () => {}
 })
+
 async function registerForPushNotifications() {
   try {
-    if (!Device.isDevice) return null
+    // If device is emulated or we are on web we can't use push notifications like this
+    if (!Device.isDevice || Platform.OS === 'web') return null
 
     const { status: existingStatus } = await Notifications.getPermissionsAsync()
     let finalStatus = existingStatus

@@ -28,20 +28,20 @@ export default function AnimalScheduleCard({
                     <Text className='text-2xl font-bold dark:text-white'>{animal.name}</Text>
                 </View>
                 <View className='flex-row gap-5 justify-center'>
-                    {onEdit && (
+                    {onEdit ? (
                         <TouchableOpacity
                             onPress={onEdit}
                             >
                             <Ionicons name='pencil' size={30} color={ isDark ? '#c5c5c5' : '#1c1c1c'} />
                         </TouchableOpacity>
-                    )}
-                    {onDelete && (
+                    ) : null}
+                    {onDelete ? (
                         <TouchableOpacity
                             onPress={onDelete}
                             >
                             <Ionicons name='trash-outline' size={30} color='#f56565' />
                         </TouchableOpacity>
-                    )}
+                    ) : null}
                 </View>
             </View>
             <View className='h-px bg-black dark:bg-white'/>
@@ -56,11 +56,11 @@ export default function AnimalScheduleCard({
                                 .join(', ')} at ${schedule.time}`
                             }      
                     </Text>
-                    {medication.note && (
+                    {medication.note ? (
                         <Text className='text-xl text-gray-500 dark:text-gray-200'> 
                         Notes: {medication.note}
                         </Text>
-                    )}
+                    ) : null}
                     {(schedule.starts_on || schedule.ends_on) && (
                         <View className='flex-row justify-between'>
                             <Text className='text-xl text-gray-500 dark:text-gray-200'> 

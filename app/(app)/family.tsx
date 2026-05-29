@@ -9,6 +9,7 @@ import ExitFamilyModal from '../components/modals/ExitFamilyModal'
 import AnimalScheduleCard from '../components/ui/AnimalScheduleCard'
 import FABModals from '../components/modals/FABModal'
 import { useCopy } from '@/hooks/useCopy'
+import { useBreakpoint } from '@/hooks/useBreakpoint'
 
 export default function HomeScreen() {
   const { families } = useAuth()
@@ -16,9 +17,12 @@ export default function HomeScreen() {
   const [ deleteScheduleModal, setDeleteScheduleModal ] = useState<{ animal: Animal, medication: Medication, schedule: Schedule} | null> (null)
   const [ editScheduleModal, setEditScheduleModal ] = useState<{ animal: Animal, medication: Medication, schedule: Schedule} | null> (null)
   const { copiedId, handleCopy } = useCopy()
+  const { isNative , isDesktop} = useBreakpoint()
 
   return (
-      <View className='flex-1 pt-20 bg-white dark:bg-black px-6'>
+     <View className='flex-1 bg-white dark:bg-black min-h-screen'>
+      <View className={`flex-1 ${isNative? 'pt-20' : 'pt-5'} max-w-4xl w-full mx-auto px-6`}>
+           
         <ExitFamilyModal
           visible={exitModal !== null}
           familyName={exitModal?.name ?? ''}
@@ -43,7 +47,15 @@ export default function HomeScreen() {
             onClose={() => setEditScheduleModal(null)}
           />
         )}
-        <ScrollView>
+      <ScrollView 
+		  className='flex-1'
+		  contentContainerStyle=
+			  {{ paddingBottom: 
+				  isNative ? 40 
+					   : isDesktop 
+						? 80 
+						: 180}}
+		 showsVerticalScrollIndicator={false}	>
           <View>
             <Text className='text-5xl font-bold dark:text-white'>{families.length > 1 ? 'Families' : 'Family'}</Text>
           </View>
@@ -106,6 +118,7 @@ export default function HomeScreen() {
 
         <FABModals/>
         
+      </View>
       </View>
   )
 }

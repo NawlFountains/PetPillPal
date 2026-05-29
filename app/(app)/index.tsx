@@ -5,9 +5,11 @@ import { useCallback } from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import PendingLogDoseCard from '../components/ui/PendingLogDoseCard'
 import FABModals from '../components/modals/FABModal'
+import { useBreakpoint } from '@/hooks/useBreakpoint'
 
 export default function HomeScreen() {
   const { profile, families, doseLogs, refreshDoseLogs } = useAuth()
+  const { isNative, isDesktop} = useBreakpoint()
 
   const todaySchedules = families.flatMap(family =>
     (family.animals ?? []).flatMap(animal =>
@@ -46,11 +48,19 @@ export default function HomeScreen() {
   )
 
   return (
-      <View className='flex-1 pt-20 bg-white dark:bg-black px-6'>
-
+	  <View className='flex-1 bg-white dark:bg-black min-h-screen'>
+      <View className={`flex-1 ${isNative? 'pt-20' : 'pt-5'} max-w-4xl w-full mx-auto px-6`}>
           
-        <ScrollView>
-          <View>
+          <ScrollView 
+		  className='flex-1'
+		  contentContainerStyle=
+			  {{ paddingBottom: 
+				  isNative ? 40 
+					   : isDesktop 
+						? 80 
+						: 180}}
+		 showsVerticalScrollIndicator={false}>
+	<View>
             <Text className='text-5xl font-bold dark:text-white'>Welcome back</Text>
             <Text className='text-5xl text-gray-700 dark:text-gray-100'>{profile?.display_name}</Text>
           </View>
@@ -122,6 +132,7 @@ export default function HomeScreen() {
         
         <FABModals/>
     
+      </View>
       </View>
   )
 }

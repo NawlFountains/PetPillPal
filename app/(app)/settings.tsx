@@ -7,11 +7,13 @@ import { ScrollView, Switch, Text, TextInput, TouchableOpacity, View } from 'rea
 import { REMINDER_OPTIONS } from '@/lib/constants'
 import { obscureEmail } from '@/lib/utils'
 import { useEffect } from 'react'
+import { useBreakpoint } from '@/hooks/useBreakpoint'
 
 export default function HomeScreen() {
     const { profile , session} = useAuth()
     const { loading, handleLogout } = useLogout()
     const { colorScheme, setColorScheme } = useColorScheme()
+    const { isNative, isDesktop } = useBreakpoint()
 
     let obscuredEmail = ''
 
@@ -35,8 +37,18 @@ export default function HomeScreen() {
     }
 
     return (
-        <ScrollView className='bg-white dark:bg-black'>
-            <View className='flex-1 pt-20 px-6 gap-8'>
+	<View className='flex-1 bg-white dark:bg-black min-h-screen'>
+      
+	<ScrollView 
+		  className='flex-1'
+		  contentContainerStyle=
+			  {{ paddingBottom: 
+				  isNative ? 40 
+					   : isDesktop 
+						? 80 
+						: 180}}
+		 showsVerticalScrollIndicator={false}>
+	      <View className={`flex-1 ${isNative? 'pt-20' : 'pt-5'} gap-8 max-w-4xl w-full mx-auto px-6`}>
                 <Text className='text-5xl font-bold dark:text-white'>Settings</Text>
                 <View className='flex-row items-center justify-between rounded-2xl px- py-4 dark:bg-black'>
                 <Text className='text-4xl font-bold dark:text-white'>Dark mode</Text>
@@ -48,19 +60,19 @@ export default function HomeScreen() {
 
                 <Text className='text-4xl font-bold dark:text-white'>Profile</Text>
                 <View className='bg-white rounded-2xl border border-gray-500 dark:border-white dark:bg-black'>
-                    <View className='flex-row'>
-                        <Text className='w-32 text-2xl bg-black dark:bg-white rounded-tl-[13] text-white dark:text-black p-5 flex-2 border-b border-r'>Name</Text>
+                    <View className='flex-row flex-wrap'>
+                        <Text className='w-full sm:w-32 text-center sm:text-left text-2xl bg-black dark:bg-white rounded-t-[13] sm:rounded-tl-[13] text-white dark:text-black p-5 flex-2 border-b border-r'>Name</Text>
                         <TextInput 
-                            className='text-2xl p-5 flex-1 border-b dark:border-white'
+                            className='text-2xl text-center sm:text-left p-5 w-full sm:flex-1 border-b dark:border-white'
                             placeholder={profile?.display_name}
                             placeholderTextColor='#5c5c5c'
                             editable={false}>
                         </TextInput>
                     </View>
-                    <View className='flex-row'>
-                        <Text className='w-32 text-2xl bg-black dark:bg-white rounded-bl-[13] p-5 text-white dark:text-black flex-2 border-r'>Email</Text>
+                    <View className='flex-row flex-wrap'>
+                        <Text className='w-full sm:w-32 text-center sm:text-left text-2xl bg-black dark:bg-white sm:rounded-bl-[13] p-5 text-white dark:text-black flex-2 border-r'>Email</Text>
                         <TextInput 
-                            className='text-2xl p-5 flex-1'
+                            className='text-2xl text-center sm:text-left p-5 w-full sm:flex-1'
                             placeholder={obscuredEmail}
                             placeholderTextColor='#5c5c5c'
                             editable={false}>
@@ -72,19 +84,19 @@ export default function HomeScreen() {
                 <View className='bg-white dark:bg-black rounded-2xl border border-gray-500 dark:border-white mb-6'>
                     <View className='px-4 py-4'>
                         <Text className='text-xl font-semibold mb-3 dark:text-white'>Reminder before dose</Text>
-                        <View className='flex-row gap-2'>
+                        <View className='flex-row gap-2 flex-wrap'>
                             {REMINDER_OPTIONS.map(option => (
                                 <TouchableOpacity
                                 key={option.value}
                                 onPress={() => handleReminderChange(option.value)}
-                                className={`px-4 py-2 rounded-[15] border flex-1 ${
+                                className={`px-4 py-2 rounded-[15] border w-full lg:flex-1 ${
                                     reminderMinutes === option.value 
                                     ? 'bg-black dark:bg-white border-black dark:border-white' 
                                     : 'border-gray-200'
                                 }`}
                                 >
                                 <Text 
-                                    className={`text-xl ${reminderMinutes === option.value ? 'text-white dark:text-black' : 'text-gray-600'}`}>
+                                    className={`text-xl text-center lg:text-left ${reminderMinutes === option.value ? 'text-white dark:text-black' : 'text-gray-600'}`}>
                                     {option.label}
                                 </Text>
                                 </TouchableOpacity>
@@ -104,6 +116,7 @@ export default function HomeScreen() {
                 </TouchableOpacity>
             </View>
         </ScrollView>
+	</View>
     )
 }
 

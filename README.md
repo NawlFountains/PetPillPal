@@ -1,4 +1,11 @@
-# PetMeds 🐾
+<p align="center">
+  <img src="assets/images/icon-512.png" width="120" alt="App icon" />
+  <br/>
+  <strong>Pet Meds</strong>
+  <br/><br/>
+  <img src="https://img.shields.io/badge/Expo-000020?logo=expo" alt="Expo" />
+  <img src="https://img.shields.io/badge/Supabase-3ECF8E?logo=supabase" alt="Supabase" />
+</p>
 
 A cross-platform mobile app for coordinating pet medication schedules across family members in real time.
 
@@ -65,24 +72,24 @@ Core value of the app is coordination — seeing a family member log a dose inst
 ## Setup
 
 1. Clone the repo and install dependencies:
-\```bash
+``` bash
 git clone https://github.com/NawlFountains/PetMeds
 cd PetMeds
 npm install --legacy-peer-deps
-\```
+```
 
 2. Create a Supabase project at supabase.com and run `supabase/migrations/` in the SQL editor
 
 3. Create `.env.local`:
-\```
+```
 EXPO_PUBLIC_SUPABASE_URL=your_project_url
 EXPO_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
-\```
+```
 
 4. Start the dev server:
-\```bash
+```bash
 npx expo start
-\```
+```
 
 
 ## UI Design
@@ -112,7 +119,7 @@ npx expo start
 - [x] See who gave the medication and when
 - [x] Multi-day recurring schedules
 - [x] Reminders for giving meds 
-- [ ] Push notification when an user logs a dose
+- [x] Push notification when an user logs a dose
 
 ## CI/CD
 

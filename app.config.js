@@ -1,11 +1,11 @@
 module.exports = {
   expo: {
-    name: "PetMeds",
-    slug: "PetMeds",
-    version: "1.1.0",
+    name: "PetPillPal",
+    slug: "PetPillPal",
+    version: "1.2.0",
     orientation: "portrait",
     icon: "./assets/images/icon.png",
-    scheme: "petmeds",
+    scheme: "petpillpal",
     userInterfaceStyle: "automatic",
     splash: {
       image: "./assets/images/splash-icon.png",
@@ -26,7 +26,7 @@ module.exports = {
         monochromeImage: "./assets/images/android-icon-monochrome.png"
       },
       predictiveBackGestureEnabled: false,
-      package: "com.nawl.PetMeds"
+      package: "com.nawl.petpillpal"
     },
     web: {
       bundler: "metro",

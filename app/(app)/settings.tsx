@@ -36,6 +36,10 @@ export default function HomeScreen() {
         await AsyncStorage.setItem('colorScheme', scheme)
     }
 
+
+	const labelStyle = isNative ? 'w-32' : 'w-full sm:w-32'
+	const rowBorder = isNative ? 'border-r' : 'border-b md:border-b-0 md:border-r'
+
     return (
 	<View className='flex-1 bg-white dark:bg-black min-h-screen'>
       
@@ -59,26 +63,31 @@ export default function HomeScreen() {
                 </View>
 
                 <Text className='text-4xl font-bold dark:text-white'>Profile</Text>
-                <View className='bg-white rounded-2xl border border-gray-500 dark:border-white dark:bg-black'>
-                    <View className='flex-row flex-wrap'>
-                        <Text className='w-full sm:w-32 text-center sm:text-left text-2xl bg-black dark:bg-white rounded-t-[13] sm:rounded-tl-[13] text-white dark:text-black p-5 flex-2 border-b border-r'>Name</Text>
-                        <TextInput 
-                            className='text-2xl text-center sm:text-left p-5 w-full sm:flex-1 border-b dark:border-white'
-                            placeholder={profile?.display_name}
-                            placeholderTextColor='#5c5c5c'
-                            editable={false}>
-                        </TextInput>
-                    </View>
-                    <View className='flex-row flex-wrap'>
-                        <Text className='w-full sm:w-32 text-center sm:text-left text-2xl bg-black dark:bg-white sm:rounded-bl-[13] p-5 text-white dark:text-black flex-2 border-r'>Email</Text>
-                        <TextInput 
-                            className='text-2xl text-center sm:text-left p-5 w-full sm:flex-1'
-                            placeholder={obscuredEmail}
-                            placeholderTextColor='#5c5c5c'
-                            editable={false}>
-                        </TextInput>
-                    </View>
-                </View>
+		<View className='bg-white rounded-2xl border border-gray-500 dark:border-white dark:bg-black'>
+		  <View className='flex-row flex-wrap border-b border-gray-500 dark:border-white'>
+		    <Text className={`text-2xl bg-black dark:bg-white rounded-tl-[13] text-white dark:text-black p-5 ${labelStyle} ${rowBorder} border-gray-500 dark:border-white`}>
+		      Name
+		    </Text>
+		    <TextInput 
+		      className='text-2xl p-5 flex-1 dark:text-white min-w-0'
+		      placeholder={profile?.display_name}
+		      placeholderTextColor='#5c5c5c'
+		      editable={false}
+		    />
+		  </View>
+
+		  <View className='flex-row flex-wrap'>
+		    <Text className={`text-2xl bg-black dark:bg-white text-white dark:text-black p-5 ${labelStyle} ${rowBorder} border-gray-500 dark:border-white`}>
+		      Email
+		    </Text>
+		    <TextInput 
+		      className='text-2xl p-5 flex-1 dark:text-white min-w-0'
+		      placeholder={obscuredEmail}
+		      placeholderTextColor='#5c5c5c'
+		      editable={false}
+		    />
+		  </View>
+		</View>
                 
                 <Text className='text-4xl font-bold dark:text-white'>Notifications</Text>
                 <View className='bg-white dark:bg-black rounded-2xl border border-gray-500 dark:border-white mb-6'>

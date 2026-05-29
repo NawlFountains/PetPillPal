@@ -14,7 +14,7 @@ module.exports = {
     },
     ios: {
       supportsTablet: true,
-      bundleIdentifier: "com.nawl.PetMeds"
+      bundleIdentifier: "com.nawl.PetPillPal"
     },
     android: {
       googleServicesFile: process.env.GOOGLE_SERVICES_JSON || "./google-services.json",

@@ -3,6 +3,7 @@ import { isValidEmail, isValidPassword } from '@/lib/validation'
 import { useState } from 'react'
 
 export function useRegister(){
+    const [registered, setRegistered] = useState(false)
     const [name, setName ] = useState('')
     const [email, setEmail ] = useState('')
     const [password, setPassword] = useState('')
@@ -47,7 +48,8 @@ export function useRegister(){
             options: {
                 data: {
                     display_name: name
-                } 
+                },
+		emailRedirectTo: 'petpillpall://confirm'
             }
         })
         
@@ -55,7 +57,9 @@ export function useRegister(){
 
         if ( error ) {
             setErrors({ email: error.message})
-        }
+        } else {
+	    setRegistered(true)
+	}
     }
-    return { name, setName, email, setEmail, password, setPassword, confirmPassword, setConfirmPassword, errors, loading, handleRegister }
+    return { name, setName, email, setEmail, password, setPassword, confirmPassword, setConfirmPassword, errors, loading, handleRegister, registered }
 }

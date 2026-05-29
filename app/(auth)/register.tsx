@@ -6,7 +6,29 @@ import ErrorMessage from '../components/ui/ErrorMessage'
 
 export default function RegisterScreen() {
     const router = useRouter()
-    const { name, setName, email, setEmail, password, setPassword, confirmPassword, setConfirmPassword, errors, loading, handleRegister } = useRegister()
+    const { name, setName, email, setEmail, password, setPassword, confirmPassword, setConfirmPassword, errors, loading, handleRegister, registered } = useRegister()
+
+    if (registered) {
+	    return (
+		<View className='flex-1 items-center justify-center bg-light-gray px-6 mx-auto'>
+		    <View className='bg-white dark:bg-black p-4 shadow-sm border rounded-[15] w-full'>
+			<View className='mx-12 my-6 items-center gap-10'>
+			    <Text className='text-5xl font-bold text-gray-900 dark:text-gray-200 text-center'>Check your email</Text>
+			    <Text className='text-3xl text-gray-500 dark:text-gray-400 text-center'>
+				We sent a confirmation link to{'\n'}{email}
+			    </Text>
+			    <TouchableOpacity
+				className='py-3 bg-black dark:bg-white w-full rounded-[15]'
+				onPress={() => router.push('/(auth)/login')}>
+				<Text className='text-white dark:text-black text-2xl font-bold text-center'>
+				    Go to login
+				</Text>
+			    </TouchableOpacity>
+			</View>
+		    </View>
+		</View>
+	    )
+    }
 
     return (
         <View className ='flex-1 items-center justify-center bg-light-gray px-6 mx-auto'>

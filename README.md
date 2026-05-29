@@ -73,8 +73,8 @@ Core value of the app is coordination — seeing a family member log a dose inst
 
 1. Clone the repo and install dependencies:
 ``` bash
-git clone https://github.com/NawlFountains/PetMeds
-cd PetMeds
+git clone https://github.com/NawlFountains/PetPillPal
+cd PetPillPal
 npm install --legacy-peer-deps
 ```
 

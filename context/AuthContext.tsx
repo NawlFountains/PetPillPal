@@ -5,8 +5,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Session } from '@supabase/supabase-js'
 import * as Device from 'expo-device'
 import * as Notifications from 'expo-notifications'
-import { Platform, createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { useColorScheme } from 'nativewind'
+import { Platform } from 'react-native'
 
 type AuthContextType = {
     session: Session | null

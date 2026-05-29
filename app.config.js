@@ -1,5 +1,6 @@
 module.exports = {
   expo: {
+    owner: "nawl",
     name: "PetPillPal",
     slug: "PetPillPal",
     version: "1.2.0",
@@ -42,7 +43,7 @@ module.exports = {
     extra: {
       router: {},
       eas: {
-        projectId: "36f15f60-848d-4f55-99c4-98306f6967e4"
+	      projectId: "66e1edc1-4f44-4aef-a70e-a19f5dfaa41d"
       }
     }
   }

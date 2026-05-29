@@ -65,7 +65,7 @@ export default function HomeScreen() {
                 <Text className='text-4xl font-bold dark:text-white'>Profile</Text>
 		<View className='bg-white rounded-2xl border border-gray-500 dark:border-white dark:bg-black'>
 		  <View className='flex-row flex-wrap border-b border-gray-500 dark:border-white'>
-		    <Text className={`text-2xl bg-black dark:bg-white rounded-tl-[13] text-white dark:text-black p-5 ${labelStyle} ${rowBorder} border-gray-500 dark:border-white`}>
+		    <Text className={`text-2xl bg-black rounded-t-[13] dark:bg-white text-white dark:text-black p-5 ${labelStyle} ${rowBorder} border-gray-500 dark:border-white`}>
 		      Name
 		    </Text>
 		    <TextInput 
@@ -77,7 +77,7 @@ export default function HomeScreen() {
 		  </View>
 
 		  <View className='flex-row flex-wrap'>
-		    <Text className={`text-2xl bg-black dark:bg-white text-white dark:text-black p-5 ${labelStyle} ${rowBorder} border-gray-500 dark:border-white`}>
+		    <Text className={`text-2xl bg-black rounded-b-[13] dark:bg-white text-white dark:text-black p-5 ${labelStyle} ${rowBorder} border-gray-500 dark:border-white`}>
 		      Email
 		    </Text>
 		    <TextInput 

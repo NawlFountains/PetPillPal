@@ -3,14 +3,18 @@ import { Platform } from 'react-native';
 import { DoseLog, Family } from "./definitions";
 import { isScheduledOnDate } from './utils';
 
-Notifications.setNotificationHandler({
-    handleNotification: async () => ({
-        shouldPlaySound: true,
-        shouldShowBanner: true,
-        shouldSetBadge: false,
-        shouldShowList: true
-    }),
-})
+
+if (Platform.OS !== 'web') {
+	Notifications.setNotificationHandler({
+	    handleNotification: async () => ({
+		shouldPlaySound: true,
+		shouldShowBanner: true,
+		shouldSetBadge: false,
+		shouldShowList: true
+	    }),
+	})
+}
+
 
 // To avoid race condition we use a mutex
 let isScheduling = false;

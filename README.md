@@ -1,7 +1,7 @@
 <p align="center">
   <img src="assets/images/icon-512.png" width="120" alt="App icon" />
   <br/>
-  <strong>Pet Meds</strong>
+  <strong>PetPillPal</strong>
   <br/><br/>
   <img src="https://img.shields.io/badge/Expo-000020?logo=expo" alt="Expo" />
   <img src="https://img.shields.io/badge/Supabase-3ECF8E?logo=supabase" alt="Supabase" />
@@ -11,7 +11,7 @@ A cross-platform mobile app for coordinating pet medication schedules across fam
 
 ## Overview
 
-PetMeds allows households to track and coordinate medication schedules for their pets. Family members get notified when a dose is due and when someone has given it, preventing double-dosing and missed medications.
+PetPillPal allows households to track and coordinate medication schedules for their pets. Family members get notified when a dose is due and when someone has given it, preventing double-dosing and missed medications.
 
 ## Status
 In active development — core features complete

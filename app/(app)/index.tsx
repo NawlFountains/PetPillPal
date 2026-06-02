@@ -6,7 +6,7 @@ import { ScrollView, Text, View } from 'react-native'
 import PendingLogDoseCard from '../components/ui/PendingLogDoseCard'
 import FABModals from '../components/modals/FABModal'
 import { useBreakpoint } from '@/hooks/useBreakpoint'
-import ScreenContainer from '../components/ScreenContainer'
+import ScreenContainer from '../components/ui/ScreenContainer'
 
 export default function HomeScreen() {
   const { profile, families, doseLogs, refreshDoseLogs } = useAuth()

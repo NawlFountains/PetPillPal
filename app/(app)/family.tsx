@@ -10,7 +10,7 @@ import AnimalScheduleCard from '../components/ui/AnimalScheduleCard'
 import FABModals from '../components/modals/FABModal'
 import { useCopy } from '@/hooks/useCopy'
 import { useBreakpoint } from '@/hooks/useBreakpoint'
-import ScreenContainer from '../components/ScreenContainer'
+import ScreenContainer from '../components/ui/ScreenContainer'
 
 export default function HomeScreen() {
   const { families } = useAuth()

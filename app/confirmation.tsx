@@ -2,7 +2,7 @@ import { supabase } from '@/lib/supabase'
 import { useRouter } from 'expo-router'
 import { useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
-import ScreenContainer from './components/ScreenContainer'
+import ScreenContainer from './components/ui/ScreenContainer'
 
 export default function ConfirmScreen() {
     const router = useRouter()

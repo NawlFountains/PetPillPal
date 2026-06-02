@@ -1,8 +1,9 @@
 import { useCreateAnimal } from '@/hooks/useCreateAnimal'
 import { useState } from 'react'
-import { Modal, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Modal, Text, TouchableOpacity, View } from 'react-native'
 import FamilyDropdown from '../ui/FamilyDropdown'
 import ErrorMessage from '../ui/ErrorMessage'
+import Input from '../ui/Input'
 
 type Props = {
   visible: boolean
@@ -27,7 +28,8 @@ export default function CreateAnimalModal({ visible, onClose }: Props) {
 		<View className='bg-white dark:bg-black rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
 		  <Text className='dark:text-white text-2xl font-bold'>Add new animal</Text>
 		</View>
-		<View className='bg-white dark:bg-black rounded-b-3xl border border-l border-b dark:border-white px-6 pt-6 pb-8 gap-2'>
+		<View className='bg-white dark:bg-black rounded-b-3xl border border-l border-b dark:border-white px-6 py-6 gap-4'>
+		<View className='gap-2'>
 		  <FamilyDropdown
 		    selectedId={selectedFamilyId}
 		    onSelect={(id, name) => {
@@ -36,22 +38,18 @@ export default function CreateAnimalModal({ visible, onClose }: Props) {
 		    }}
 		    />
 		  <ErrorMessage error={errors.animalName}/>
-		  <TextInput
-		    className='h-12 border dark:border-white rounded-xl px-4 text-2xl my-2 dark:text-white'
-		    placeholder='animal_name'
-		    placeholderTextColor='#5c5c5c'
-		    value={animalName}
-		    onChangeText={setAnimalName}
-		  />
+		  <Input
+		  	placeholder='animal_name'
+			value={animalName}
+			onChangeText={setAnimalName}/>
+		  
 		  <ErrorMessage error={errors.animalName}/>
-		  <TextInput
-		    className='h-12 border dark:border-white rounded-xl px-4 text-2xl my-2 dark:text-white'
-		    placeholder='species'
-		    placeholderTextColor='#5c5c5c'
-		    value={species}
-		    onChangeText={setSpecies}
-		  />
+		  <Input
+		  	placeholder='species'
+			value={species}
+			onChangeText={setSpecies}/>
 		  <ErrorMessage error={errors.species}/>
+		</View>
 		  <TouchableOpacity 
 		    className='h-12 bg-black dark:bg-white rounded-xl items-center justify-center'
 		    onPress={ () => handleCreateAnimal(selectedFamilyId)}

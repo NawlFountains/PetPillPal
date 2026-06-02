@@ -3,11 +3,12 @@ import { useLogout } from '@/hooks/useLogout'
 import { useColorScheme } from 'nativewind'
 import { scheduleAllNotifications } from '@/lib/notifications'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { ScrollView, Switch, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ScrollView, Switch, Text, TouchableOpacity, View } from 'react-native'
 import { REMINDER_OPTIONS } from '@/lib/constants'
 import { obscureEmail } from '@/lib/utils'
 import { useBreakpoint } from '@/hooks/useBreakpoint'
-import ScreenContainer from '../components/ScreenContainer'
+import ScreenContainer from '../components/ui/ScreenContainer'
+import Input from '../components/ui/Input'
 
 export default function HomeScreen() {
     const { profile , session} = useAuth()
@@ -68,10 +69,9 @@ export default function HomeScreen() {
 		    <Text className={`text-2xl bg-black rounded-t-[13] dark:bg-white text-white dark:text-black p-5 ${labelStyle} ${rowBorder} border-gray-500 dark:border-white`}>
 		      Name
 		    </Text>
-		    <TextInput 
-		      className='text-2xl p-5 flex-1 dark:text-white min-w-0'
+		    <Input
+		      className='text-2xl flex-1'
 		      placeholder={profile?.display_name}
-		      placeholderTextColor='#5c5c5c'
 		      editable={false}
 		    />
 		  </View>
@@ -80,10 +80,9 @@ export default function HomeScreen() {
 		    <Text className={`text-2xl bg-black rounded-b-[13] dark:bg-white text-white dark:text-black p-5 ${labelStyle} ${rowBorder} border-gray-500 dark:border-white`}>
 		      Email
 		    </Text>
-		    <TextInput 
-		      className='text-2xl p-5 flex-1 dark:text-white min-w-0'
+		    <Input 
+		      className='text-2xl flex-1'
 		      placeholder={obscuredEmail}
-		      placeholderTextColor='#5c5c5c'
 		      editable={false}
 		    />
 		  </View>

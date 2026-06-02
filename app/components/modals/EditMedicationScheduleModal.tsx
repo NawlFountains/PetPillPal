@@ -2,8 +2,9 @@ import { useEditMedication } from '@/hooks/useEditMedication'
 import { DAYS_OF_WEEK, FREQUENCIES } from '@/lib/constants'
 import { Animal, Medication, Schedule } from '@/lib/definitions'
 import { useEffect } from 'react'
-import { Modal, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Modal, Text , TouchableOpacity, View } from 'react-native'
 import ErrorMessage from '../ui/ErrorMessage'
+import Input from '../ui/Input'
 
 type Props = {
   animal: Animal
@@ -55,19 +56,16 @@ export default function EditMedicationScheduleModal({ animal, medication, schedu
           <View className='bg-white dark:bg-black rounded-b-3xl border dark:border-white px-6 pt-6 pb-8 gap-4'>
             <View className='flex-row justify-between w-full gap-2'>
               <View className='flex-1'>
-                <TextInput
-                  className='h-12 text-2xl border dark:border-white rounded-xl px-4 dark:text-white'
-                  defaultValue={medication.name}
+               <Input 
+	      	  defaultValue={medication.name}
                   value={medicationName}
                   onChangeText={setMedicationName}
                 />
                 <ErrorMessage error={errors.medicationName}/>
               </View>
               <View className='flex-1'>
-                <TextInput
-                  className='h-12 text-2xl border dark:border-white rounded-xl px-4 dark:text-white'
+               <Input 
                   placeholder='HH:MM (e.g. 08:00)'
-                  placeholderTextColor='#5c5c5c'
                   value={time}
                   onChangeText={setTime}
                   maxLength={5}
@@ -114,17 +112,13 @@ export default function EditMedicationScheduleModal({ animal, medication, schedu
             </View>
             <Text className='text-2xl font-bold mb-1 dark:text-white'>Optional </Text>
             <View className='flex-row flex-wrap gap-4 lg:gap-2'>
-              <TextInput
-                className='h-12 border dark:border-white rounded-xl px-4 text-2xl flex-1 dark:text-white'
+              <Input
                 placeholder='note'
-                placeholderTextColor='#5c5c5c'
                 value={note}
                 onChangeText={setNote}
               />
-              <TextInput
-                className='h-12 border dark:border-white rounded-xl px-4 text-2xl flex-1 dark:text-white'
+              <Input
                 placeholder='dose'
-                placeholderTextColor='#5c5c5c'
                 value={dose}
                 onChangeText={setDose}
               />
@@ -132,20 +126,16 @@ export default function EditMedicationScheduleModal({ animal, medication, schedu
               
             <View className='flex-row gap-2'>
               <View className='flex-1'>
-                <TextInput
-                  className='h-12 border dark:border-white rounded-xl px-4 text-2xl dark:text-white'
+                <Input
                   placeholder='Start-date YYYY-MM-DD'
-                  placeholderTextColor='#5c5c5c'
                   value={startsOn}
                   onChangeText={setStartsOn}
                 />
                 <ErrorMessage error={errors.startsOn}/>
               </View>
               <View className='flex-1'>
-                <TextInput
-                  className='h-12 border dark:border-white rounded-xl px-4 text-2xl flex-1 dark:text-white'
+                <Input
                   placeholder='End-date YYYY-MM-DD'
-                  placeholderTextColor='#5c5c5c'
                   value={endsOn}
                   onChangeText={setEndsOn}
                 />

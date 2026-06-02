@@ -1,8 +1,9 @@
 import {useForgotPassword} from '@/hooks/useForgotPassword'
-import { Text, TextInput, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity } from 'react-native'
 import ErrorMessage from '../components/ui/ErrorMessage'
 import {useBreakpoint} from '@/hooks/useBreakpoint'
-import ScreenContainer from '../components/ScreenContainer'
+import ScreenContainer from '../components/ui/ScreenContainer'
+import Input from '../components/ui/Input'
 
 export default function ForgotPassword() {
 	const { isNative } = useBreakpoint()
@@ -26,16 +27,13 @@ export default function ForgotPassword() {
 			    </View>
 			    <View className='mt-4 gap-10 w-full'>
 				<View>
-				    <TextInput 
-					className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-gray-200 dark:text-white'
-					placeholder='email@example.com' 
-					placeholderTextColor="#5c5c5c"
+				 <Input
+				 	placeholder='email@example.com'
 					value={email}
 					onChangeText={setEmail}
 					keyboardType='email-address'
-					autoCapitalize='none'
-					/>
-					<ErrorMessage error={error}/>
+					autoCapitalize='none'/>
+				 <ErrorMessage error={error}/>
 				</View>
 
 				<TouchableOpacity

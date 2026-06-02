@@ -1,9 +1,10 @@
 import { useLogin } from '@/hooks/useLogin'
 import { useRouter } from 'expo-router'
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import ErrorMessage from '../components/ui/ErrorMessage'
 import {useBreakpoint} from '@/hooks/useBreakpoint'
-import ScreenContainer from '../components/ScreenContainer'
+import ScreenContainer from '../components/ui/ScreenContainer'
+import Input from '../components/ui/Input'
 
 
 export default function LoginScreen() {
@@ -22,26 +23,21 @@ export default function LoginScreen() {
                     </View>
                     <View className='mt-4 gap-10 w-full'>
                         <View>
-                            <TextInput 
-                                className='w-full h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-gray-200 dark:text-white'
-                                placeholder='email@example.com' 
-                                placeholderTextColor="#5c5c5c"
-                                value={email}
-                                onChangeText={setEmail}
-                                keyboardType='email-address'
-                                autoCapitalize='none'
-                                />
+			 <Input
+				placeholder='email@example.com' 
+				value={email} 
+				onChangeText={setEmail}
+				keyboardType='email-address'
+				autoCapitalize='none'/>
+                            
                                 <ErrorMessage error={errors.email}/>
                         </View>
                         <View>
-                            <TextInput 
-                                className='w-full h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-gray-200 dark:text-white'
-                                placeholder='password'
-                                placeholderTextColor="#5c5c5c"
-                                value={password}
-                                onChangeText={setPassword}
-                                secureTextEntry
-                                />
+			<Input
+				placeholder='password'
+				value={password}
+				onChangeText={setPassword}
+				secureTextEntry/>
 				<View className='flex flex-col flex-wrap'>
                                 <ErrorMessage error={errors.password}/>
 

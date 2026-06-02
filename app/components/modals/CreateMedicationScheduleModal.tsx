@@ -5,6 +5,7 @@ import AnimalDropdown from '../ui/AnimalDropdown'
 import FamilyDropdown from '../ui/FamilyDropdown'
 import { DAYS_OF_WEEK, FREQUENCIES } from '@/lib/constants'
 import ErrorMessage from '../ui/ErrorMessage'
+import Input from '../ui/Input'
 
 type Props = {
   visible: boolean
@@ -63,25 +64,19 @@ export default function CreateMedicationScheduleModal({ visible, onClose }: Prop
 		  <ErrorMessage error={errors.animalId}/>
 		  <View className='flex-row justify-between w-full gap-3'>
 		    <View className='flex-1'>
-		      <TextInput
-			className='h-12 text-2xl border dark:border-white dark:text-white rounded-xl px-4'
-			placeholder='medication_name'
-			placeholderTextColor='#5c5c5c'
+		     <Input
+		     	placeholder='medication_name'
 			value={medicationName}
-			onChangeText={setMedicationName}
-		      />
+			onChangeText={setMedicationName}/>
 		      <ErrorMessage error={errors.medicationName}/>
 		    </View>
 		    <View className='flex-1'>
-		      <TextInput
-			className='h-12 text-2xl border dark:border-white dark:text-white rounded-xl px-4'
-			placeholder='HH:MM (e.g. 08:00)'
-			placeholderTextColor='#5c5c5c'
+		     <Input
+		     	placeholder='HH:MM'
 			value={time}
 			onChangeText={setTime}
-			maxLength={5}
-			/>
-		      <ErrorMessage error={errors.time}/>
+			maxLength={5}/>
+		     <ErrorMessage error={errors.time}/>
 		    </View>
 		  </View>
 		  <View className='gap-2'>
@@ -122,40 +117,30 @@ export default function CreateMedicationScheduleModal({ visible, onClose }: Prop
 		  </View>
 		  <Text className='text-2xl font-bold mb-1 dark:text-white'>Optional</Text>
 		  <View className='flex-row flex-wrap gap-4 md:gap-2'>
-		    <TextInput
-		      className='h-12 border dark:border-white dark:text-white rounded-xl px-4 text-2xl flex-1'
-		      placeholder='note'
-		      placeholderTextColor='#5c5c5c'
-		      value={note}
-		      onChangeText={setNote}
-		    />
-		    <TextInput
-		      className='h-12 border dark:border-white dark:text-white rounded-xl px-4 text-2xl flex-1'
-		      placeholder='dose'
-		      placeholderTextColor='#5c5c5c'
-		      value={dose}
-		      onChangeText={setDose}
-		    />
+		   <Input
+		   	classname='flex-1'
+		   	placeholder='note'
+			value={note}
+			onChangeText={setNote}/>
+		   <Input
+		   	classname='flex-1'
+		   	placeholder='dose'
+			value={dose}
+			onChangeText={setDose}/> 
 		  </View>
 		  <View className='flex-row gap-2'>
 		    <View className='flex-1'>
-		    <TextInput
-		      className='h-12 text-2xl dark:border-white dark:text-white border rounded-xl px-4'
+		    <Input
 		      placeholder='Start-date YYYY-MM-DD'
-		      placeholderTextColor='#5c5c5c'
 		      value={startsOn}
-		      onChangeText={setStartsOn}
-		    />
+		      onChangeText={setStartsOn}/>
 		    <ErrorMessage error={errors.startsOn}/>
 		    </View>
 		    <View className='flex-1'>
-		    <TextInput
-		      className='h-12 text-2xl dark:border-white dark:text-white border rounded-xl px-4'
+		    <Input 
 		      placeholder='End-date YYYY-MM-DD'
-		      placeholderTextColor='#5c5c5c'
 		      value={endsOn}
-		      onChangeText={setEndsOn}
-		    />
+		      onChangeText={setEndsOn}/>
 		    <ErrorMessage error={errors.endsOn}/>
 		    </View>
 		  </View>

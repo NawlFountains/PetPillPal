@@ -1,7 +1,8 @@
-import { Text, TextInput, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity } from 'react-native'
 import ErrorMessage from './components/ui/ErrorMessage'
 import {useResetPassword} from '@/hooks/useResetPassword'
-import ScreenContainer  from './components/ScreenContainer'
+import ScreenContainer  from './components/ui/ScreenContainer'
+import Input from './components/ui/Input'
 
 export default function ForgotPassword() {
 	const { password, setPassword, confirmPassword, setConfirmPassword, loading, errors, handleResetPassword } = useResetPassword()
@@ -15,30 +16,20 @@ export default function ForgotPassword() {
                     </View>
                     <View className='mt-4 gap-10 w-full'>
                         <View>
-                            <TextInput 
-                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-gray-200 dark:text-white'
-                                placeholder='password'
-                                placeholderTextColor="#5c5c5c"
-                                value={password}
-                                onChangeText={setPassword}
-                                secureTextEntry
-                                />
-				<View className='flex flex-col flex-wrap'>
-                                 <ErrorMessage error={errors.password}/>
-				</View>
+			 <Input
+			 	placeholder='password'
+				value={password}
+				onChangeText={setPassword}
+				secureTextEntry/>
+			 <ErrorMessage error={errors.password}/>
                         </View>
 			<View>
-                            <TextInput 
-                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-gray-200 dark:text-white'
-                                placeholder='password'
-                                placeholderTextColor="#5c5c5c"
-                                value={confirmPassword}
-                                onChangeText={setConfirmPassword}
-                                secureTextEntry
-                                />
-				<View className='flex flex-col flex-wrap'>
-                                 <ErrorMessage error={errors.confirmPassword}/>
-				</View>
+			 <Input
+			 	placeholder='confirm_password'
+				value={confirmPassword}
+				onChangeText={setConfirmPassword}
+				secureTextEntry/>
+			 <ErrorMessage error={errors.confirmPassword}/>
                         </View>
                         <TouchableOpacity
                             className='py-3 bg-black dark:bg-white w-full rounded-[15]'

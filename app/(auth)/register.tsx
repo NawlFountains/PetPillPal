@@ -1,9 +1,10 @@
 import { useRegister } from '@/hooks/useRegister'
 import { useRouter } from 'expo-router'
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import ErrorMessage from '../components/ui/ErrorMessage'
 import {useBreakpoint} from '@/hooks/useBreakpoint'
-import ScreenContainer from '../components/ScreenContainer'
+import ScreenContainer from '../components/ui/ScreenContainer'
+import Input from '../components/ui/Input'
 
 
 export default function RegisterScreen() {
@@ -44,44 +45,35 @@ export default function RegisterScreen() {
                     </View>
                     <View className='mt-4 gap-10 w-full'>
                         <View>
-                            <TextInput 
-                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-white dark:text-white' 
-                                placeholder='name' 
-                                placeholderTextColor="#5c5c5c"
-                                value={name}
-                                onChangeText={setName}
-                                />
-                                <ErrorMessage error={errors.name}/>
+			 <Input
+				placeholder='name'
+				value={name}
+				onChangeText={setName}/>
+                         <ErrorMessage error={errors.name}/>
                         </View>
                         <View>
-                            <TextInput 
-                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-white dark:text-white' 
-                                placeholder='email@example.com' 
-                                placeholderTextColor="#5c5c5c"
-                                value={email}
-                                onChangeText={setEmail}
-                                keyboardType='email-address'
-                                autoCapitalize='none'/>
-                                <ErrorMessage error={errors.email}/>
+			 <Input
+			 	placeholder='email@example.com'
+				value={email}
+				onChangeText={setEmail}
+				keyboardType='email-address'
+				autoCapitalize='none'/>
+                         <ErrorMessage error={errors.email}/>
                         </View>
                         <View>
-                            <TextInput 
-                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-white dark:text-white' 
-                                placeholder='password' 
-                                placeholderTextColor="#5c5c5c"
-                                value={password}
-                                onChangeText={setPassword}
-                                secureTextEntry/>
-                                <ErrorMessage error={errors.password}/>
+			 <Input
+			 	placeholder='password'
+				value={password}
+				onChangeText={setPassword}
+				secureTextEntry/>
+			 <ErrorMessage error={errors.password}/>
                         </View>
                         <View>
-                            <TextInput 
-                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-white dark:text-white' 
-                                placeholder='confirm_password' 
-                                placeholderTextColor="#5c5c5c"
-                                value={confirmPassword}
-                                onChangeText={setConfirmPassword}
-                                secureTextEntry/>
+			 <Input
+			 	placeholder='confirm_password'
+				value={confirmPassword}
+				onChangeText={setConfirmPassword}
+				secureTextEntry/>
                                 <ErrorMessage error={errors.confirmPassword}/>
                         </View>
                         <TouchableOpacity

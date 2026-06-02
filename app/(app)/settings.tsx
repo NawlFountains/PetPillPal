@@ -64,13 +64,13 @@ export default function HomeScreen() {
                 </View>
 
                 <Text className='text-4xl font-bold dark:text-white'>Profile</Text>
-		<View className='bg-white rounded-2xl border border-gray-500 dark:border-white dark:bg-black'>
-		  <View className='flex-row flex-wrap border-b border-gray-500 dark:border-white'>
-		    <Text className={`text-2xl bg-black rounded-t-[13] dark:bg-white text-white dark:text-black p-5 ${labelStyle} ${rowBorder} border-gray-500 dark:border-white`}>
+		<View className='bg-white rounded-2xl border border-gray-500 dark:border-gray-400 dark:bg-black'>
+		  <View className='flex-row flex-wrap border-b border-gray-500 dark:border-gray-400 '>
+		    <Text className={`text-2xl bg-black rounded-t-[13] dark:bg-gray-200 text-white dark:text-black p-5 ${labelStyle} ${rowBorder} border-gray-500 dark:border-gray-400`}>
 		      Name
 		    </Text>
 		    <Input
-		      className='text-2xl flex-1 px-4'
+		      className='text-2xl flex-1 px-4 dark:bg-zinc-900 rounded-tr-2xl'
 		      placeholderTextColor='#5c5c5c'
 		      placeholder={profile?.display_name}
 		      editable={false}
@@ -78,11 +78,11 @@ export default function HomeScreen() {
 		  </View>
 
 		  <View className='flex-row flex-wrap'>
-		    <Text className={`text-2xl bg-black rounded-b-[13] dark:bg-white text-white dark:text-black p-5 ${labelStyle} ${rowBorder} border-gray-500 dark:border-white`}>
+		    <Text className={`text-2xl bg-black rounded-b-[13] dark:bg-gray-200 text-white dark:text-black p-5 ${labelStyle} ${rowBorder} border-gray-500 dark:border-gray-400`}>
 		      Email
 		    </Text>
 		    <Input 
-		      className='text-2xl flex-1 px-4'
+		      className='text-2xl flex-1 px-4 dark:bg-zinc-900 rounded-br-2xl'
 		      placeholder={obscuredEmail}
 		      placeholderTextColor ='#5c5c5c'
 		      editable={false}
@@ -91,7 +91,7 @@ export default function HomeScreen() {
 		</View>
                 
                 <Text className='text-4xl font-bold dark:text-white'>Notifications</Text>
-                <View className='bg-white dark:bg-black rounded-2xl border border-gray-500 dark:border-white mb-6'>
+                <View className='bg-white rounded-2xl dark:bg-zinc-900 border border-gray-500 dark:border-gray-400 mb-6'>
                     <View className='px-4 py-4'>
                         <Text className='text-xl font-semibold mb-3 dark:text-white'>Reminder before dose</Text>
                         <View className='flex-row gap-2 flex-wrap'>
@@ -101,12 +101,12 @@ export default function HomeScreen() {
                                 onPress={() => handleReminderChange(option.value)}
                                 className={`px-4 py-2 rounded-[15] border w-full lg:flex-1 ${
                                     reminderMinutes === option.value 
-                                    ? 'bg-black dark:bg-white border-black dark:border-white' 
-                                    : 'border-gray-200'
+                                    ? 'bg-black dark:bg-gray-100' 
+                                    : 'border-gray-200 dark:border-gray-600'
                                 }`}
                                 >
                                 <Text 
-                                    className={`text-xl text-center lg:text-left ${reminderMinutes === option.value ? 'text-white dark:text-black' : 'text-gray-600'}`}>
+                                    className={`text-xl text-center lg:text-left ${reminderMinutes === option.value ? 'text-white dark:text-black' : 'text-gray-600 dark:text-gray-300'}`}>
                                     {option.label}
                                 </Text>
                                 </TouchableOpacity>
@@ -117,7 +117,7 @@ export default function HomeScreen() {
 
                 <Text className='text-4xl font-bold dark:text-white'>Account</Text>
                 <TouchableOpacity
-                    className='py-3 bg-red-500 w-full rounded-[15]'
+                    className='py-3 bg-red-500 dark:bg-red-700 w-full rounded-[15]'
                     onPress={handleLogout}
                     >
                     <Text className='text-white text-2xl font-bold text-center'>

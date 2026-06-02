@@ -8,7 +8,7 @@ export default function PetCard({
     med_name: string;
 }) {
     return (
-        <View className='bg-white rounded-2xl border border-black w-full'>
+        <View className='bg-gray-100 rounded-2xl border border-black w-full'>
             <View className='mx-4 mt-4 mb-1'>
                 <Text className='text-2xl font-bold mb-3'>{pet_name}</Text>
             </View>

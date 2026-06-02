@@ -25,7 +25,7 @@ export default function PendingLogDoseCard({ family, animal, medication, schedul
     const isMyLog = log?.given_by === profile?.id
 
     return (
-    <View className='bg-white dark:bg-black rounded-2xl border border-black dark:border-white w-full'>
+    <View className='bg-gray-50 dark:bg-zinc-900 rounded-2xl border border-black dark:border-gray-400 w-full'>
         <View className='mx-4 my-4 flex-row justify-between items-center'>
         <Text className='text-2xl font-bold dark:text-white'>{animal.name}</Text>
         {onDelete && (
@@ -34,7 +34,7 @@ export default function PendingLogDoseCard({ family, animal, medication, schedul
             </TouchableOpacity>
         )}
         </View>
-        <View className='h-px bg-black dark:bg-white' />
+        <View className='h-px bg-black dark:bg-gray-400' />
         <View className='m-4 gap-3'>
         <Text className='text-xl text-gray-500 dark:text-gray-200'>
             Schedule to take
@@ -64,11 +64,11 @@ export default function PendingLogDoseCard({ family, animal, medication, schedul
             </View>
             ) : (
             <TouchableOpacity
-                className='h-12  rounded-xl items-center justify-center border border-gray-300 dark:border-zinc-800'
+                className='h-14 rounded-xl items-center justify-center border border-gray-300 bg-gray-200 dark:bg-zinc-700/40 dark:border-zinc-600'
                 onPress={() => handleLogDose(family.id, animal.name, medication, schedule)}
                 disabled={loading}
             >
-                <Text className='dark:text-white text-black font-semibold'>
+                <Text className='dark:text-white text-gray-700 font-semibold'>
                 {loading ? 'Logging...' : 'Mark as given'}
                 </Text>
             </TouchableOpacity>

@@ -2,15 +2,17 @@ import { useLogin } from '@/hooks/useLogin'
 import { useRouter } from 'expo-router'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import ErrorMessage from '../components/ui/ErrorMessage'
+import {useBreakpoint} from '@/hooks/useBreakpoint'
 
 
 export default function LoginScreen() {
     const router = useRouter()
+    const { isNative } = useBreakpoint()
     const { email, setEmail, password, setPassword, errors, loading, handleLogin} = useLogin()
 
     return (
-            <View className ='flex-1 items-center justify-center bg-light-gray px-6 mx-auto'>
-            <View className='bg-white dark:bg-black p-4 shadow-sm border rounded-[15] w-full gap-15'>
+            <View className ={`flex-1 justify-center ${ isNative ? 'bg-light-gray' : 'bg-gray-900/60'} px-6`}>
+            <View className='bg-white dark:bg-black p-4 shadow-sm border rounded-[15] w-full gap-15 max-w-lg mx-auto'>
                 <View className='mx-12 my-6 items-center'>
                     <View className='mb-14 mt-3 gap-5 w-full'>
                         <Text className='text-5xl font-bold text-gray-900 dark:text-gray-200 mb-3 text-center'>Welcome back</Text>
@@ -19,7 +21,7 @@ export default function LoginScreen() {
                     <View className='mt-4 gap-10 w-full'>
                         <View>
                             <TextInput 
-                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-gray-200 dark:text-white'
+                                className='w-full h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-gray-200 dark:text-white'
                                 placeholder='email@example.com' 
                                 placeholderTextColor="#5c5c5c"
                                 value={email}
@@ -31,7 +33,7 @@ export default function LoginScreen() {
                         </View>
                         <View>
                             <TextInput 
-                                className='h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-gray-200 dark:text-white'
+                                className='w-full h-14 text-2xl text-gray-500 border rounded-[15] px-5 dark:border-gray-200 dark:text-white'
                                 placeholder='password'
                                 placeholderTextColor="#5c5c5c"
                                 value={password}

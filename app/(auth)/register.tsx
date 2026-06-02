@@ -2,16 +2,18 @@ import { useRegister } from '@/hooks/useRegister'
 import { useRouter } from 'expo-router'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import ErrorMessage from '../components/ui/ErrorMessage'
+import {useBreakpoint} from '@/hooks/useBreakpoint'
 
 
 export default function RegisterScreen() {
     const router = useRouter()
+    const { isNative } = useBreakpoint()
     const { name, setName, email, setEmail, password, setPassword, confirmPassword, setConfirmPassword, errors, loading, handleRegister, registered } = useRegister()
 
     if (registered) {
 	    return (
-		<View className='flex-1 items-center justify-center bg-light-gray px-6 mx-auto'>
-		    <View className='bg-white dark:bg-black p-4 shadow-sm border rounded-[15] w-full'>
+		<View className='flex-1 items-center justify-center bg-light-gray px-6'>
+		    <View className='bg-white dark:bg-black p-4 shadow-sm border rounded-[15] w-full max-w-lg mx-auto'>
 			<View className='mx-12 my-6 items-center gap-10'>
 			    <Text className='text-5xl font-bold text-gray-900 dark:text-gray-200 text-center'>Check your email</Text>
 			    <Text className='text-3xl text-gray-500 dark:text-gray-400 text-center'>
@@ -21,7 +23,7 @@ export default function RegisterScreen() {
 				className='py-3 bg-black dark:bg-white w-full rounded-[15]'
 				onPress={() => router.push('/(auth)/login')}>
 				<Text className='text-white dark:text-black text-2xl font-bold text-center'>
-				    Go to login
+				    Go to login (Currently disabled login as normal)
 				</Text>
 			    </TouchableOpacity>
 			</View>
@@ -31,8 +33,8 @@ export default function RegisterScreen() {
     }
 
     return (
-        <View className ='flex-1 items-center justify-center bg-light-gray px-6 mx-auto'>
-            <View className='bg-white dark:bg-black p-4 shadow-sm border rounded-[15] w-full gap-15'>
+            <View className ={`flex-1 justify-center ${ isNative ? 'bg-light-gray' : 'bg-gray-900/60'} px-6`}>
+            <View className='bg-white dark:bg-black p-4 shadow-sm border rounded-[15] w-full gap-15 max-w-lg mx-auto'>
                 <View className='mx-12 my-6 items-center'>
                     <View className='mb-14 mt-3 gap-5 w-full'>
                         <Text className='text-5xl font-bold text-gray-900 dark:text-gray-200 mb-3 text-center'>Create account</Text>

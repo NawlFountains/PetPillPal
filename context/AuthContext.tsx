@@ -52,7 +52,7 @@ async function registerForPushNotifications() {
     }
 
     const token = (await Notifications.getExpoPushTokenAsync({
-      projectId: '36f15f60-848d-4f55-99c4-98306f6967e4'  // ← add your EAS project ID
+	projectId: "66e1edc1-4f44-4aef-a70e-a19f5dfaa41d"
     })).data
     
     console.log('Push token:', token)

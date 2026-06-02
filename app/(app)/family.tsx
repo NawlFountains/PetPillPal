@@ -20,7 +20,7 @@ export default function HomeScreen() {
   const { isNative , isDesktop} = useBreakpoint()
 
   return (
-     <View className='flex-1 bg-white dark:bg-black min-h-screen'>
+     <View className='flex-1 bg-gray-200 dark:bg-zinc-900 min-h-screen'>
       <View className={`flex-1 ${isNative? 'pt-20' : 'pt-5'} max-w-4xl w-full mx-auto px-6`}>
            
         <ExitFamilyModal

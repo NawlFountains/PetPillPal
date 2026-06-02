@@ -6,7 +6,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ScrollView, Switch, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { REMINDER_OPTIONS } from '@/lib/constants'
 import { obscureEmail } from '@/lib/utils'
-import { useEffect } from 'react'
 import { useBreakpoint } from '@/hooks/useBreakpoint'
 
 export default function HomeScreen() {
@@ -41,8 +40,8 @@ export default function HomeScreen() {
 	const rowBorder = isNative ? 'border-r' : 'border-b md:border-b-0 md:border-r'
 
     return (
-	<View className='flex-1 bg-white dark:bg-black min-h-screen'>
       
+     <View className='flex-1 bg-gray-200 dark:bg-zinc-900 min-h-screen'>
 	<ScrollView 
 		  className='flex-1'
 		  contentContainerStyle=
@@ -54,7 +53,7 @@ export default function HomeScreen() {
 		 showsVerticalScrollIndicator={false}>
 	      <View className={`flex-1 ${isNative? 'pt-20' : 'pt-5'} gap-8 max-w-4xl w-full mx-auto px-6`}>
                 <Text className='text-5xl font-bold dark:text-white'>Settings</Text>
-                <View className='flex-row items-center justify-between rounded-2xl px- py-4 dark:bg-black'>
+                <View className='flex-row items-center justify-between rounded-2xl px- py-4'>
                 <Text className='text-4xl font-bold dark:text-white'>Dark mode</Text>
                 <Switch
                     value={colorScheme === 'dark'}

@@ -1,13 +1,15 @@
 import {useForgotPassword} from '@/hooks/useForgotPassword'
 import { Text, TextInput, View, TouchableOpacity } from 'react-native'
 import ErrorMessage from '../components/ui/ErrorMessage'
+import {useBreakpoint} from '@/hooks/useBreakpoint'
 
 export default function ForgotPassword() {
+	const { isNative } = useBreakpoint()
 	const { email, setEmail, loading, error, sent, handleForgotPassword} = useForgotPassword()
 
     return (
-	<View className ='flex-1 items-center justify-center bg-light-gray px-6 mx-auto'>
-            <View className='bg-white dark:bg-black p-4 shadow-sm border rounded-[15] w-full gap-15'>
+	<View className ={`flex-1 items-center justify-center ${ isNative ? 'bg-light-gray' : 'bg-gray-900/60'} px-6`}>
+            <View className='bg-white dark:bg-black p-4 shadow-sm border rounded-[15] w-full gap-15 max-w-lg mx-auto'>
                 <View className='mx-12 my-6 items-center'>
 
 		    {sent? (

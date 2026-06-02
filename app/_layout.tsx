@@ -21,8 +21,29 @@ function RootLayoutNav() {
 
   useEffect(() => {
     const handleDeepLink = async (url: string) => {
-      await supabase.auth.exchangeCodeForSession(url)
+	    console.log('Deep link received', url)
+	    
+	    const urlObj = new URL(url)
+	    const token = urlObj.searchParams.get('token')
+	    const type = urlObj.searchParams.get('type')
+	    const email = urlObj.searchParams.get('email')
+
+	    if (token && type && email) {
+		// OTP flow (email confirmation)
+		const { data, error } = await supabase.auth.verifyOtp({ 
+		    email,
+		    token, 
+		    type: type as any 
+		})
+		console.log('OTP result:', data, error)
+	    } else {
+		// PKCE flow (password reset)
+		const { data, error } = await supabase.auth.exchangeCodeForSession(url)
+		console.log('Exchange result:', data, error)
+	    }
     }
+
+
 
     // app already open when link is tapped
     const subscription = Linking.addEventListener('url', ({ url }) => {
@@ -40,8 +61,10 @@ function RootLayoutNav() {
   useEffect(() => {
     if (loading) return
     const inAuthGroup = segments[0] === '(auth)'
+    const inResetPassword =  segments[0] === 'reset-password'
+    const inConfirmation = segments[0] === 'confirmation'
 
-    if (!session && !inAuthGroup) {
+    if (!session && !inAuthGroup && !inResetPassword && !inConfirmation) {
       router.replace('/(auth)/login')
     } else if (session && inAuthGroup) {
       router.replace('/(app)/')

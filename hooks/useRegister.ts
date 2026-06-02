@@ -49,7 +49,7 @@ export function useRegister(){
                 data: {
                     display_name: name
                 },
-		emailRedirectTo: 'petpillpall://confirm'
+		emailRedirectTo: 'petpillpal://confirmation'
             }
         })
         

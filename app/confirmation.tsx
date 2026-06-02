@@ -7,16 +7,25 @@ export default function ConfirmScreen() {
     const router = useRouter()
     const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading')
 
-    useEffect(() => {
-        supabase.auth.getSession().then(({ data: { session } }) => {
-            if (session) {
-                setStatus('success')
-                setTimeout(() => router.replace('/(app)/home'), 2000)
-            } else {
-                setStatus('error')
-            }
-        })
-    }, [])
+   useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+        if (event === 'SIGNED_IN' && session) {
+            setStatus('success')
+            setTimeout(() => router.replace('/(app)/'), 2000)
+        }
+    })
+
+    // timeout fallback
+    const timeout = setTimeout(() => {
+        setStatus('error')
+    }, 10000)
+
+    return () => {
+        subscription.unsubscribe()
+        clearTimeout(timeout)
+    }
+}, [])
+
 
     return (
         <View className='flex-1 items-center justify-center bg-light-gray px-6'>

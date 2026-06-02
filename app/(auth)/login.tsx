@@ -38,7 +38,16 @@ export default function LoginScreen() {
                                 onChangeText={setPassword}
                                 secureTextEntry
                                 />
+				<View className='flex flex-col flex-wrap'>
                                 <ErrorMessage error={errors.password}/>
+
+				<TouchableOpacity
+					onPress={() => router.push('/(auth)/forgot-password')}>
+					<Text className='text-lg font-bold text-black dark:text-white p-1'>
+						Forgot Password?
+					</Text>
+				</TouchableOpacity>
+				</View>
                         </View>
                         <TouchableOpacity
                             className='py-3 bg-black dark:bg-white w-full rounded-[15]'

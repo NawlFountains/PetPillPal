@@ -3,6 +3,7 @@ import { useRouter } from 'expo-router'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import ErrorMessage from '../components/ui/ErrorMessage'
 import {useBreakpoint} from '@/hooks/useBreakpoint'
+import ScreenContainer from '../components/ScreenContainer'
 
 
 export default function LoginScreen() {
@@ -11,6 +12,7 @@ export default function LoginScreen() {
     const { email, setEmail, password, setPassword, errors, loading, handleLogin} = useLogin()
 
     return (
+	    <ScreenContainer>
             <View className ={`flex-1 justify-center ${ isNative ? 'bg-light-gray' : 'bg-gray-900/60'} px-6`}>
             <View className='bg-white dark:bg-black p-4 shadow-sm border rounded-[15] w-full gap-15 max-w-lg mx-auto'>
                 <View className='mx-12 my-6 items-center'>
@@ -70,5 +72,6 @@ export default function LoginScreen() {
                 </View>
             </View>
         </View>
+	    </ScreenContainer>
     )
 }

@@ -7,6 +7,7 @@ import { ScrollView, Switch, Text, TextInput, TouchableOpacity, View } from 'rea
 import { REMINDER_OPTIONS } from '@/lib/constants'
 import { obscureEmail } from '@/lib/utils'
 import { useBreakpoint } from '@/hooks/useBreakpoint'
+import ScreenContainer from '../components/ScreenContainer'
 
 export default function HomeScreen() {
     const { profile , session} = useAuth()
@@ -41,7 +42,7 @@ export default function HomeScreen() {
 
     return (
       
-     <View className='flex-1 bg-gray-200 dark:bg-zinc-900 min-h-screen'>
+     <ScreenContainer>
 	<ScrollView 
 		  className='flex-1'
 		  contentContainerStyle=
@@ -124,7 +125,7 @@ export default function HomeScreen() {
                 </TouchableOpacity>
             </View>
         </ScrollView>
-	</View>
+     </ScreenContainer>
     )
 }
 

@@ -3,6 +3,7 @@ import { useRouter } from 'expo-router'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import ErrorMessage from '../components/ui/ErrorMessage'
 import {useBreakpoint} from '@/hooks/useBreakpoint'
+import ScreenContainer from '../components/ScreenContainer'
 
 
 export default function RegisterScreen() {
@@ -12,7 +13,7 @@ export default function RegisterScreen() {
 
     if (registered) {
 	    return (
-		<View className='flex-1 items-center justify-center bg-light-gray px-6'>
+		    <ScreenContainer>
 		    <View className='bg-white dark:bg-black p-4 shadow-sm border rounded-[15] w-full max-w-lg mx-auto'>
 			<View className='mx-12 my-6 items-center gap-10'>
 			    <Text className='text-5xl font-bold text-gray-900 dark:text-gray-200 text-center'>Check your email</Text>
@@ -28,11 +29,12 @@ export default function RegisterScreen() {
 			    </TouchableOpacity>
 			</View>
 		    </View>
-		</View>
+		    </ScreenContainer>
 	    )
     }
 
     return (
+	    <ScreenContainer>
             <View className ={`flex-1 justify-center ${ isNative ? 'bg-light-gray' : 'bg-gray-900/60'} px-6`}>
             <View className='bg-white dark:bg-black p-4 shadow-sm border rounded-[15] w-full gap-15 max-w-lg mx-auto'>
                 <View className='mx-12 my-6 items-center'>
@@ -98,6 +100,7 @@ export default function RegisterScreen() {
                     </View>
                 </View>
             </View>
-        </View>
+	    </View>
+	    </ScreenContainer>
     )
 }

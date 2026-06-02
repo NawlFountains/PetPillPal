@@ -1,12 +1,13 @@
 import { Text, TextInput, View, TouchableOpacity } from 'react-native'
 import ErrorMessage from './components/ui/ErrorMessage'
 import {useResetPassword} from '@/hooks/useResetPassword'
+import ScreenContainer  from './components/ScreenContainer'
 
 export default function ForgotPassword() {
 	const { password, setPassword, confirmPassword, setConfirmPassword, loading, errors, handleResetPassword } = useResetPassword()
 
     return (
-	<View className ='flex-1 items-center justify-center bg-light-gray px-6 mx-auto'>
+	    <ScreenContainer>
             <View className='bg-white dark:bg-black p-4 shadow-sm border rounded-[15] w-full gap-15'>
                 <View className='mx-12 my-6 items-center'>
                     <View className='mb-14 mt-3 gap-5 w-full'>
@@ -50,6 +51,6 @@ export default function ForgotPassword() {
                     </View>
                 </View>
             </View>
-        </View>
+	    </ScreenContainer>
     )
 }

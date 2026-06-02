@@ -6,6 +6,7 @@ import { ScrollView, Text, View } from 'react-native'
 import PendingLogDoseCard from '../components/ui/PendingLogDoseCard'
 import FABModals from '../components/modals/FABModal'
 import { useBreakpoint } from '@/hooks/useBreakpoint'
+import ScreenContainer from '../components/ScreenContainer'
 
 export default function HomeScreen() {
   const { profile, families, doseLogs, refreshDoseLogs } = useAuth()
@@ -48,7 +49,7 @@ export default function HomeScreen() {
   )
 
   return (
-     <View className='flex-1 bg-gray-200 dark:bg-zinc-900 min-h-screen'>
+     <ScreenContainer>
       <View className={`flex-1 ${isNative? 'pt-20' : 'pt-5'} max-w-4xl w-full mx-auto px-6`}>
           
           <ScrollView 
@@ -133,7 +134,7 @@ export default function HomeScreen() {
         <FABModals/>
     
       </View>
-      </View>
+     </ScreenContainer>
   )
 }
 

@@ -2,6 +2,7 @@ import { supabase } from '@/lib/supabase'
 import { useRouter } from 'expo-router'
 import { useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
+import ScreenContainer from './components/ScreenContainer'
 
 export default function ConfirmScreen() {
     const router = useRouter()
@@ -28,7 +29,7 @@ export default function ConfirmScreen() {
 
 
     return (
-        <View className='flex-1 items-center justify-center bg-light-gray px-6'>
+	    <ScreenContainer>
             <View className='bg-white dark:bg-black p-4 shadow-sm border rounded-[15] w-full'>
                 <View className='mx-12 my-6 items-center gap-10'>
                     {status === 'loading' && (
@@ -48,6 +49,6 @@ export default function ConfirmScreen() {
                     )}
                 </View>
             </View>
-        </View>
+	    </ScreenContainer>
     )
 }

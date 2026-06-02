@@ -57,7 +57,6 @@ export default function EditMedicationScheduleModal({ animal, medication, schedu
             <View className='flex-row justify-between w-full gap-2'>
               <View className='flex-1'>
                <Input 
-	      	  defaultValue={medication.name}
                   value={medicationName}
                   onChangeText={setMedicationName}
                 />
@@ -79,7 +78,7 @@ export default function EditMedicationScheduleModal({ animal, medication, schedu
                   <TouchableOpacity
                     key={f}
                     onPress={() => setFrequency(f)}
-                    className={`flex-1 px-4 py-2 rounded-[10] w-1/4 border dark:border-white ${frequency === f ? 'bg-black dark:bg-white' : ''}`}
+                    className={`flex-1 px-4 py-2 rounded-[10] w-1/4 border border-gray-400 dark:border-white ${frequency === f ? 'bg-black dark:bg-white' : ''}`}
                   >
                     <Text className={`text-2xl ${frequency === f ? 'text-white dark:text-black font-semibold' : 'text-gray-600'}`}>
                       {f}

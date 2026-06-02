@@ -19,7 +19,7 @@ export default function AnimalDropdown({ selectedId, familyId, onSelect }: Props
 
   if (!familyId) {
     return (
-      <View className='h-12 border border-gray-200 rounded-xl px-4 justify-center'>
+      <View className='h-14 border border-gray-200 rounded-xl px-4 justify-center'>
         <Text className='text-2xl text-gray-400'>Select a family first</Text>
       </View>
     )
@@ -28,7 +28,7 @@ export default function AnimalDropdown({ selectedId, familyId, onSelect }: Props
   return (
     <View className='relative z-10'>
       <TouchableOpacity
-        className='h-12 border dark:border-white rounded-xl px-4 flex-row items-center justify-between'
+        className='h-14 border border-gray-400 dark:border-white rounded-xl px-4 flex-row items-center justify-between'
         onPress={() => setOpen(!open)}
       >
         <Text className={`text-2xl ${selected ? 'text-gray-900 dark:text-white' : 'text-gray-400'}`}>

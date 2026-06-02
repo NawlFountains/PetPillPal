@@ -70,7 +70,8 @@ export default function HomeScreen() {
 		      Name
 		    </Text>
 		    <Input
-		      className='text-2xl flex-1'
+		      className='text-2xl flex-1 px-4'
+		      placeholderTextColor='#5c5c5c'
 		      placeholder={profile?.display_name}
 		      editable={false}
 		    />
@@ -81,8 +82,9 @@ export default function HomeScreen() {
 		      Email
 		    </Text>
 		    <Input 
-		      className='text-2xl flex-1'
+		      className='text-2xl flex-1 px-4'
 		      placeholder={obscuredEmail}
+		      placeholderTextColor ='#5c5c5c'
 		      editable={false}
 		    />
 		  </View>

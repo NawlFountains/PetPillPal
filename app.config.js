@@ -35,10 +35,17 @@ module.exports = {
       favicon: "./assets/images/favicon.png"
     },
     plugins: [
-      "expo-router"
+      "expo-router",
+      "expo-updates"
     ],
     experiments: {
       typedRoutes: true
+    },
+    updates: {
+      url: "https://u.expo.dev/66e1edc1-4f44-4aef-a70e-a19f5dfaa41d"
+    },
+     runtimeVersion: {
+      policy: "appVersion"
     },
     extra: {
       router: {},

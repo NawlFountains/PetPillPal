@@ -1,6 +1,7 @@
 import { useCreateAnimal } from '@/hooks/useCreateAnimal'
 import { useState } from 'react'
-import { Modal, Text, TouchableOpacity, View } from 'react-native'
+import { Modal, TouchableOpacity, View } from 'react-native'
+import Text from '../ui/Text'
 import FamilyDropdown from '../ui/FamilyDropdown'
 import ErrorMessage from '../ui/ErrorMessage'
 import Input from '../ui/Input'

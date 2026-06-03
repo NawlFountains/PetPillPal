@@ -2,7 +2,8 @@ import { useAuth } from '@/context/AuthContext'
 import { isOverdue, isScheduledToday } from '@/lib/utils'
 import { useFocusEffect } from 'expo-router'
 import { useCallback } from 'react'
-import { ScrollView, Text, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
+import Text from '../components/ui/Text'
 import PendingLogDoseCard from '../components/ui/PendingLogDoseCard'
 import FABModals from '../components/modals/FABModal'
 import { useBreakpoint } from '@/hooks/useBreakpoint'
@@ -62,7 +63,7 @@ export default function HomeScreen() {
 						: 180}}
 		 showsVerticalScrollIndicator={false}>
 	<View>
-            <Text className='text-5xl font-bold dark:text-white'>Welcome back</Text>
+            <Text className='text-5xl font-bold dark:text-white font-sans'>Welcome back</Text>
             <Text className='text-5xl text-gray-700 dark:text-gray-100'>{profile?.display_name}</Text>
           </View>
           {/* Pending */}

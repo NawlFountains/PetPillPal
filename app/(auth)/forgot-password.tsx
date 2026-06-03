@@ -1,5 +1,6 @@
 import {useForgotPassword} from '@/hooks/useForgotPassword'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
+import Text from '../components/ui/Text'
 import ErrorMessage from '../components/ui/ErrorMessage'
 import {useBreakpoint} from '@/hooks/useBreakpoint'
 import ScreenContainer from '../components/ui/ScreenContainer'

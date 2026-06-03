@@ -1,7 +1,8 @@
 import { useAuth } from '@/context/AuthContext'
 import { Ionicons } from '@expo/vector-icons'
 import React, { useState } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
+import Text from '../ui/Text'
 
 export default function FamilyDropdown({ 
   selectedId, 

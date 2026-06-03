@@ -1,6 +1,7 @@
 import { useCreateMedication } from '@/hooks/useCreateMedication'
 import { useState } from 'react'
-import { Modal, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Modal, TouchableOpacity, View } from 'react-native'
+import Text from '../ui/Text'
 import AnimalDropdown from '../ui/AnimalDropdown'
 import FamilyDropdown from '../ui/FamilyDropdown'
 import { DAYS_OF_WEEK, FREQUENCIES } from '@/lib/constants'

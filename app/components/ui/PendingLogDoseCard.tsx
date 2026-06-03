@@ -5,7 +5,8 @@ import { Animal, Family, Medication, Schedule } from '@/lib/definitions'
 import { formatLocalTime } from '@/lib/utils'
 import { Ionicons } from '@expo/vector-icons'
 import React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
+import Text from '../ui/Text'
 import { useColorScheme } from 'nativewind'
 
 type Props = {

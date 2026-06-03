@@ -6,12 +6,18 @@ import '../global.css'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as Linking from 'expo-linking'
 import { supabase } from '@/lib/supabase'
+import { useFonts, Inter_400Regular, Inter_700Bold } from '@expo-google-fonts/inter'
 
 function RootLayoutNav() {
   const { session, loading} = useAuth()
   const router = useRouter()
   const segments = useSegments()
   const { setColorScheme } = useColorScheme()
+
+  const [loaded] = useFonts({
+	Inter_400Regular,
+	Inter_700Bold
+  })
 
   useEffect(() => {
     AsyncStorage.getItem('colorScheme').then(val => {

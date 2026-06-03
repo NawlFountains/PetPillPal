@@ -1,6 +1,7 @@
 import { useDeleteMedication } from '@/hooks/useDeleteMedication'
 import { Animal, Medication, Schedule } from '@/lib/definitions'
-import { Modal, Text, TouchableOpacity, View } from 'react-native'
+import { Modal, TouchableOpacity, View } from 'react-native'
+import Text from '../ui/Text'
 import AnimalScheduleCard from '../ui/AnimalScheduleCard'
 import ErrorMessage from '../ui/ErrorMessage'
 import ModalContainer from '../ui/ModalContainer'

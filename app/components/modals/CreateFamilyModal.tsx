@@ -1,5 +1,6 @@
 import { useCreateFamily } from '@/hooks/useCreateFamily'
-import { Modal, Text, TouchableOpacity, View } from 'react-native'
+import { Modal, TouchableOpacity, View } from 'react-native'
+import Text from '../ui/Text'
 import ErrorMessage from '../ui/ErrorMessage'
 import Input from '../ui/Input'
 import ModalContainer from '../ui/ModalContainer'

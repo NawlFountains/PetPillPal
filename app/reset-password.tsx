@@ -1,4 +1,5 @@
-import { Text, View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
+import Text from './components/ui/Text'
 import ErrorMessage from './components/ui/ErrorMessage'
 import {useResetPassword} from '@/hooks/useResetPassword'
 import ScreenContainer  from './components/ui/ScreenContainer'

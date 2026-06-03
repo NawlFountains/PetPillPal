@@ -22,7 +22,7 @@ export default function AnimalScheduleCard({
     const isDark = colorScheme === 'dark'
 
     return (
-        <View className='bg-white dark:bg-zinc-900 rounded-2xl border border-black dark:border-gray-400 w-full'>
+        <View className='bg-white dark:bg-zinc-900 rounded-2xl border border-gray-400 w-full'>
             <View className='flex-row mx-4 my-2 justify-between'>
                 <View className='justify-center'>
                     <Text className='text-2xl font-bold dark:text-white'>{animal.name}</Text>
@@ -39,12 +39,12 @@ export default function AnimalScheduleCard({
                         <TouchableOpacity
                             onPress={onDelete}
                             >
-                            <Ionicons name='trash-outline' size={30} color='#f56565' />
+                            <Ionicons name='trash-outline' size={30} color='#dc2626' />
                         </TouchableOpacity>
                     ) : null}
                 </View>
             </View>
-            <View className='h-px bg-black dark:bg-gray-400'/>
+            <View className='h-px bg-gray-400'/>
             <View className='m-4'>
                     <Text className='text-xl text-gray-500 dark:text-gray-200'>                
                         Schedule to take 

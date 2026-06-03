@@ -17,7 +17,7 @@ export default function FamilyDropdown({
   return (
     <View className='relative z-10'>
       <TouchableOpacity
-        className='h-14 border border-gray-400 dark:border-white rounded-xl px-2 flex-row items-center justify-between'
+        className='h-14 border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 rounded-xl px-2 flex-row items-center justify-between'
         onPress={() => setOpen(!open)}
       >
         <Text className={`text-2xl ${selected ? 'text-gray-900 dark:text-white' : 'text-gray-400'}`}>
@@ -28,11 +28,11 @@ export default function FamilyDropdown({
 
       {/* Options */}
       {open && (
-        <View className='absolute top-14 left-0 right-0 bg-white dark:bg-black border dark:border-white rounded-xl overflow-hidden shadow-md'>
+        <View className='absolute top-14 left-0 right-0 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl overflow-hidden shadow-md'>
           {families.map(family => (
             <TouchableOpacity
               key={family.id}
-              className='px-2 py-3 border-b dark:border-white'
+              className='px-2 py-3 border-b border-neutral-200 dark:border-neutral-700'
               onPress={() => {
                 onSelect(family.id, family.name)
                 setOpen(false)

@@ -19,7 +19,7 @@ export default function AnimalDropdown({ selectedId, familyId, onSelect }: Props
 
   if (!familyId) {
     return (
-      <View className='h-14 border border-gray-200 rounded-xl px-4 justify-center'>
+      <View className='h-14 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl px-4 justify-center'>
         <Text className='text-2xl text-gray-400'>Select a family first</Text>
       </View>
     )
@@ -28,7 +28,7 @@ export default function AnimalDropdown({ selectedId, familyId, onSelect }: Props
   return (
     <View className='relative z-10'>
       <TouchableOpacity
-        className='h-14 border border-gray-400 dark:border-white rounded-xl px-4 flex-row items-center justify-between'
+        className='h-14 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl px-4 flex-row items-center justify-between'
         onPress={() => setOpen(!open)}
       >
         <Text className={`text-2xl ${selected ? 'text-gray-900 dark:text-white' : 'text-gray-400'}`}>
@@ -38,7 +38,7 @@ export default function AnimalDropdown({ selectedId, familyId, onSelect }: Props
       </TouchableOpacity>
 
       {open && (
-        <View className='absolute top-14 left-0 right-0 bg-white dark:bg-black border dark:border-white rounded-xl overflow-hidden shadow-md'>
+        <View className='absolute top-14 left-0 right-0 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl overflow-hidden shadow-md'>
           {animals.length === 0 ? (
             <View className='px-4 py-3'>
               <Text className='text-gray-400'>No animals in this family</Text>
@@ -47,7 +47,7 @@ export default function AnimalDropdown({ selectedId, familyId, onSelect }: Props
             animals.map(animal => (
               <TouchableOpacity
                 key={animal.id}
-                className='px-4 py-3 border-b dark:border-white'
+                className='px-4 py-3 border-b border-neutral-200 dark:border-neutral-700'
                 onPress={() => {
                   onSelect(animal.id, animal.name)
                   setOpen(false)

@@ -4,6 +4,7 @@ import { Modal, Text, TouchableOpacity, View } from 'react-native'
 import FamilyDropdown from '../ui/FamilyDropdown'
 import ErrorMessage from '../ui/ErrorMessage'
 import Input from '../ui/Input'
+import ModalContainer from '../ui/ModalContainer'
 
 type Props = {
   visible: boolean
@@ -24,11 +25,11 @@ export default function CreateAnimalModal({ visible, onClose }: Props) {
           onPress={onClose}
         />
 
-	<View className='w-full max-w-2xl'>
-		<View className='bg-white dark:bg-black rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
+	<ModalContainer>
+		<View className='rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
 		  <Text className='dark:text-white text-2xl font-bold'>Add new animal</Text>
 		</View>
-		<View className='bg-white dark:bg-black rounded-b-3xl border border-l border-b dark:border-white px-6 py-6 gap-4'>
+		<View className='rounded-b-3xl border border-l border-b dark:border-white px-6 py-6 gap-4'>
 		<View className='gap-2'>
 		  <FamilyDropdown
 		    selectedId={selectedFamilyId}
@@ -59,7 +60,7 @@ export default function CreateAnimalModal({ visible, onClose }: Props) {
 		      </Text>
 		  </TouchableOpacity>
 		</View>
-	</View>
+	</ModalContainer>
       </View>
     </Modal>
   )

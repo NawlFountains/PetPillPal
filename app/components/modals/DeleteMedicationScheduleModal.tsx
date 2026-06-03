@@ -3,6 +3,7 @@ import { Animal, Medication, Schedule } from '@/lib/definitions'
 import { Modal, Text, TouchableOpacity, View } from 'react-native'
 import AnimalScheduleCard from '../ui/AnimalScheduleCard'
 import ErrorMessage from '../ui/ErrorMessage'
+import ModalContainer from '../ui/ModalContainer'
 
 type Props = {
     animal: Animal
@@ -23,11 +24,11 @@ export default function DeleteMedicationScheduleModal({ animal, medication, sche
           onPress={onClose}
         />
 
-	<View className='w-full max-w-2xl'>
-		<View className='bg-white dark:bg-black rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
+	<ModalContainer>
+		<View className='rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
 		  <Text className='text-2xl font-bold text-center dark:text-white'>Are you sure you want to delete the schedule ? </Text>
 		</View>
-		<View className='bg-white dark:bg-black rounded-b-3xl border dark:border-white px-6 pt-6 pb-6 gap-2'>
+		<View className='rounded-b-3xl border dark:border-white px-6 pt-6 pb-6 gap-2'>
 		  <ErrorMessage error={error}/>
 		  <AnimalScheduleCard
 		    animal={animal}
@@ -52,7 +53,7 @@ export default function DeleteMedicationScheduleModal({ animal, medication, sche
 			</TouchableOpacity>
 		  </View>
 		</View>
-	</View>
+	</ModalContainer>
       </View>
     </Modal>
   )

@@ -2,6 +2,7 @@ import { useJoinFamily } from '@/hooks/useJoinFamily'
 import { Modal, Text, TouchableOpacity, View } from 'react-native'
 import ErrorMessage from '../ui/ErrorMessage'
 import Input from '../ui/Input'
+import ModalContainer from '../ui/ModalContainer'
 
 type Props = {
   visible: boolean
@@ -20,11 +21,11 @@ export default function JoinFamilyModal({ visible, onClose }: Props) {
           onPress={onClose}
         />
 
-	<View className='w-full max-w-2xl'>
-		<View className='bg-white dark:bg-black rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
+	<ModalContainer>
+		<View className='rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
 		  <Text className='text-2xl font-bold dark:text-white'>Join an existing family </Text>
 		</View>
-		<View className='bg-white dark:bg-black rounded-b-3xl border dark:border-white px-6 pt-2 pb-8 gap-2'>
+		<View className='rounded-b-3xl border dark:border-white px-6 pt-2 pb-8 gap-2'>
 		<View className='py-2'>
 		 <Input
 		 	placeholder='family_code'
@@ -40,7 +41,7 @@ export default function JoinFamilyModal({ visible, onClose }: Props) {
 			{loading ? 'Joining...' : 'Join'}</Text>
 		  </TouchableOpacity>
 		</View>
-       </View>
+	</ModalContainer>
       </View>
     </Modal>
   )

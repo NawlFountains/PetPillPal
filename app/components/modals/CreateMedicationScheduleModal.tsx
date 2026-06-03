@@ -6,6 +6,7 @@ import FamilyDropdown from '../ui/FamilyDropdown'
 import { DAYS_OF_WEEK, FREQUENCIES } from '@/lib/constants'
 import ErrorMessage from '../ui/ErrorMessage'
 import Input from '../ui/Input'
+import ModalContainer from '../ui/ModalContainer'
 
 type Props = {
   visible: boolean
@@ -37,11 +38,11 @@ export default function CreateMedicationScheduleModal({ visible, onClose }: Prop
           className='absolute inset-0 bg-black/40'
           onPress={onClose}
         />
-	<View className='w-full max-w-2xl'>
-		<View className='bg-white dark:bg-black rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
+	<ModalContainer>
+		<View className='rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
 		  <Text className='text-2xl font-bold dark:text-white'>Add new med schedule </Text>
 		</View>
-		<View className='bg-white dark:bg-black rounded-b-3xl border dark:border-white px-6 pt-6 pb-8 gap-4'>
+		<View className='rounded-b-3xl border dark:border-white px-6 pt-6 pb-8 gap-4'>
 		  <View style={{ zIndex: 2}}>
 		    <FamilyDropdown
 		      selectedId={selectedFamilyId}
@@ -153,7 +154,7 @@ export default function CreateMedicationScheduleModal({ visible, onClose }: Prop
 		      </Text>
 		  </TouchableOpacity>
 		  </View>
-	</View>
+	</ModalContainer>
       </View>
     </Modal>
   )

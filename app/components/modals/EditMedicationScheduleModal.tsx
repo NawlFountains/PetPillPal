@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { Modal, Text , TouchableOpacity, View } from 'react-native'
 import ErrorMessage from '../ui/ErrorMessage'
 import Input from '../ui/Input'
+import ModalContainer from '../ui/ModalContainer'
 
 type Props = {
   animal: Animal
@@ -49,11 +50,11 @@ export default function EditMedicationScheduleModal({ animal, medication, schedu
             onPress={onClose}
           />
 
-	<View className='w-full max-w-2xl'>
-          <View className='bg-white dark:bg-black rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
+	<ModalContainer>
+          <View className='rounded-t-3xl border dark:border-white px-6 pt-6 pb-4'>
             <Text className='text-2xl font-bold dark:text-white'>Edit med schedule for {animal.name} </Text>
           </View>
-          <View className='bg-white dark:bg-black rounded-b-3xl border dark:border-white px-6 pt-6 pb-8 gap-4'>
+          <View className='rounded-b-3xl border dark:border-white px-6 pt-6 pb-8 gap-4'>
             <View className='flex-row justify-between w-full gap-2'>
               <View className='flex-1'>
                <Input 
@@ -150,7 +151,7 @@ export default function EditMedicationScheduleModal({ animal, medication, schedu
                 </Text>
             </TouchableOpacity>
           </View>
-	  </View>
+	</ModalContainer>
         </View>
       </Modal>
     )

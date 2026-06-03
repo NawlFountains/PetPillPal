@@ -100,7 +100,7 @@ export default function HomeScreen() {
             {/* Overdue */}
             {overdueSchedules.length > 0 && (
               <View className='gap-4 mt-10'>
-                <Text className='text-2xl font-bold text-red-500'>Overdue</Text>
+                <Text className='text-2xl font-bold text-red-600'>Overdue</Text>
                 {overdueSchedules.map(({ family, animal, medication, schedule }) => (
                   <PendingLogDoseCard
                     key={`overdue-${animal.id}-${medication.id}-${schedule.id}`}

@@ -64,9 +64,9 @@ export default function HomeScreen() {
                 </View>
 
                 <Text className='text-4xl font-bold dark:text-white'>Profile</Text>
-		<View className='bg-white rounded-2xl border border-gray-500 dark:border-gray-400 dark:bg-black'>
-		  <View className='flex-row flex-wrap border-b border-gray-500 dark:border-gray-400 '>
-		    <Text className={`text-2xl bg-black rounded-t-[13] dark:bg-gray-200 text-white dark:text-black p-5 ${labelStyle} ${rowBorder} border-gray-500 dark:border-gray-400`}>
+		<View className='bg-white rounded-2xl border border-gray-400 dark:bg-black'>
+		  <View className='flex-row flex-wrap border-b border-gray-400 '>
+		    <Text className={`text-2xl bg-black rounded-t-[13] dark:bg-gray-200 text-white dark:text-black p-5 ${labelStyle} ${rowBorder} border-gray-400`}>
 		      Name
 		    </Text>
 		    <Input
@@ -78,7 +78,7 @@ export default function HomeScreen() {
 		  </View>
 
 		  <View className='flex-row flex-wrap'>
-		    <Text className={`text-2xl bg-black rounded-b-[13] dark:bg-gray-200 text-white dark:text-black p-5 ${labelStyle} ${rowBorder} border-gray-500 dark:border-gray-400`}>
+		    <Text className={`text-2xl bg-black rounded-b-[13] dark:bg-gray-200 text-white dark:text-black p-5 ${labelStyle} ${rowBorder} border-gray-400`}>
 		      Email
 		    </Text>
 		    <Input 
@@ -91,7 +91,7 @@ export default function HomeScreen() {
 		</View>
                 
                 <Text className='text-4xl font-bold dark:text-white'>Notifications</Text>
-                <View className='bg-white rounded-2xl dark:bg-zinc-900 border border-gray-500 dark:border-gray-400 mb-6'>
+                <View className='bg-white rounded-2xl dark:bg-zinc-900 border border-gray-400 mb-6'>
                     <View className='px-4 py-4'>
                         <Text className='text-xl font-semibold mb-3 dark:text-white'>Reminder before dose</Text>
                         <View className='flex-row gap-2 flex-wrap'>
@@ -117,7 +117,7 @@ export default function HomeScreen() {
 
                 <Text className='text-4xl font-bold dark:text-white'>Account</Text>
                 <TouchableOpacity
-                    className='py-3 bg-red-500 dark:bg-red-700 w-full rounded-[15]'
+                    className='py-3 bg-red-600 w-full rounded-[15]'
                     onPress={handleLogout}
                     >
                     <Text className='text-white text-2xl font-bold text-center'>

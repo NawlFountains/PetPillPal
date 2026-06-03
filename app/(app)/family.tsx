@@ -87,7 +87,7 @@ export default function HomeScreen() {
                     </View>
                   <TouchableOpacity
                     onPress={() => setExitModal({ name: family.name, id: family.id})}>
-                    <Ionicons name='exit-outline' size={36} color='#f56565' />
+                    <Ionicons name='exit-outline' size={36} color='#dc2626' />
                   </TouchableOpacity>
                 </View>
                     {family.animals?.map(animal => (

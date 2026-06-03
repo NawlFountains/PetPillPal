@@ -6,6 +6,7 @@ import { formatLocalTime } from '@/lib/utils'
 import { Ionicons } from '@expo/vector-icons'
 import React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
+import { useColorScheme } from 'nativewind'
 
 type Props = {
     family: Family
@@ -19,13 +20,16 @@ export default function PendingLogDoseCard({ family, animal, medication, schedul
     const { doseLogs, profile } = useAuth()
     const { handleLogDose, loading } = useLogDose(() => {})
     const { handleDeleteLogDose } = useDeleteLogDose(() => {})
+    
+    const { colorScheme } = useColorScheme()
+    const isDark = colorScheme === 'dark'
 
     const log = doseLogs.find(l => l.schedule_id === schedule.id)
     const isGiven = !!log
     const isMyLog = log?.given_by === profile?.id
 
     return (
-    <View className='bg-gray-50 dark:bg-zinc-900 rounded-2xl border border-black dark:border-gray-400 w-full'>
+    <View className='bg-gray-50 dark:bg-zinc-900 rounded-2xl border border-gray-400 w-full'>
         <View className='mx-4 my-4 flex-row justify-between items-center'>
         <Text className='text-2xl font-bold dark:text-white'>{animal.name}</Text>
         {onDelete && (
@@ -34,7 +38,7 @@ export default function PendingLogDoseCard({ family, animal, medication, schedul
             </TouchableOpacity>
         )}
         </View>
-        <View className='h-px bg-black dark:bg-gray-400' />
+        <View className='h-px bg-gray-400' />
         <View className='m-4 gap-3'>
         <Text className='text-xl text-gray-500 dark:text-gray-200'>
             Schedule to take
@@ -47,18 +51,17 @@ export default function PendingLogDoseCard({ family, animal, medication, schedul
         </Text>
 
         {isGiven ? (
-            <View className='flex-row items-center justify-between bg-green-50 rounded-xl p-3'>
+            <View className='flex-row items-center justify-between rounded-xl p-3'>
                 <View className='flex-row items-center gap-2'>
-                <Ionicons name='checkmark-circle' size={20} color='#22c55e' />
-                <Text className='text-lg text-green-700 font-semibold'>
+                <Ionicons name='checkmark-circle' size={20} color={ isDark ? `#909090` : '#5c5c5c'} />
+                <Text className='text-lg text-neutral-500 dark:text-neutral-400 font-semibold'>
                     Given by {log.profiles?.display_name ?? 'Unknown'} {formatLocalTime(log.given_at)}
                 </Text>
                 </View>
                 {isMyLog && (
                 <TouchableOpacity 
-                    className='border border-red-500 bg-white rounded-[7] p-1'
                     onPress={() => handleDeleteLogDose(log.id)}>
-                    <Text className='text-red-500 text-lg font-bold'>Undo</Text>
+                    <Text className='text-lg text-black dark:text-white font-bold'>Undo</Text>
                 </TouchableOpacity>
                 )}
             </View>
